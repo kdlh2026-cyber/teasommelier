@@ -6,6 +6,6 @@
 	<a href="/guest/productlist">티 웨어</a>
 	<a href="/guest/productlist">이벤트</a>
 	<a href="/guest/productlist">매장 안내</a>
-	<a href="/guest/productlist">커뮤니티</a>
+	<a href="/cb_communityBoard">커뮤니티</a>
 	<a href="/guest/productlist">기업구매</a>
 </div>
