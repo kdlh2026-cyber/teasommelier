@@ -1,0 +1,129 @@
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.teasommelier.dao.IProductDao">
+ 	<!-- 티 제품 -->
+	<select id="select_tea_products_List" resultType="com.springboot.teasommelier.dto.ProductDto">
+		select 
+			p_no,
+			p_category,
+			p_name, 
+			p_price, 
+			p_type,  
+			p_desc,  
+			p_capacity, 
+			p_stock,
+			p_sale, 
+			p_img,
+			p_date
+		from tea_product 
+		where p_category = '티 제품'
+		order by p_no desc			
+	</select>
+	
+	 <!-- 기프트 세트 -->
+	<select id="select_tea_products_set" resultType="com.springboot.teasommelier.dto.ProductDto">
+		select 
+			p_no,
+			p_category,
+			p_name, 
+			p_price, 
+			p_type,  
+			p_desc,  
+			p_capacity, 
+			p_stock,
+			p_sale, 
+			p_img,
+			p_date
+		from tea_product 
+		where p_category = '기프트 세트'
+		order by p_no desc			
+	</select>
+	
+	 <!-- 티웨어 -->
+	<select id="select_tea_products_wear" resultType="com.springboot.teasommelier.dto.ProductDto">
+		select 
+			p_no,
+			p_category,
+			p_name, 
+			p_price, 
+			p_type,  
+			p_desc,  
+			p_capacity, 
+			p_stock,
+			p_sale, 
+			p_img,
+			p_date
+		from tea_product 
+		where p_category = '티 웨어'
+		order by p_no desc			
+	</select>
+	
+	 <!-- 이벤트 -->
+	<select id="select_tea_products_event" resultType="com.springboot.teasommelier.dto.ProductDto">
+		select 
+			p_no,
+			p_category,
+			p_name, 
+			p_price, 
+			p_type,  
+			p_desc,  
+			p_capacity, 
+			p_stock,
+			p_sale, 
+			p_img,
+			p_date
+		from tea_product 
+		where p_category = '이벤트'
+		order by p_no desc			
+	</select>
+
+	
+    <!-- 상품 상세 조회 (등록/수정 폼에서도 재사용) -->
+    <select id="select_tea_product" parameterType="int" resultType="com.springboot.teasommelier.dto.ProductDto">
+        select
+            p_no,
+            p_category,
+            p_name,
+            p_price,
+            p_type,
+            p_desc,
+            p_capacity,
+            p_stock,
+            p_sale,
+            p_img,
+            p_date
+        from product
+        where p_no = #{p_no}
+    </select>
+
+    <!-- 상품 등록 -->
+    <insert id="insert_tea_product" parameterType="com.springboot.teasommelier.dto.ProductDto">
+        insert into tea_product 
+            (p_category, p_name, p_price, p_type, p_desc, p_capacity, p_stock, p_sale, p_img, p_date)
+        values
+            (#{p_category}, #{p_name}, #{p_price}, #{p_type}, #{p_desc}, #{p_capacity}, #{p_stock}, #{p_sale}, #{p_img}, sysdate)
+    </insert>
+
+    <!-- 상품 수정 -->
+    <update id="update_tea_product" parameterType="com.springboot.teasommelier.dto.ProductDto">
+        update tea_product 
+        set
+            p_category = #{p_category},
+            p_name     = #{p_name},
+            p_price    = #{p_price},
+            p_type     = #{p_type},
+            p_desc     = #{p_desc},
+            p_capacity = #{p_capacity},
+            p_stock    = #{p_stock},
+            p_sale     = #{p_sale},
+            p_img      = #{p_img}
+        where p_no = #{p_no}
+    </update>
+
+    <!-- 상품 삭제 -->
+    <delete id="delete_tea_product" parameterType="int">
+        delete from tea_product where p_no = #{p_no}
+    </delete>
+
+</mapper>
