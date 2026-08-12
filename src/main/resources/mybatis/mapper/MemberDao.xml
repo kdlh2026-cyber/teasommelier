@@ -9,11 +9,11 @@
 	
 	<insert id="MemberWrite">
 		insert into tea_member(m_no, m_id, m_passwd, m_name, m_zipno, m_addr, m_tel, m_phone, m_date, m_email, m_gender, m_birth, m_lscalendar, m_holder, m_bank, m_banknumber, m_cash, m_authority, m_rsms, m_remail)
-		values(member_seq.NEXTVAL, #{m_id},#{m_passwd},#{m_name},#{m_zipno, jdbcType=VARCHAR},
+		values(tea_member_seq.NEXTVAL, #{m_id},#{m_passwd},#{m_name},#{m_zipno, jdbcType=VARCHAR},
 		#{m_addr, jdbcType=VARCHAR},#{m_tel, jdbcType=VARCHAR},#{m_phone, jdbcType=VARCHAR},
 		sysdate,#{m_email, jdbcType=VARCHAR},#{m_gender, jdbcType=VARCHAR},
 		#{m_birth, jdbcType=DATE},#{m_lscalendar, jdbcType=VARCHAR},#{m_holder, jdbcType=VARCHAR},
-		#{m_bank, jdbcType=VARCHAR},#{m_banknumber,jdbcType=VARCHAR},#{m_cash},'ADMIN',
+		#{m_bank, jdbcType=VARCHAR},#{m_banknumber,jdbcType=VARCHAR},#{m_cash},'USER',
 		#{m_rsms, jdbcType=CHAR},#{m_remail, jdbcType=CHAR})
 	</insert>
 	
