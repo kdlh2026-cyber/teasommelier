@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.teasommelier.dao.IcartDAO">
+	<insert id="insertCart">
+		MERGE INTO
+			tea_cart
+    	USING
+    		DUAL
+    	ON
+    		(m_no = #{m_no} AND p_no = #{p_no})
+    	WHEN MATCHED THEN
+        	UPDATE SET ca_qty = ca_qty + #{ca_qty}
+    	WHEN NOT MATCHED THEN
+        	INSERT
+        		(ca_no, ca_image, ca_info, ca_qty, ca_price, ca_del, ca_date, m_no, p_no)
+        	VALUES
+        		(tea_cart_seq.NEXTVAL, #{ca_image}, #{ca_info}, #{ca_qty}, #{ca_price}, '기본배송', SYSDATE, #{m_no}, #{p_no})
+	</insert>
+	<select id="cartList" resultType="com.springboot.teasommelier.dto.cartDTO">
+		select c.ca_image as image, c.ca_info, c.ca_qty, c.ca_price, c.ca_del, p.p_name, p.p_price
+		 from tea_cart c join tea_product p
+		 on c.p_no = p.p_no
+		 where c.m_no = #{m_no}
+	</select>
+	<delete id="deleteCarts">
+		delete from tea_cart
+		 where ca_no in
+		 <foreach collection="list" item="no" open="(" separator="," close=")">
+		 	#{no}
+		 </foreach>
+	</delete>
+	<delete id="deleteAll">
+		delete from tea_cart where m_no = #{m_no}
+	</delete>
+</mapper>	
