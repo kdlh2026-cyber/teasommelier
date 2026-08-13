@@ -25,6 +25,9 @@ public interface IProductDao {
 	//  조회
 	public ProductDto select_tea_product(int p_no);
 	
+	// 조회2
+	public List<ProductDto> productList();
+	
 	// 상품 수정
 	public int update_tea_product (ProductDto tea_product);
 	

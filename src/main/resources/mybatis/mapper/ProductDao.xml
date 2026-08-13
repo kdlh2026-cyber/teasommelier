@@ -4,19 +4,7 @@
 <mapper namespace="com.springboot.teasommelier.dao.IProductDao">
  	<!-- 티 제품 -->
 	<select id="select_tea_products_List" resultType="com.springboot.teasommelier.dto.ProductDto">
-		select 
-			p_no,
-			p_category,
-			p_name, 
-			p_price, 
-			p_type,  
-			p_desc,  
-			p_capacity, 
-			p_stock,
-			p_sale,
-			p_time, 
-			p_img,
-			p_date
+		select *
 		from tea_product 
 		where p_category = '티 제품'
 		order by p_no desc			
@@ -24,19 +12,7 @@
 	
 	 <!-- 기프트 세트 -->
 	<select id="select_tea_products_set" resultType="com.springboot.teasommelier.dto.ProductDto">
-		select 
-			p_no,
-			p_category,
-			p_name, 
-			p_price, 
-			p_type,  
-			p_desc,  
-			p_capacity, 
-			p_stock,
-			p_sale,
-			p_time, 
-			p_img,
-			p_date
+		select *
 		from tea_product 
 		where p_category = '기프트 세트'
 		order by p_no desc			
@@ -44,19 +20,7 @@
 	
 	 <!-- 티웨어 -->
 	<select id="select_tea_products_wear" resultType="com.springboot.teasommelier.dto.ProductDto">
-		select 
-			p_no,
-			p_category,
-			p_name, 
-			p_price, 
-			p_type,  
-			p_desc,  
-			p_capacity, 
-			p_stock,
-			p_sale, 
-			p_time,
-			p_img,
-			p_date
+		select *
 		from tea_product 
 		where p_category = '티 웨어'
 		order by p_no desc			
@@ -64,19 +28,7 @@
 	
 	 <!-- 이벤트 -->
 	<select id="select_tea_products_event" resultType="com.springboot.teasommelier.dto.ProductDto">
-		select 
-			p_no,
-			p_category,
-			p_name, 
-			p_price, 
-			p_type,  
-			p_desc,  
-			p_capacity, 
-			p_stock,
-			p_sale, 
-			p_time,
-			p_img,
-			p_date
+		select *
 		from tea_product 
 		where p_category = '이벤트'
 		order by p_no desc			
@@ -85,29 +37,17 @@
 	
     <!-- 상품 상세 조회 (등록/수정 폼에서도 재사용) -->
     <select id="select_tea_product" parameterType="int" resultType="com.springboot.teasommelier.dto.ProductDto">
-        select
-            p_no,
-            p_category,
-            p_name,
-            p_price,
-            p_type,
-            p_desc,
-            p_capacity,
-            p_stock,
-            p_sale,
-            p_time,
-            p_img,
-            p_date
-        from product
+        select *
+        from tea_product
         where p_no = #{p_no}
     </select>
 
     <!-- 상품 등록 -->
     <insert id="insert_tea_product" parameterType="com.springboot.teasommelier.dto.ProductDto">
         insert into tea_product 
-            (p_category, p_name, p_price, p_type, p_desc, p_capacity, p_stock, p_sale, p_time, p_img, p_date)
+            (p_no, p_category, p_name, p_price, p_type, p_desc, p_capacity, p_stock, p_sale, p_time, p_img, p_date, p_img2)
         values
-            (#{p_category}, #{p_name}, #{p_price}, #{p_type}, #{p_desc}, #{p_capacity}, #{p_stock}, #{p_sale}, #{p_time}, #{p_img}, sysdate)
+            (tea_product_seq.NEXTVAL, #{p_category}, #{p_name}, #{p_price}, #{p_type}, #{p_desc}, #{p_capacity}, #{p_stock}, #{p_sale}, #{p_time}, #{p_img, jdbcType=VARCHAR}, sysdate, #{p_img2, jdbcType=VARCHAR})
     </insert>
 
     <!-- 상품 수정 -->
@@ -123,7 +63,8 @@
             p_stock    = #{p_stock},
             p_sale     = #{p_sale},
             p_time	   = #{p_time},	
-            p_img      = #{p_img}
+            p_img      = #{p_img, jdbcType=VARCHAR}
+            p_img2      = #{p_img2, jdbcType=VARCHAR}
         where p_no = #{p_no}
     </update>
 
@@ -132,4 +73,9 @@
         delete from tea_product where p_no = #{p_no}
     </delete>
 
+
+	<!--상품 목록 조회 -->
+	<select id="productList" resultType="com.springboot.teasommelier.dto.ProductDto">
+        select * from tea_product order by p_no asc
+    </select>
 </mapper>

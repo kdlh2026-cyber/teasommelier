@@ -18,4 +18,5 @@ public class ProductDto {
 	private String p_time;
 	private String p_img;
 	private	Date p_date;
+	private String p_img2;
 }

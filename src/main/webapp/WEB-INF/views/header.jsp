@@ -13,11 +13,12 @@
 	
 	<nav class="header-nav">
 		<a href="/guest/productList">티 제품</a>
+		<a href="/guest/productTest">테스트</a>
 		<a href="/guest/productSet">기프트세트</a>
 		<a href="/guest/productWear">티 웨어</a>
 		<a href="/guest/productEvent">이벤트</a>
 		<a href="/guest/ShopList">매장 안내</a>
-		<a href="/guest/productlist">커뮤니티</a>
+		<a href="/cb_communityBoard">커뮤니티</a>
 		<a href="/guest/InqiryQuery">기업구매</a>
 	</nav>
 	
@@ -48,7 +49,7 @@
 		<div class="member-menu">
 		<a href="/logout">로그아웃</a>
 		<a href="/admin/MemberList">회원목록</a>
-		<a href="/admin/productList">상품목록</a>
+		<a href="/admin/productLists">상품목록</a>
 		<a href="#">주문목록</a>
 		</div>
 	</sec:authorize>

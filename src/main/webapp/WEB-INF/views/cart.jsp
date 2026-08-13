@@ -11,6 +11,7 @@
 </head>
 <body>
 	<h1>CART</h1>
+	<a href="/deleteCart">선택상품삭제</a>
 	<form name="cartList" method="get" action="#">
 		<table border=1 width=1000>
 			<tr>
@@ -28,24 +29,24 @@
 		<c:forEach var="list" items="${list}" varStatus="status">
 			<tr>
 				<td><input type="checkbox" name="ca_no" value="${list.ca_no}"></td>
-				<td><a href="#"><img src="${list.ca_image}"></a></td>
+				<td><a href="#"><img src="${list.ca_image}" width="50"></a></td>
 				<td><a href="#">${list.p_name}</a></td>
-				<td>${list.p_name}</td>
-				<td>${list.ca_aty}</td>
-				<td><fmt:formatNumber value="${list.p_price*list.ca_qty}" type="number"/>원</td>
-				<td><fmt:formatNumber value="${(list.p_price*list.ca_qty)*0.1}" type="number"/>원</td>
+				<td>${list.ca_qty}개</td> 
+				<td><fmt:formatNumber value="${list.p_price * list.ca_qty}" type="number"/>원</td>
+				<td>0원</td>
+				<td><fmt:formatNumber value="${(list.p_price * list.ca_qty) * 0.1}" type="number"/>원</td>
 				<td>${list.ca_del}</td>
+				<td>무료</td> 
 				<td>
-					<input type="button" value="주문하기">
+					<input type="button" value="주문하기" onclick="#">
 					<input type="button" value="관심상품등록">
 					<input type="button" value="X 삭제">
 				</td>
 			</tr>
 		</c:forEach>
 		</table>
-		<input type="button" value="선택삭제" onclick="#">
-		<input type="button" value="선택주문" onclick="#">
 	</form>
-	
+	<a href="">전체상품주문</a>
+	<a href="">선택상품주문</a>
 </body>
 </html> --%>
