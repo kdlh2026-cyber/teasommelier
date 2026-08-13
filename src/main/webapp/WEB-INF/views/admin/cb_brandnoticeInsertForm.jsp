@@ -4,36 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 작성 폼 페이지</title>
+<title>브랜 드소식 작성 폼 페이지</title>
 </head>
 <body>
-	<h2>리뷰</h2>
-	<p>상품 사용후기입니다.</p>
-	<form id="reviewWriteForm" method="post" action="/member/cb_communityInsert" enctype="multipart/form-data">
+<%@ include file="../header.jsp" %>
+	<h2>브랜드 소식</h2>
+	<p>브랜드 소식입니다.</p>
+	<form id="brandnoticeInsertForm" method="post" action="/admin/cb_communityInsertA" enctype="multipart/form-data">
 		<input name="m_no" type="hidden" value="${m_no}">
-		<input name="p_no" type="hidden" value="${p_no}">
-		<input type="hidden" name="cb_category" value="리뷰(review)">
-		<table border="1">
+		<input type="hidden" name="cb_category" value="브랜드소식">
+			<table border="1">
 			<tr>
 				<td>제목</td>
 				<td><input type="text" name="cb_subject"></td>
 			</tr>
 			<tr>
-				<td>평점</td>
-				<td>
-					<input type="radio" name="cb_rating" value="5">★★★★★
-					<input type="radio" name="cb_rating" value="4">★★★★
-					<input type="radio" name="cb_rating" value="3">★★★
-					<input type="radio" name="cb_rating" value="2">★★
-					<input type="radio" name="cb_rating" value="1">★
-				</td>
-			</tr>
-			<tr>
 				<td colspan=2><textarea name="cb_content"></textarea></td>
-			</tr>
-			<tr>
-				<td>UCCURL</td>
-				<td><input type="text" name="cb_url"></td>
 			</tr>
 			<tr>
 				<td>첨부파일1</td>
@@ -57,7 +43,8 @@
 			</tr>
 		</table>
 		<input type="submit" value="등록">
-		<a href="/cb_reviewList">취소</a>
+		<a href="/guest/cb_brandnoticeList">취소</a>
 	</form>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

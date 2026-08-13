@@ -27,19 +27,32 @@
 	<!-- 게시글 작성 -->
 	<insert id="CommunityInsert">
 		insert into tea_community(
-			cb_no, cb_category, cb_date, cb_subject, cb_rating, 
-			cb_content, cb_view_count, cb_url, cb_file, p_no, m_no
+		    cb_no, cb_category, cb_date, cb_subject, cb_rating,
+		    cb_content, cb_view_count, cb_url, cb_file, p_no, m_no
 		) values (
-			tea_community_seq.NEXTVAL, #{cb_category}, SYSDATE, #{cb_subject}, #{cb_rating},
-			#{cb_content}, 0, #{cb_url}, #{cb_file}, #{p_no}, #{m_no}
+		    tea_community_seq.NEXTVAL,
+		    #{cb_category, jdbcType=VARCHAR},
+		    SYSDATE,
+		    #{cb_subject, jdbcType=VARCHAR},
+		    #{cb_rating, jdbcType=NUMERIC},
+		    #{cb_content, jdbcType=VARCHAR},
+		    0,
+		    #{cb_url, jdbcType=VARCHAR},
+		    #{cb_file, jdbcType=VARCHAR},
+		    #{p_no, jdbcType=NUMERIC},
+		    #{m_no, jdbcType=NUMERIC}
 		)
 	</insert>
 
 	<!-- 게시글 수정 -->
 	<update id="CommunityUpdate">
 		update tea_community
-		 set cb_subject=#{cb_subject}, cb_rating=#{cb_rating}, cb_content=#{cb_content}, cb_url=#{cb_url}, cb_file=#{cb_file}
-		 where cb_no=#{cb_no}
+		 set cb_subject=#{cb_subject, jdbcType=VARCHAR},
+		     cb_rating=#{cb_rating, jdbcType=NUMERIC},
+		     cb_content=#{cb_content, jdbcType=VARCHAR},
+		     cb_url=#{cb_url, jdbcType=VARCHAR},
+		     cb_file=#{cb_file, jdbcType=VARCHAR}
+		 where cb_no=#{cb_no, jdbcType=NUMERIC}
 	</update>
 
 	<!-- 게시글 삭제 -->

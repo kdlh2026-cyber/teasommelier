@@ -4,9 +4,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springboot.teasommelier.dao.IMemberDao">
 	<select id="MemberList" resultType="com.springboot.teasommelier.dto.MemberDto">
-		select * from tea_member order by m_no desc
+		select * from tea_member where m_authority='USER' order by m_no desc
 	</select>
-	
 	<insert id="MemberWrite">
 		insert into tea_member(m_no, m_id, m_passwd, m_name, m_zipno, m_addr, m_tel, m_phone, m_date, m_email, m_gender, m_birth, m_lscalendar, m_holder, m_bank, m_banknumber, m_cash, m_authority, m_rsms, m_remail)
 		values(tea_member_seq.NEXTVAL, #{m_id},#{m_passwd},#{m_name},#{m_zipno, jdbcType=VARCHAR},
@@ -16,7 +15,19 @@
 		#{m_bank, jdbcType=VARCHAR},#{m_banknumber,jdbcType=VARCHAR},#{m_cash},'USER',
 		#{m_rsms, jdbcType=CHAR},#{m_remail, jdbcType=CHAR})
 	</insert>
-	
+	<update id="MemberUpdate">
+		update tea_member
+		set m_passwd=#{m_passwd}, m_tel=#{m_tel},m_phone=#{m_phone},m_email=#{m_email},m_zipno=#{m_zipno}, m_addr=#{m_addr}, m_rsms=#{m_rsms},m_remail=#{m_remail},m_birth=#{m_birth}
+		where m_id=#{m_id}
+	</update>
+	<update id="RefundUpdate">
+		update tea_member
+		set m_holder=#{m_holder}, m_bank=#{m_bank},m_banknumber=#{m_banknumber}
+		where m_id=#{m_id}
+	</update>
+	<delete id="MemberDelete">
+		delete from tea_member where m_id=#{m_id} 
+	</delete>
 	<select id="MemberFindId" resultType="com.springboot.teasommelier.dto.MemberDto">
 		select * from tea_member where m_id=#{m_id}
 	</select>
