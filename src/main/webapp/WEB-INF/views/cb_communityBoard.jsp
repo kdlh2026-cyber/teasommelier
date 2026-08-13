@@ -16,15 +16,16 @@
 			<a href="/guest/cb_editorialList">에디토리얼</a><br>
 			<a href="/guest/cb_reviewList">리뷰</a><br>
 			<a href="/guest/cb_qnaList">Q&A</a><br>
-			<a href="/guest/cb_brandnoticeList">고객센터</a><br>
+			<a href="/guest/cs_customerServiceList">고객센터</a><br>
 	<!-- 일반 회원 -->
 		<sec:authorize access="hasRole('USER')">
 			일반 회원 부분<br>
-			<a href="/member/cb_reviewForm">리뷰 게시글 작성</a>
+			<a href="/member/cb_reviewInsertForm">리뷰 게시글 작성</a>
 		</sec:authorize>
 	<!-- 관리자 -->
 		<sec:authorize access="hasRole('ADMIN')">
 			관리자 부분<br>
+			<a href="/admin/cb_brandnoticeInsertForm">브랜드 소식 공지글 작성</a>
 		</sec:authorize>
 
 <%@ include file="footer.jsp" %>

@@ -10,11 +10,11 @@ public class CommunityDto {
 	private String cb_category;
 	private Date cb_date;
 	private String cb_subject;
-	private int cb_rating;
+	private Integer cb_rating;
 	private String cb_content;
 	private int cb_view_count;
 	private String cb_url;
 	private String cb_file;
-	private int p_no;
-	private int m_no;
+	private Integer p_no;
+	private Integer m_no;
 }
