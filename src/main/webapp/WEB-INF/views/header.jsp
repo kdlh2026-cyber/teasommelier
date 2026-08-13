@@ -12,13 +12,13 @@
 	</div>
 	
 	<nav class="header-nav">
-		<a href="/guest/productlist">티 제품</a>
-		<a href="/guest/productlist">기프트세트</a>
-		<a href="/guest/productlist">티 웨어</a>
-		<a href="/guest/productlist">이벤트</a>
-		<a href="/guest/productlist">매장 안내</a>
+		<a href="/guest/productList">티 제품</a>
+		<a href="/guest/productSet">기프트세트</a>
+		<a href="/guest/productWear">티 웨어</a>
+		<a href="/guest/productEvent">이벤트</a>
+		<a href="/guest/ShopList">매장 안내</a>
 		<a href="/guest/productlist">커뮤니티</a>
-		<a href="/guest/productlist">기업구매</a>
+		<a href="/guest/InqiryQuery">기업구매</a>
 	</nav>
 	
 	<div class="login">

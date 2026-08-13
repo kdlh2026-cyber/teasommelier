@@ -23,24 +23,24 @@ public class ProductController {
 	}
 
 	// 기프트 세트
-	@RequestMapping("/guest/productset")
-	public String productset(Model model) {
-		model.addAttribute("productset", IProductDao.select_tea_products_set());
-		return "guest/productset";
+	@RequestMapping("/guest/productSet")
+	public String productSet(Model model) {
+		model.addAttribute("productSet", IProductDao.select_tea_products_set());
+		return "guest/productSet";
 	}
 
 	// 티 웨어
-	@RequestMapping("/guest/productwear")
-	public String productwear(Model model) {
-		model.addAttribute("productwear", IProductDao.select_tea_products_wear());
-		return "guest/productwear";
+	@RequestMapping("/guest/productWear")
+	public String productWear(Model model) {
+		model.addAttribute("productWear", IProductDao.select_tea_products_wear());
+		return "guest/productWear";
 	}
 
 	// 할인메뉴
-	@RequestMapping("/guest/productevent")
-	public String productevent(Model model) {
-		model.addAttribute("productevent", IProductDao.select_tea_products_event());
-		return "guest/productevent";
+	@RequestMapping("/guest/productEvent")
+	public String productEvent(Model model) {
+		model.addAttribute("productEvent", IProductDao.select_tea_products_event());
+		return "guest/productEvent";
 	}
 
 	// 상품 상세 조회

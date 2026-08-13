@@ -1,57 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>티 제품</title>
+<title>이벤트</title>
 <link rel="stylesheet" href="/css/productList.css">
 </head>
 <body>
-
 <div class="product-page">
 
     <!-- 대분류 탭 -->
     <div class="category-tabs">
-        <div class="tab active">티 제품</div>
+        <div class="tab">티 제품</div>
         <div class="tab">기프트 세트</div>
         <div class="tab">티 웨어</div>
-        <div class="tab">이벤트</div>
+        <div class="tab active">이벤트</div>
     </div>
 
-    <!-- 티 제품 하위 6개 카테고리 -->
-    <h2>티 제품</h2>
-    <div class="filter-tabs">
-    	<div class="filter">티백</div>
-    	<div class="filter">잎차</div>
-	    <div class="filter">미니 컬렉션</div>
-	    <div class="filter">디카페인 티</div>
-	    <div class="filter">스테디셀러</div>
-	    <div class="filter">티 테디즈</div>
-	 </div>
-
-    <!-- 세부 필터 (티백 기준: 홍차/녹차/루이보스/청차/허브차/기타) -->
-    <div class="filter-tabs">
-        <div class="filter active">홍차</div>
-        <div class="filter">녹차</div>
-        <div class="filter">루이보스</div>
-        <div class="filter">청차(우롱차)</div>
-        <div class="filter">허브차</div>
-        <div class="filter">기타</div>
-    </div>
     
-    <!-- 세부 필터 (잎차 기준: 잎차/홍차/루이보스/백차/보이차) -->
+    
+ 	<!-- 이벤트 제품 하위 1개 카테고리 -->
     <div class="filter-tabs">
-        <div class="filter active">잎차</div>
-        <div class="filter">홍차</div>
-        <div class="filter">루이보스</div>
-        <div class="filter">백차</div>
-        <div class="filter">보이차</div>
-    </div>
-	 
-	<!-- 신상품 상품명 인기상품 조회수 -->
+  	<div class="filter">UP TO 50%OFF</div>
+	</div>
+    	 	 
+		<!-- 신상품 상품명 인기상품 조회수 -->
 	<div class="sub-tabs">
     <a href="${pageContext.request.contextPath}/product/list.do?category=${selectedCategory}&sort=new"
        class="sub-tab ${sortType eq 'new' ? 'active' : ''}">신상품</a>
@@ -106,13 +82,13 @@
 
     </div>
 
-    <!-- 페이지네이션: 전체 69개 상품 (1페이지 60개 + 2페이지 9개) -->
+    <!-- 페이지네이션-->
     <div class="pagination">
     <div class="prev-next">PREV</div>
     <div class="page active">1</div>
-    <div class="page">2</div>
     <div class="prev-next">NEXT</div>
 
 	</div>
-</body>
+
+</div>
 </html>

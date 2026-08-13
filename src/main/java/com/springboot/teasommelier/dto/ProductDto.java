@@ -15,6 +15,7 @@ public class ProductDto {
 	private String p_capacity;
 	private	int p_stock;
 	private String p_sale;
+	private String p_time;
 	private String p_img;
 	private	Date p_date;
 }
