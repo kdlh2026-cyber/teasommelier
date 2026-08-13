@@ -13,10 +13,10 @@
 }
 .required {
   color: #007bff;        /* 파란색 별표 */
-  margin-right: 4px;
+  margin-right: 2px;
 }
 .btn_search {
-  height: 48px;             /* input_box 높이와 비슷하게 맞춤 */
+  height: 48px;
   padding: 0 14px;
   font-size: 13px;
   cursor: pointer;
@@ -130,7 +130,7 @@ select{
 				<button type="button" class="">인증번호 받기</button>
 			</div>
 		</div>
-		<div class="">
+		<div>
 			<label for="m_eamil"><span class="required">*</span>이메일</label> 
 			<input type="text" id="m_eamil" name="m_email">
 		</div>

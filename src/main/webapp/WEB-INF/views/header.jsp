@@ -35,7 +35,7 @@
 	<sec:authorize access="hasRole('USER')">
 		<div class="member-menu">
 		<a href="/logout">로그아웃</a>
-		<a href="/member/passwordCheckForm?mode=update">정보수정</a>
+		<a href="/member/MemberUpdateForm">정보수정</a>
 		<a href="/guest/">고객센터</a>
 		<a href="#">마이페이지</a>
 		<a href="/cartList">장바구니</a>

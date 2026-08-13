@@ -35,9 +35,6 @@
 				<td><fmt:formatNumber value="${list.p_price*list.ca_qty}" type="number"/>원</td>
 				<td><fmt:formatNumber value="${(list.p_price*list.ca_qty)*0.1}" type="number"/>원</td>
 				<td>${list.ca_del}</td>
-				<c:if>
-				<<td rowspan="${fn:length(list)}" id="shippingCell">무료</td>
-				</c:if>
 				<td>
 					<input type="button" value="주문하기">
 					<input type="button" value="관심상품등록">

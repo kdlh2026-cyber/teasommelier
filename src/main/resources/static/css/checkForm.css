@@ -1,0 +1,90 @@
+@charset "UTF-8";
+    /* 전체 화면 중앙 정렬 및 배경 세팅 */
+    .check-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 50vh; /* 화면 세로의 절반 정도 높이를 확보하여 가운데 배치 */
+        font-family: sans-serif;
+    }
+
+    /* 박스 테두리 및 그림자 */
+    .check-container {
+        width: 100%;
+        max-width: 400px; /* 박스 최대 가로 크기 */
+        padding: 40px;
+        background-color: #ffffff;
+        border: 1px solid #e5e5e5;
+        border-radius: 12px; /* 부드러운 라운드 테두리 */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 은은한 그림자 효과 */
+    }
+
+    /* 입력 폼 내부 텍스트 및 레이아웃 */
+    .check-container p {
+        margin: 0 0 20px 0; /* 아래쪽 여백 구성 */
+        font-size: 15px;
+        color: #333333;
+        font-weight: bold;
+    }
+
+    /* 아이디, 비밀번호 입력창 스타일 */
+    .check-container input[type="text"],
+    .check-container input[type="password"] {
+        width: 100%;
+        box-sizing: border-box; /* 패딩이 박스 크기를 벗어나지 않게 설정 */
+        margin-top: 8px; /* 글씨와 입력창 사이 간격 */
+        padding: 12px 16px; /* 입력창 내부 여백 늘림 (크기 확대) */
+        font-size: 16px; /* 글씨 크기 확대 */
+        border: 1px solid #cccccc;
+        border-radius: 6px;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    /* 입력창 클릭(포커스) 되었을 때 효과 */
+    .check-container input[type="text"]:focus,
+    .check-container input[type="password"]:focus {
+        border-color: #222222; /* 테두리가 진해짐 */
+    }
+
+    /* 버튼들을 감싸는 영역 */
+    .check-container p.login {
+        margin-bottom: 0;
+        display: flex;
+        gap: 10px; /* 로그인과 취소 버튼 사이 간격 */
+        margin-top: 25px;
+    }
+
+    /* 확인 & 취소 버튼 공통 스타일 */
+    .check-container input[type="submit"],
+    .check-container input[type="button"] {
+        flex: 1; /* 반반씩 균등하게 너비 차지 */
+        padding: 14px 0;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    /* 확인 버튼 (진하게 강조) */
+    .check-container input[type="submit"] {
+        background-color: #222222;
+        color: #ffffff;
+        border: 1px solid #222222;
+    }
+    .check-container input[type="submit"]:hover {
+        background-color: #444444;
+        border-color: #444444;
+    }
+
+    /* 취소 버튼 (연하게 처리) */
+    .check-container input[type="button"] {
+        background-color: #ffffff;
+        color: #666666;
+        border: 1px solid #cccccc;
+    }
+    .check-container input[type="button"]:hover {
+        background-color: #f5f5f5;
+        color: #333333;
+    }
