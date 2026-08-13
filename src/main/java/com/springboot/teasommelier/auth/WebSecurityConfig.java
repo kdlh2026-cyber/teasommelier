@@ -22,7 +22,7 @@ public class WebSecurityConfig {
 					.requestMatchers("/css/**","/js/**","/images/**","/error").permitAll() // 정적(static)리소스 모두 허용
 					.requestMatchers("/guest/**").permitAll() // guest 폴더는 모두 허용(게스트 페이지)
 					.requestMatchers("/member/**").hasAnyRole("USER","ADMIN") // member 폴더는 USER, ADMIN만 허용(회원페이지)
-					.requestMatchers("/admin/**").hasAnyRole("ADMIN") // admin 폴더는 ADMIN만 허용(관리자 페이지)
+					.requestMatchers("/admin/**","/AdminMDelete").hasAnyRole("ADMIN") // admin 폴더는 ADMIN만 허용(관리자 페이지)
 					.requestMatchers("/cart", "/cartList").permitAll()
 					.anyRequest().authenticated() //나머지 모두 인증이 필요	
 			);
