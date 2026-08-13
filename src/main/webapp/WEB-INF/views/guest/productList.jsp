@@ -12,7 +12,7 @@
 	</div>		
 	
 	<div>
-	<button class="buy-btn" >티백</button>
+	<button class="buy-btn">티백</button>
 	<button class="buy-btn">잎차</button>
 	<button class="buy-btn">미니</button>
 	<button class="buy-btn">컬랙션</button>

@@ -18,28 +18,15 @@ public class cartDTO {
 	private int m_no;
 	private int p_no;
 	
-	// 장바구니 페이지에서 주문할 상품 데이터를 전달할 자기자신의 list
+	// 여러 개의 상품을 체크박스로 선택한 후 선택박스를 누를 떄 주로 사용
 	private List<cartDTO> cartDTOList; 
 	
 	// 상품 테이블과 조인할 때
 	private String p_name;
 	private int p_price;
-	
-	// 상품구매금액과 적립금 계산을 위한 필드, setter 만들지 않음
-	private int amount;
-	private int point;
-	
-	public int getAmount() {
-		return amount;
+	public void setCartDTOList(List<String> cartDTOList2) {
+		// TODO Auto-generated method stub
+		
 	}
 	
-	public int getPoint() {
-		return point;
-	}
-	
-	// 계산 로직 관리
-	public void calc() {
-		this.amount = this.p_price * this.ca_qty;
-		this.point = (int) (this.amount * 0.1);
-	}
 }
