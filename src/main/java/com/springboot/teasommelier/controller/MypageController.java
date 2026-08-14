@@ -1,0 +1,144 @@
+package com.springboot.teasommelier.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.springboot.teasommelier.dao.IMemberDao;
+import com.springboot.teasommelier.dao.IShippingaddrDao;
+import com.springboot.teasommelier.dto.MemberDto;
+import com.springboot.teasommelier.dto.ShippingaddrDto;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+
+@Controller
+public class MypageController {
+	@Autowired
+	IShippingaddrDao s_dao;
+	
+	@Autowired
+	IMemberDao m_dao;
+	
+	//마이페이지 주문조회는 여기서
+	@RequestMapping("/member/mypage/OrderSelect")
+	public String OrderSelect(){
+		return "member/mypage/OrderSelect";
+	}
+		
+	// 마이페이지 관심상품은 여기서
+	@RequestMapping("/member/mypage/FavoriteProduct")
+	public String FavoriteProduct(){	
+		return "member/mypage/FavoriteProduct";
+	}
+			
+	//마이페이지 적립금은 여기서
+	@RequestMapping("/member/mypage/MemberCash")
+	public String MemberCash(){
+		return "member/mypage/MemberCash";
+	}
+		
+	//마이페이지 커뮤니티 관리는 여기서
+	@RequestMapping("/member/mypage/CommunityManagement")
+	public String CommunityManagement(){		
+		return "member/mypage/CommunityManagement";
+	}
+	
+	//마이페이지 배송주소 관리는 여기서
+	@RequestMapping("/member/mypage/ShipaddrManagement")
+	public String ShipaddrManagement(Authentication authentication, Model model){
+		
+		if(authentication != null) {
+			String m_id = authentication.getName();
+			MemberDto m_dto = m_dao.MemberFindId(m_id);
+			model.addAttribute("m_dto", m_dto);
+			model.addAttribute("ShippingaddrList", s_dao.ShippingaddrList());
+		}
+		return "member/mypage/ShipaddrManagement";
+	}
+		
+	//마이페이지 대량문의 관리는 여기서
+	@RequestMapping("/member/mypage/InqiryManagement")
+	public String InqiryManagement(){
+		return "member/mypage/InqiryManagement";
+	}
+	
+	
+	@RequestMapping("/member/mypage/ShipaddrWriteForm")
+	public String ShipaddrWriteForm(@RequestParam(value="m_no", required=false) Integer m_no,
+			Model model){
+		model.addAttribute("m_no", m_no);
+		return "member/mypage/ShipaddrWriteForm";
+	}
+	
+	@RequestMapping("/ShipaddrWrite")
+	public String ShipaddrWrite(HttpServletRequest request, ShippingaddrDto s_dto,
+			@RequestParam(value="m_no", required=false) Integer m_no) {
+		
+		String s_phone1 = request.getParameter("s_phone1");
+		String s_phone2 = request.getParameter("s_phone2");
+		String s_phone3 = request.getParameter("s_phone3");
+		String s_tel1 = request.getParameter("s_tel1");
+		String s_tel2 = request.getParameter("s_tel2");
+		String s_tel3 = request.getParameter("s_tel3");
+		String s_addr1 = request.getParameter("s_addr1");
+		String s_addr2 = request.getParameter("s_addr2");
+		String s_defaddr = request.getParameter("s_defaddr");
+		
+		s_dto.setS_addr(s_addr1+","+s_addr2);
+		s_dto.setS_tel(s_tel1+"-"+s_tel2+"-"+s_tel3);
+		s_dto.setS_phone(s_phone1+"-"+s_phone2+"-"+s_phone3);
+		
+		if(s_defaddr == null) {
+			s_defaddr="F";
+			s_dto.setS_defaddr(s_defaddr);
+		}
+		
+		s_dao.ShippingaddrWrite(s_dto);
+		
+		return "redirect:member/mypage/ShipaddrManagement";
+	}
+
+	@RequestMapping("member/mypage/ShippingaddrUpdateForm")
+	public String ShippingaddrUpdateForm(HttpServletRequest request, ShippingaddrDto s_dto,
+			@RequestParam(value="m_no", required=false) Integer m_no) {
+		
+		String s_tel1 = request.getParameter("s_tel1");
+		String s_tel2 = request.getParameter("s_tel2");
+		String s_tel3 = request.getParameter("s_tel3");
+		String s_phone1 = request.getParameter("s_phone1");
+		String s_phone2 = request.getParameter("s_phone2");
+		String s_phone3 = request.getParameter("s_phone3");
+		String s_addr1 = request.getParameter("s_addr1");
+		String s_addr2 = request.getParameter("s_addr2");
+		String s_defaddr = request.getParameter("s_defaddr");
+		
+		s_dto.setS_addr(s_addr1+","+s_addr2);
+		s_dto.setS_tel(s_tel1+"-"+s_tel2+"-"+s_tel3);
+		s_dto.setS_phone(s_phone1+"-"+s_phone2+"-"+s_phone3);
+		
+		if(s_defaddr == null) {
+			s_defaddr="F";
+			s_dto.setS_defaddr(s_defaddr);
+		}
+		
+		s_dao.ShippingaddrUpdate(s_dto);
+		
+		return "redirect:member/mypage/ShipaddrManagement";
+	}
+	
+	@RequestMapping("/ShippingaddrDelete")
+	public String MemberDelete(@RequestParam(value = "addr_chk") List<Integer> s_noList
+			,@RequestParam(value = "m_no") int m_no) {
+		
+		s_dao.ShippingaddrDelete(s_noList);
+		
+		return "redirect:member/mypage/ShipaddrManagement";
+	}
+}
