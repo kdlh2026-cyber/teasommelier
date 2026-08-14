@@ -7,5 +7,5 @@
 	<a href="/guest/productEvent">이벤트</a>
 	<a href="/guest/ShopList">매장 안내</a>
 	<a href="/cb_communityBoard">커뮤니티</a>
-	<a href="/guest/productlist">기업구매</a>
+	<a href="/guest/inquiryWrite">기업구매</a>
 </div>
