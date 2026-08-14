@@ -267,40 +267,34 @@ public class ProductController {
 	}
 
 	// 상품 등록 처리
-		@RequestMapping("/admin/productWritePro")
-		public String productWritePro(ProductDto tea_product,
-									  Model model,
-									  @RequestParam("p_image") MultipartFile p_image,
-									  @RequestParam("p_image2") MultipartFile p_image2) throws Exception {
-			
-			// 업로드할 경로 변수 선언
-			String uploadPath = "C:\\easommelier\\src\\main\\resources\\static\\images\\product\\";
-
-			// 업로드 폴더가 없으면 자동 생성 (FileNotFoundException 방지)
-			File uploadDir = new File(uploadPath);
-			if (!uploadDir.exists()) {
-			    uploadDir.mkdirs();
-			}
-			
-			if(!p_image.isEmpty()) {
-				String pimage = p_image.getOriginalFilename();
-				p_image.transferTo(new File(uploadPath + pimage));
-				tea_product.setP_img(pimage);
-			}
-			
-			if(p_image2 != null && !p_image2.isEmpty()) {
-			    String pimage2 = p_image2.getOriginalFilename();
-			    p_image2.transferTo(new File(uploadPath + pimage2));
-			    tea_product.setP_img2(pimage2);
-			} else {
-			    tea_product.setP_img2("default.png"); // 두 번째 이미지가 없을 때 기본 이미지 설정
-			}
+	@RequestMapping("/admin/productWritePro")
+	public String productWritePro(ProductDto tea_product,
+								  Model model,
+								  @RequestParam("p_image") MultipartFile p_image,
+								  @RequestParam("p_image2") MultipartFile p_image2) throws Exception {
 		
-			int result = IProductDao.insert_tea_product(tea_product);
-			model.addAttribute("result", result);
-			
-			return "redirect:/admin/productLists";
+		// 업로드할 경로 변수 선언
+		String uploadPath = "C:\\easommelier\\src\\main\\resources\\static\\images\\product\\";
+		
+		if(!p_image.isEmpty()) {
+			String pimage = p_image.getOriginalFilename();
+			p_image.transferTo(new File(uploadPath + pimage));
+			tea_product.setP_img(pimage);
 		}
+		
+		if(p_image2 != null && !p_image2.isEmpty()) {
+		    String pimage2 = p_image2.getOriginalFilename();
+		    p_image2.transferTo(new File(uploadPath + pimage2));
+		    tea_product.setP_img2(pimage2);
+		} else {
+		    tea_product.setP_img2("default.png"); // 두 번째 이미지가 없을 때 기본 이미지 설정
+		}
+	
+		int result = IProductDao.insert_tea_product(tea_product);
+		model.addAttribute("result", result);
+		
+		return "redirect:/admin/productLists";
+	}
 
 	// 상품 상세 보기
 	@RequestMapping("/admin/productView")

@@ -16,6 +16,7 @@
 		<tr>
 	<c:forEach var="dto" items="${pdto}" varStatus="status">
 			        <td>
+			        	<div><img src="/images/product/${dto.p_img}"></div>
 			            <a href="/guest/ViewForm?p_no=${dto.p_no}">${dto.p_name}</a>
 			            <div>${dto.p_price}원</div><br>    
 			            <div>${dto.p_category}</div>
