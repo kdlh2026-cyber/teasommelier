@@ -6,12 +6,21 @@
 	<insert id="insertCart">
 		merge into tea_cart
     	using dual
-    	on(m_no = #{m_no} and p_no = #{p_no})
+    	on(m_no = #{m_no, jdbcType=INTEGER} and p_no = #{p_no, jdbcType=INTEGER})
     	when matched then
-        	update set ca_qty = ca_qty + #{ca_qty}
-    	when no matched then
+        	update set ca_qty = ca_qty + #{ca_qty, jdbcType=INTEGER}
+    	when not matched then
         	insert(ca_no, ca_image, ca_info, ca_qty, ca_price, ca_del, ca_date, m_no, p_no)
-        	values(tea_cart_seq.NEXTVAL, #{ca_image}, #{ca_info}, #{ca_qty}, #{ca_price}, '기본배송', SYSDATE, #{m_no}, #{p_no})
+        	values(
+        		tea_cart_seq.NEXTVAL,
+        		#{ca_image, jdbcType=VARCHAR},
+        		#{ca_info, jdbcType=VARCHAR},
+        		#{ca_qty, jdbcType=INTEGER},
+        		#{ca_price, jdbcType=INTEGER},
+        		'기본배송', SYSDATE,
+        		#{m_no, jdbcType=INTEGER},
+        		#{p_no, jdbcType=INTEGER}
+        	)
 	</insert>
 	<select id="cartList" resultType="com.springboot.teasommelier.dto.cartDTO">
 		select c.ca_image, c.ca_info, c.ca_qty, c.ca_price, c.ca_del, p.p_name, p.p_price

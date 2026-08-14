@@ -24,6 +24,7 @@ public class cartDTO {
 	// 상품 테이블과 조인할 때
 	private String p_name;
 	private int p_price;
+	private String p_img;
 	public void setCartDTOList(List<String> cartDTOList2) {
 		// TODO Auto-generated method stub
 		

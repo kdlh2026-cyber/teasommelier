@@ -125,7 +125,7 @@ public class CommunityController {
 		return "admin/cb_qnaResponseInsertForm";
 	}
 	
-	@RequestMapping({"/admin/cb_communityInsertA", "/member/cb_communityInsertB"})
+	@RequestMapping({"/admin/cb_communityInsertA", "/member/cb_communityInsertM"})
 	public String communityInsert(CommunityDto cb_dto,
 	                               @RequestParam(value = "m_no", required = false) Integer m_no,
 	                               @RequestParam(value = "file1", required = false) MultipartFile file1,
