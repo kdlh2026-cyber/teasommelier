@@ -52,7 +52,7 @@ select{
 		<label><span class="required">*</span>필수 입력사항</label>
 	</div>
     <div>
-	<form name="member" method="post" action="/MemberWrite">
+	<form name="member" method="post" action="/MemberWrite" onsubmit="return membercheck();">
 		<div class="">
 			<label for="m_id"><span class="required">*</span> 아이디</label>
 			<input type="text" id="m_id" name="m_id"><span class="desc">(영문소문자/숫자, 4~16자)</span>
@@ -86,7 +86,7 @@ select{
 		</div>
 		<div class="tel">
 			<label>일반전화</label>
-			<span class="">
+			<span>
 				<select name="m_tel1">
 					    <option value="02">02</option>
 					    <option value="031">031</option>
@@ -112,23 +112,23 @@ select{
 			</span>
 		</div>
 		<div>
-			<div class="tel">
-			<label>휴대전화</label>
-				<span class="required">*
-				</span>
-				<span>
-					<input type="text" id="m_phone1" name="m_phone1" size="3" maxlength="3" value="010" readonly>
-				</span>
-				<span>
-					<input type="text" id="m_phone2" name="m_phone2" size="4" maxlength="4">
-				</span>
-				<span>
-					<input type="text" id="m_phone3" name="m_phone3" size="4" maxlength="4">
-				</span>
-			</div>
-			<div>
-				<button type="button" class="">인증번호 받기</button>
-			</div>
+		<div class="tel">
+		<label>휴대전화</label>
+			<span class="required">*
+			</span>
+			<span>
+				<input type="text" id="m_phone1" name="m_phone1" size="3" maxlength="3" value="010" readonly>
+			</span>
+			<span>
+				<input type="text" id="m_phone2" name="m_phone2" size="4" maxlength="4">
+			</span>
+			<span>
+				<input type="text" id="m_phone3" name="m_phone3" size="4" maxlength="4">
+			</span>
+		</div>
+		<div>
+			<button type="button" class="">인증번호 받기</button>
+		</div>
 		</div>
 		<div>
 			<label for="m_eamil"><span class="required">*</span>이메일</label> 
@@ -187,7 +187,7 @@ select{
 		</table>
 		</div>
 		<div>
-			<input type="submit" value="회원가입" onclick="return membercheck();"> 
+			<input type="submit" value="회원가입"> 
 		</div>	
 		<div>
 			<div>
@@ -197,13 +197,13 @@ select{
 				<%@ include file="TermsofUse.jsp" %>
 			</div>
 			<div>이용약관에 동의하십니까? 
-				<input type="checkbox" name="term_chk"> 동의함
+				<input type="checkbox" name="term_chk" value="T"> 동의함
 			</div>
 			<div>
 				<%@ include file="Personalinfo.jsp" %>
 			</div>
 			<div>개인정보 수집 및 이용에 동의하십니까? 
-				<input type="checkbox" name="personal_chk"> 동의함
+				<input type="checkbox" name="personal_chk" value="T"> 동의함
 			</div>
 			<div>
 				<%@ include file="ConsentToReceive.jsp" %>

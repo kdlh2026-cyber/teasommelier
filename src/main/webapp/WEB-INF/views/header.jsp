@@ -19,7 +19,7 @@
 		<a href="/guest/productEvent">이벤트</a>
 		<a href="/guest/ShopList">매장 안내</a>
 		<a href="/cb_communityBoard">커뮤니티</a>
-		<a href="/guest/InqiryQuery">기업구매</a>
+		<a href="/guest/inquiryWrite">기업구매</a>
 	</nav>
 	
 	<div class="login">
@@ -38,7 +38,7 @@
 		<a href="/logout">로그아웃</a>
 		<a href="/member/MemberUpdateForm">정보수정</a>
 		<a href="/guest/">고객센터</a>
-		<a href="#">마이페이지</a>
+		<a href="/member/mypage/OrderSelect">마이페이지</a>
 		<a href="/cartList">장바구니</a>
 		<a href="#">서치</a>
 		</div>
