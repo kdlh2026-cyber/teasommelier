@@ -9,15 +9,15 @@
 <body>
 	<h1>상품등록</h1>
 	
-	<form name="product" method="post" action="/admin/productWritePro">
+	<form name="product" method="post" action="/admin/productWritePro" enctype="multipart/form-data">
 		<table border=1>
-			<tr>
-				<th width=100>상품명</th>
-				<td width=500><input type="text" name="p_name"></td>
-			</tr>
 			<tr>
 				<th>카테고리</th>
 				<td><input type="text" name="p_category"></td>
+			</tr>
+			<tr>
+				<th width=100>상품명</th>
+				<td width=500><input type="text" name="p_name"></td>
 			</tr>
 			<tr>	
 				<th>가격</th>
@@ -28,13 +28,14 @@
 				<td><input type="text" name="p_type"></td>
 			</tr>
 			<tr>
-				<th>상세설명</th>
-				<td><input type="text" name="p_desc"></td>
-			</tr>
-			<tr>
 				<th>용량</th>
 				<td><input type="text" name="p_capacity"></td>
 			</tr>
+			<tr>
+				<th>상세설명</th>
+				<td><input type="text" name="p_desc"></td>
+			</tr>
+
 			<tr>
 				<th>재고수량</th>
 				<td><input type="text" name="p_stock"></td>
@@ -49,11 +50,11 @@
 			</tr>
 			<tr>
 				<th>상품이미지1</th>
-				<td><input type="text" name="p_image"></td>
+				<td><input type="file" name="p_image"></td>
 			</tr>
 			<tr>
 				<th>상품이미지2</th>
-				<td><input type="text" name="p_image2"></td>
+				<td><input type="file" name="p_image2"></td>
 			</tr>
 		</table>
 		<input type="submit" value="등록하기" onclick="#">

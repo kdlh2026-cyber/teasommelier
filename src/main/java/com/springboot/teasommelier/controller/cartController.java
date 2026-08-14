@@ -36,56 +36,55 @@ public class cartController {
 	}
 
 	// 장바구니 담기(회원과 비회원을 구별하여)
-	@RequestMapping("/insertCart")
-	public String insertCart(cartDTO ca_dto,
-							 Authentication authentication,
-							 HttpSession session) {
-		
-		boolean loggedIn = authentication != null
-	            && authentication.isAuthenticated()
-	            && !"anonymousUser".equals(authentication.getPrincipal());
-		
-		if(loggedIn) {
-			int m_no = getMno(authentication);
-			ca_dto.setM_no(m_no);
-			ca_dao.insertCart(ca_dto);
-		}else {
-			// 비회원은 세션으로 리스트 형식의 장바구니 담기
-			List<cartDTO> cart = (List<cartDTO>) session.getAttribute("guestCart");
+		@RequestMapping("/insertCart")
+		public String insertCart(cartDTO ca_dto,
+								 Authentication authentication,
+								 HttpSession session) {
 			
-			if(cart == null) {
-				cart = new ArrayList<>();
-			}
+			boolean loggedIn = authentication != null
+		            && authentication.isAuthenticated()
+		            && !"anonymousUser".equals(authentication.getPrincipal());
 			
-			// 동일 상품이 있는 지 확인
-			boolean found = false;
-			
-			for(cartDTO item : cart) {
-				if(item.getP_no() == ca_dto.getP_no()) {
-					item.setCa_qty(
-						item.getCa_qty() + ca_dto.getCa_qty()
-					);
-					
-					found = true;
-					break;
+			if(loggedIn) {
+				int m_no = getMno(authentication);
+				ca_dto.setM_no(m_no);
+				ca_dao.insertCart(ca_dto);
+			} else {
+				// 비회원은 세션으로 리스트 형식의 장바구니 담기
+				List<cartDTO> cart = (List<cartDTO>) session.getAttribute("guestCart");
+				
+				if(cart == null) {
+					cart = new ArrayList<>();
 				}
+				
+				// 동일 상품이 있는 지 확인
+				boolean found = false;
+				
+				for(cartDTO item : cart) {
+					if(item.getP_no() == ca_dto.getP_no()) {
+						item.setCa_qty(
+							item.getCa_qty() + ca_dto.getCa_qty()
+						);
+						
+						found = true;
+						break;
+					}
+				}
+				
+				// 새로운 상품이면 추가
+				// 비회원도 장바구니에서 상품을 삭제 주문해야하기에 가상의 ca_no 값을 부여
+				// 음수값으로 지정하여 실제 DB에 양수 ca_no와 충돌을 피하기  
+				if(!found) {
+					ca_dto.setCa_no(-(cart.size()+1));
+					ca_dto.setCa_del("기본배송");
+					cart.add(ca_dto);
+				}
+				
+				session.setAttribute("guestCart", cart);
 			}
 			
-			// 새로운 상품이면 추가
-			// 비회원도 장바구니에서 상품을 삭제 주문해야하기에 가상의 ca_no 값을 부여
-			// 음수값으로 지정하여 실제 DB에 양수 ca_no와 충돌을 피하기  
-			if(!found) {
-				ca_dto.setCa_no(-(cart.size()+1));
-				ca_dto.setCa_del("기본배송");
-				cart.add(ca_dto);
-			}
-			
-			session.setAttribute("guestCart", cart);
+			return "redirect:/cart";
 		}
-		
-		return "redirect:/cart";
-	}
-
 	// 장바구니 목록
 	@RequestMapping("/cartList")
 	public String cartList() {
