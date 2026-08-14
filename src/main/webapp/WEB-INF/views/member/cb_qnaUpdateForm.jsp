@@ -9,7 +9,7 @@
 <body>
 	<h2>Q&A</h2>
 	<p>상품문의입니다.</p>
-	<form id="qnaUpdateForm" method="post" action="/member/cb_communityUpdateM" enctype="multipart/form-data">
+	<form id="qnaUpdateForm" method="post" action="/member/cb_communityUpdate" enctype="multipart/form-data">
 		<input name="m_no" type="hidden" value="${viewCBdao.m_no}">
 		<input name="p_no" type="hidden" value="${viewCBdao.p_no}">
 		<input name="cb_no" type="hidden" value="${viewCBdao.cb_no}">

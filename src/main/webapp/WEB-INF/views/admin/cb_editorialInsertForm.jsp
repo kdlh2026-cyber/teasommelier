@@ -10,8 +10,8 @@
 <%@ include file="../header.jsp" %>
 	<h2>에디토리얼</h2>
 	<p>에디토리얼입니다.</p>
-	<form id="editorialInsertForm" method="post" action="/admin/cb_communityInsertA" enctype="multipart/form-data">
-		<input name="m_no" type="hidden" value="${m_no}">
+	<form id="editorialInsertForm" method="post" action="/member/cb_communityInsert" enctype="multipart/form-data">
+		<input name="m_no" type="hidden" value=1>
 		<input type="hidden" name="cb_category" value="에디토리얼">
 			<table border="1">
 			<tr>
@@ -23,23 +23,23 @@
 			</tr>
 			<tr>
 				<td>첨부파일1</td>
-				<td><input type="file" name="file1"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일2</td>
-				<td><input type="file" name="file2"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일3</td>
-				<td><input type="file" name="file3"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일4</td>
-				<td><input type="file" name="file4"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일5</td>
-				<td><input type="file" name="file5"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 		</table>
 		<input type="submit" value="등록">

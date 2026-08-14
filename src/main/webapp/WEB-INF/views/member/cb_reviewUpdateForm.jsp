@@ -9,7 +9,7 @@
 <body>
 	<h2>리뷰</h2>
 	<p>상품 사용후기입니다.</p>
-	<form id="reviewUpdateForm" method="post" action="/member/cb_communityUpdateM" enctype="multipart/form-data">
+	<form id="reviewUpdateForm" method="post" action="/member/cb_communityUpdate" enctype="multipart/form-data">
 		<input name="m_no" type="hidden" value="${viewCBdao.m_no}">
 		<input name="p_no" type="hidden" value="${viewCBdao.p_no}">
 		<input name="cb_no" type="hidden" value="${viewCBdao.cb_no}">
@@ -38,23 +38,23 @@
 			</tr>
 			<tr>
 				<td>첨부파일1</td>
-				<td><input type="file" name="file1"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일2</td>
-				<td><input type="file" name="file2"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일3</td>
-				<td><input type="file" name="file3"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일4</td>
-				<td><input type="file" name="file4"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일5</td>
-				<td><input type="file" name="file5"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 		</table>
 		<input type="submit" value="등록">

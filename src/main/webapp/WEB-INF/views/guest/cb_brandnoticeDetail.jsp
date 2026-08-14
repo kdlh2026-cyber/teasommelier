@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td>viewCBdao.m_id</td>
+			<td>${viewCBdao.m_id}</td>
 		</tr>
 		<tr>
 			<td>작성일</td>

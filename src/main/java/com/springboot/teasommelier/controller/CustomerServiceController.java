@@ -2,6 +2,7 @@ package com.springboot.teasommelier.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springboot.teasommelier.dao.ICustomerServiceDao;
@@ -14,5 +15,11 @@ public class CustomerServiceController {
 	@RequestMapping("/guest/cs_customerServiceList")
 	public String csList() {
 		return "guest/cs_customerServiceList";
+	}
+	
+	@RequestMapping("/guest/customerService")
+	public String customerService(Model model) {
+	    model.addAttribute("csList", cs_dao.CustomerServiceList());
+	    return "guest/customerService";
 	}
 }

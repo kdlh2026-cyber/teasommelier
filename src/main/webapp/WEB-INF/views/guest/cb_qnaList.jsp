@@ -26,9 +26,9 @@
 		<tr>
 			<td>${QAL.cb_no}</td>
 			<td>QAL.p_img</td>
-			<td>QAL.cb_qna_category</td>
+			<td>${QAL.cb_qna_category}</td>
 			<td><a href="/guest/cb_qnaDetail?cb_no=${QAL.cb_no}">${QAL.cb_subject}</a></td>
-			<td>QAL.m_id</td>
+			<td>${QAL.m_id}</td>
 			<td>${fn:substring(QAL.cb_date, 0, 10)}</td>
 			<td>${QAL.cb_view_count}</td>
 		</tr>

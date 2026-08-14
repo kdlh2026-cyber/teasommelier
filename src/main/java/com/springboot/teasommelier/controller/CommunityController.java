@@ -16,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.teasommelier.dao.ICommunityDao;
 import com.springboot.teasommelier.dto.CommunityDto;
+import com.springboot.teasommelier.dto.QnaResponseDto;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CommunityController {
@@ -36,6 +39,7 @@ public class CommunityController {
 	@RequestMapping("/guest/cb_brandnoticeDetail")
 	public String brandnoticeDetail(@RequestParam("cb_no") int cb_no,Model model) {
 		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_no));
+		cb_dao.CommunityHit(cb_no);
 		return "guest/cb_brandnoticeDetail";
 	}
 	
@@ -48,6 +52,7 @@ public class CommunityController {
 	@RequestMapping("/guest/cb_editorialDetail")
 	public String editorialDetail(@RequestParam("cb_no") int cb_no,Model model) {
 		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_no));
+		cb_dao.CommunityHit(cb_no);
 		return "guest/cb_editorialDetail";
 	}
 	
@@ -60,6 +65,7 @@ public class CommunityController {
 	@RequestMapping("/guest/cb_reviewDetail")
 	public String reviewDetail(@RequestParam("cb_no") int cb_no,Model model) {
 		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_no));
+		cb_dao.CommunityHit(cb_no);
 		return "guest/cb_reviewDetail";
 	}
 	
@@ -70,13 +76,20 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/guest/cb_qnaDetail")
-	public String qnaDetail(@RequestParam("cb_no") int cb_no,Model model) {
-		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_no));
-		return "guest/cb_qnaDetail";
+	public String qnaDetail(@RequestParam("cb_no") int cb_no, Model model) {
+	    model.addAttribute("viewCBdao", cb_dao.CommunityView(cb_no));
+	    model.addAttribute("responseQnaDto", cb_dao.ResponseQnaView(cb_no));
+	    cb_dao.CommunityHit(cb_no);
+	    return "guest/cb_qnaDetail";
+	}
+	
+	@RequestMapping("/guest/cb_qnaResponseDetail")
+	public String cb_qnaResponseDetail() {
+		return "guest/cb_qnaResponseDetail";
 	}
 	
 	@RequestMapping("/admin/cb_brandnoticeInsertForm")
-	public String brandnoticeInsertForm(Model model) {
+	public String brandnoticeInsertForm() {
 	    return "admin/cb_brandnoticeInsertForm";
 	}
 	
@@ -87,7 +100,7 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/admin/cb_editorialInsertForm")
-	public String editorialInsertForm(Model model) {
+	public String editorialInsertForm() {
 	    return "admin/cb_editorialInsertForm";
 	}
 	
@@ -98,7 +111,7 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/member/cb_reviewInsertForm")
-	public String reviewInsertForm(Model model) {
+	public String reviewInsertForm() {
 	    return "member/cb_reviewInsertForm";
 	}
 	
@@ -109,7 +122,7 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/member/cb_qnaInsertForm")
-	public String qnaInsertForm(Model model) {
+	public String qnaInsertForm() {
 	    return "member/cb_qnaInsertForm";
 	}
 	
@@ -120,24 +133,40 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/admin/cb_qnaResponseInsertForm")
-	public String qnaResponseInsertForm(CommunityDto cb_dto,Model model) {
-		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_dto.getCb_no()));
-		return "admin/cb_qnaResponseInsertForm";
+	public String qnaResponseInsertForm(@RequestParam("cb_no") int cb_no, Model model) {
+	    model.addAttribute("viewRESdao", cb_dao.CommunityView(cb_no));
+	    return "admin/cb_qnaResponseInsertForm";
 	}
 	
-	@RequestMapping({"/admin/cb_communityInsertA", "/member/cb_communityInsertM"})
+	@RequestMapping("/admin/responseInsert")
+	public String qnaResponseInsert(QnaResponseDto res_dto,@RequestParam("cb_no") int cb_no) {
+		res_dto.setCb_no(cb_no);
+		// res_dto.setM_no(m_no);
+		cb_dao.ResponseQnaInsert(res_dto);
+		return "redirect:/guest/cb_qnaList";
+	}
+	
+	// 카테고리 -> 목록 페이지 경로 매핑
+	private String getCategoryListUrl(String category) {
+	    if (category == null) return "redirect:/main";
+
+	    switch (category) {
+	        case "브랜드소식":
+	            return "redirect:/guest/cb_brandnoticeList";
+	        case "에디토리얼":
+	            return "redirect:/guest/cb_editorialList";
+	        case "리뷰":
+	            return "redirect:/guest/cb_reviewList";
+	        case "Q&A":
+	            return "redirect:/guest/cb_qnaList";
+	        default:
+	            return "redirect:/main";
+	    }
+	}
+	
+	@RequestMapping("/member/cb_communityInsert")
 	public String communityInsert(CommunityDto cb_dto,
-	                               @RequestParam(value = "m_no", required = false) Integer m_no,
-	                               @RequestParam(value = "file1", required = false) MultipartFile file1,
-	                               @RequestParam(value = "file2", required = false) MultipartFile file2,
-	                               @RequestParam(value = "file3", required = false) MultipartFile file3,
-	                               @RequestParam(value = "file4", required = false) MultipartFile file4,
-	                               @RequestParam(value = "file5", required = false) MultipartFile file5) {
-
-	    cb_dto.setM_no(m_no);
-
-	    List<MultipartFile> fileList = Arrays.asList(file1, file2, file3, file4, file5);
-	    List<String> savedFileNames = new ArrayList<>();
+	                               @RequestParam(value = "files", required = false) List<MultipartFile> files) {
 
 	    String uploadDir = "C:\\teasommelier\\src\\main\\resources\\static\\images\\community\\";
 	    File dirCheck = new File(uploadDir);
@@ -145,15 +174,18 @@ public class CommunityController {
 	        dirCheck.mkdirs();
 	    }
 
-	    for (MultipartFile file : fileList) {
-	        if (file != null && !file.isEmpty()) {
-	            try {
-	                String originalName = file.getOriginalFilename();
-	                String savedName = UUID.randomUUID().toString() + "_" + originalName;
-	                file.transferTo(new File(uploadDir + savedName));
-	                savedFileNames.add(savedName);
-	            } catch (IOException e) {
-	                e.printStackTrace();
+	    List<String> savedFileNames = new ArrayList<>();
+	    if (files != null) {
+	        for (MultipartFile file : files) {
+	            if (file != null && !file.isEmpty()) {
+	                try {
+	                    String originalName = file.getOriginalFilename();
+	                    String savedName = UUID.randomUUID().toString() + "_" + originalName;
+	                    file.transferTo(new File(uploadDir + savedName));
+	                    savedFileNames.add(savedName);
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
 	            }
 	        }
 	    }
@@ -161,30 +193,12 @@ public class CommunityController {
 	    cb_dto.setCb_file(String.join(",", savedFileNames));
 	    cb_dao.CommunityInsert(cb_dto);
 
-	    return "redirect:/main";
-	}
-	
-	@RequestMapping({"/admin/cb_communityUpdateA","/member/cb_communityUpdateM"})
-	public String communityUpdateA(CommunityDto cb_dto,
-	                                @RequestParam(value = "m_no", required = false) Integer m_no,
-	                                @RequestParam(value = "file1", required = false) MultipartFile file1,
-	                                @RequestParam(value = "file2", required = false) MultipartFile file2,
-	                                @RequestParam(value = "file3", required = false) MultipartFile file3,
-	                                @RequestParam(value = "file4", required = false) MultipartFile file4,
-	                                @RequestParam(value = "file5", required = false) MultipartFile file5) {
-	    updateCommunity(cb_dto, m_no, file1, file2, file3, file4, file5);
-	    return "redirect:/main";
+	    return getCategoryListUrl(cb_dto.getCb_category());
 	}
 
-	// 공통 로직 (요청 매핑 없음, private)
-	private void updateCommunity(CommunityDto cb_dto, Integer m_no,
-	                              MultipartFile file1, MultipartFile file2,
-	                              MultipartFile file3, MultipartFile file4,
-	                              MultipartFile file5) {
-	    cb_dto.setM_no(m_no);
-
-	    List<MultipartFile> fileList = Arrays.asList(file1, file2, file3, file4, file5);
-	    List<String> savedFileNames = new ArrayList<>();
+	@RequestMapping("/member/cb_communityUpdate")
+	public String communityUpdate(CommunityDto cb_dto,
+	                               @RequestParam(value = "files", required = false) List<MultipartFile> files) {
 
 	    String uploadDir = "C:\\teasommelier\\src\\main\\resources\\static\\images\\community\\";
 	    File dirCheck = new File(uploadDir);
@@ -192,15 +206,18 @@ public class CommunityController {
 	        dirCheck.mkdirs();
 	    }
 
-	    for (MultipartFile file : fileList) {
-	        if (file != null && !file.isEmpty()) {
-	            try {
-	                String originalName = file.getOriginalFilename();
-	                String savedName = UUID.randomUUID().toString() + "_" + originalName;
-	                file.transferTo(new File(uploadDir + savedName));
-	                savedFileNames.add(savedName);
-	            } catch (IOException e) {
-	                e.printStackTrace();
+	    List<String> savedFileNames = new ArrayList<>();
+	    if (files != null) {
+	        for (MultipartFile file : files) {
+	            if (file != null && !file.isEmpty()) {
+	                try {
+	                    String originalName = file.getOriginalFilename();
+	                    String savedName = UUID.randomUUID().toString() + "_" + originalName;
+	                    file.transferTo(new File(uploadDir + savedName));
+	                    savedFileNames.add(savedName);
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
 	            }
 	        }
 	    }
@@ -213,16 +230,22 @@ public class CommunityController {
 	    }
 
 	    cb_dao.CommunityUpdate(cb_dto);
+
+	    return getCategoryListUrl(cb_dto.getCb_category());
 	}
 	
 	@RequestMapping("/cb_communityDelete")
 	public String CommunityDelete(@RequestParam("cb_no") int cb_no) {
-		cb_dao.CommunityDelete(cb_no);
-		return "redirect:/main";
+	    CommunityDto existing = cb_dao.CommunityView(cb_no);
+	    String category = (existing != null) ? existing.getCb_category() : null;
+
+	    cb_dao.CommunityDelete(cb_no);
+
+	    return getCategoryListUrl(category);
 	}
 	
 }
   
 
 //1. 조회수 1 증가 실행
-// communityDao.CommunityHit(cb_no);
+// cb_dao.CommunityHit(cb_no);

@@ -10,8 +10,10 @@
 <%@ include file="../header.jsp" %>
 	<h2>Q&A</h2>
 	<p>상품문의입니다.</p>
-	<form name="qnaResponseInsertForm" method="post" action="/admin/cb_communityInsertA">
-	<input type="hidden" name="cb_no" value="${viewCBdao.cb_no}">
+	<form name="qnaResponseInsertForm" method="post" action="/admin/responseInsert">
+	<input type="hidden" name="m_no" value="${viewRESdao.m_no}">
+	<input type="hidden" name="cb_no" value="${viewRESdao.cb_no}">
+	<input type="hidden" name="cb_category" value="${viewRESdao.cb_category}">
 		<table>
 			<tr>
 				<td>제목</td>
@@ -22,21 +24,17 @@
 						<option value="기타 문의">기타 문의</option>
 						<option value="카카오페이 문의">카카오페이 문의</option>
 					</select>
-					<input type="text" name="cb_subject" value="${viewCBdao.cb_subject}">
+					<input type="text" name="res_subject" value="${viewRESdao.cb_subject}">
 				</td>
 			</tr>
 			<tr>
 				<td colspan=2>
-					<textarea col="150" row="3">
+					<textarea col="150" row="3" name="res_content" wrap="hard">
 [Original Message]
-${viewCBdao.cb_content}
+${viewRESdao.cb_content}
 
 					</textarea>
 				</td>
-			</tr>
-			<tr>
-				<td>UCCURL</td>
-				<td><input type="text" name="cb_url" value="${viewCBdao.cb_url}"></td>
 			</tr>
 		</table>
 		<a href="/guest/cb_qnaList">목록</a>

@@ -9,7 +9,7 @@
 <body>
 	<h2>리뷰</h2>
 	<p>상품 사용후기입니다.</p>
-	<form id="reviewInsertForm" method="post" action="/member/cb_communityInsertM" enctype="multipart/form-data">
+	<form id="reviewInsertForm" method="post" action="/member/cb_communityInsert" enctype="multipart/form-data">
 		<input name="m_no" type="hidden" value="${m_no}">
 		<input name="p_no" type="hidden" value="${p_no}">
 		<input type="hidden" name="cb_category" value="리뷰">
@@ -37,23 +37,23 @@
 			</tr>
 			<tr>
 				<td>첨부파일1</td>
-				<td><input type="file" name="file1"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일2</td>
-				<td><input type="file" name="file2"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일3</td>
-				<td><input type="file" name="file3"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일4</td>
-				<td><input type="file" name="file4"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 			<tr>
 				<td>첨부파일5</td>
-				<td><input type="file" name="file5"></td>
+				<td><input type="file" name="files"></td>
 			</tr>
 		</table>
 		<input type="submit" value="등록">

@@ -11,12 +11,19 @@
 
 	<!-- 카테고리별 게시글 목록 조회 -->
 	<select id="CommunityList_category" resultType="com.springboot.teasommelier.dto.CommunityDto">
-		select * from tea_community where cb_category=#{cb_category} order by cb_no desc
+		select cb.*, m.*
+		from tea_community cb, tea_member m
+		where cb.m_no=m.m_no
+		and cb.cb_category=#{cb_category}
+		order by cb_no desc
 	</select>
 
-	<!-- 게시글 상세 보기 -->
+	<!-- 게시글 상세 보기 (작성자 아이디 포함) -->
 	<select id="CommunityView" resultType="com.springboot.teasommelier.dto.CommunityDto">
-		select * from tea_community where cb_no=#{cb_no}
+	    select cb.*, m.m_id
+	    from tea_community cb
+	    left join tea_member m on cb.m_no = m.m_no
+	    where cb.cb_no = #{cb_no}
 	</select>
 
 	<!-- 조회수 1 증가 -->
@@ -27,11 +34,12 @@
 	<!-- 게시글 작성 -->
 	<insert id="CommunityInsert">
 		insert into tea_community(
-		    cb_no, cb_category, cb_date, cb_subject, cb_rating,
+		    cb_no, cb_category, cb_qna_category, cb_date, cb_subject, cb_rating,
 		    cb_content, cb_view_count, cb_url, cb_file, p_no, m_no
 		) values (
 		    tea_community_seq.NEXTVAL,
 		    #{cb_category, jdbcType=VARCHAR},
+		    #{cb_qna_category, jdbcType=VARCHAR},
 		    SYSDATE,
 		    #{cb_subject, jdbcType=VARCHAR},
 		    #{cb_rating, jdbcType=NUMERIC},
@@ -59,5 +67,25 @@
 	<delete id="CommunityDelete">
 		delete from tea_community where cb_no=#{cb_no}
 	</delete>
+
+	<!-- 특정 게시글(cb_no)에 달린 답변 조회 -->
+	<select id="ResponseQnaView" resultType="com.springboot.teasommelier.dto.QnaResponseDto">
+		select * from tea_response_qna where cb_no=#{cb_no}
+	</select>
+
+	<!-- 답변 작성 -->
+	<insert id="ResponseQnaInsert">
+		insert into tea_response_qna(
+		    res_no, res_subject, res_content, res_date, res_view_count, m_no, cb_no
+		) values (
+		    tea_response_qna_seq.NEXTVAL,
+		    #{res_subject, jdbcType=VARCHAR},
+		    #{res_content, jdbcType=VARCHAR},
+		    SYSDATE,
+		    0,
+		    #{m_no, jdbcType=NUMERIC},
+		    #{cb_no, jdbcType=NUMERIC}
+		)
+	</insert>
 
 </mapper>
