@@ -63,7 +63,7 @@
             p_stock    = #{p_stock},
             p_sale     = #{p_sale},
             p_time	   = #{p_time},	
-            p_img      = #{p_img, jdbcType=VARCHAR}
+            p_img      = #{p_img, jdbcType=VARCHAR},
             p_img2      = #{p_img2, jdbcType=VARCHAR}
         where p_no = #{p_no}
     </update>

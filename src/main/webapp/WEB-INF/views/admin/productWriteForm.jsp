@@ -7,6 +7,9 @@
 <title>상품등록</title>
 </head>
 <body>
+	<div>
+		<%@ include file="/WEB-INF/views/header.jsp" %>
+	</div>
 	<h1>상품등록</h1>
 	
 	<form name="product" method="post" action="/admin/productWritePro" enctype="multipart/form-data">
