@@ -113,9 +113,7 @@ public class MemberController {
 	public String MemberUpdate(HttpServletRequest request, MemberDto m_dto, 
 			@RequestParam(value="m_birth1", required=false) Integer m_birth1,
 			@RequestParam(value="m_birth2", required=false) Integer m_birth2,
-			@RequestParam(value="m_birth3", required=false) Integer m_birth3,
-			@RequestParam(value="m_id") String m_id,
-			HttpServletResponse response
+			@RequestParam(value="m_birth3", required=false) Integer m_birth3
 			) throws IOException  {
 		
 		String m_phone1 = request.getParameter("m_phone1");
@@ -200,4 +198,5 @@ public class MemberController {
 		
 		return "redirect:admin/MemberList";
 	}
+	
 }

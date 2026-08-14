@@ -15,7 +15,7 @@ public class ShopController {
 
     // 전체 공개 - 매장 목록 조회
     @RequestMapping("/guest/ShopList")
-    public String ShopList(Model model) {
+    public String ShopList() {
 
         return "guest/ShopList";
     }

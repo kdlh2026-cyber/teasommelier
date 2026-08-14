@@ -32,17 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function membercheck(){
+	
 	let m_id = document.member.m_id;
 	let m_passwd = document.member.m_passwd;
 	let chk_passwd = document.member.chk_passwd;
-	let m_name= document.member.mname;
+	let m_name= document.member.m_name;
 	let m_phone1=document.member.m_phone1;
 	let m_phone2=document.member.m_phone2;
 	let m_phone3=document.member.m_phone3;
-	let m_tel1=document.member.mtel1;
-	let m_tel2=document.member.mtel2;
-	let m_tel3=document.member.mtel3;
-	let m_addr1=document.member.m_addr1;
+	let m_email = document.member.m_email;
 	let term_chk = document.member.term_chk;
 	let personal_chk = document.member.personal_chk;
 	let expm_Id = /^[a-zA-Z0-9]{4,16}$/; // 영문소문자/숫자 4~16
@@ -50,10 +48,7 @@ function membercheck(){
 	let expm_Phone1 = /^[0-9]{3}$/;
 	let expm_Phone2 = /^[0-9]{4}$/;
 	let expm_Phone3 = /^[0-9]{4}$/;
-	let expm_Tel1 = /^[0-9]{3}$/;
-	let expm_Tel2 = /^[0-9]{4}$/;
-	let expm_Tel3 = /^[0-9]{4}$/;
-	
+
 	if(!m_id.value){
 		alert("아이디를 입력해주세요");
 		m_id.focus();
@@ -91,25 +86,6 @@ function membercheck(){
 	if(!m_name.value){
 		alert("이름을 입력해주세요");
 		m_name.focus();
-		return false;
-	}
-	
-	if(!expm_Tel1.test(m_tel1.value)){
-		alert("연락처는 숫자만 가능합니다.");
-		m_tel1.value="";
-		m_tel1.focus();
-		return false;
-	}
-	if(!expm_Tel2.test(m_tel2.value)){
-		alert("연락처는 숫자만 가능합니다.");
-		m_tel2.value="";
-		m_tel2.focus();
-		return false;
-	}
-	if(!expm_Tel3.test(m_tel3.value)){
-		alert("연락처는 숫자만 가능합니다.");
-		m_tel3.value="";
-		m_tel3.focus();
 		return false;
 	}
 	
@@ -152,18 +128,20 @@ function membercheck(){
 		return false;
 	}
 	
-	if(!m_addr1.value){
-		alert("주소를 입력해주세요");
+	if(!m_email.value){
+		alert("이메일을 입력해주세요");
+		m_email.focus();
 		return false;
 	}
-	
-	if(!term_chk.cheked){
+
+	if(!term_chk.checked){
 		alert("이용약관에 동의해주세요.");
 		return false;
 	}
 	
-	if(!personal_chk.cheked){
+	if(!personal_chk.checked){
 		alert("개인정보 수집 및 이용에 동의해주세요.");
 		return false;
 	}
+	
 }
