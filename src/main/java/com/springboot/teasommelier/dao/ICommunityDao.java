@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.springboot.teasommelier.dto.CommunityDto;
+import com.springboot.teasommelier.dto.MemberDto;
+import com.springboot.teasommelier.dto.QnaResponseDto;
 
 @Mapper
 public interface ICommunityDao {
@@ -21,4 +23,10 @@ public interface ICommunityDao {
 	public int CommunityDelete(int cb_no);
 	
 	public int CommunityHit(int cb_no);
+	
+	public QnaResponseDto ResponseQnaView(int cb_no);
+
+	public int ResponseQnaInsert(QnaResponseDto res_dto);
+
+	public MemberDto findById(String m_id);
 }

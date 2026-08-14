@@ -24,7 +24,7 @@
 		<tr>
 			<td>${BNL.cb_no}</td>
 			<td><a href="/guest/cb_brandnoticeDetail?cb_no=${BNL.cb_no}">${BNL.cb_subject}</a></td>
-			<td>${BNL.m_no}</td>
+			<td>${BNL.m_id}</td>
 			<td>${fn:substring(BNL.cb_date, 0, 10)}</td>
 			<td>${BNL.cb_view_count}</td>
 		</tr>

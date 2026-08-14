@@ -7,7 +7,7 @@
 		select * from tea_customer_service order by cs_no desc
 	</select>
 	<select id="CustomerServiceView" resultType="com.springboot.teasommelier.dto.CustomerServiceDto">
-		select * from tea_customer_service where cb_no=#{cb_no}
+		select * from tea_customer_service where cs_no=#{cs_no}
 	</select>
 	<insert id="CustomerServiceInsert">
 		insert into tea_customer_service(cs_no,cs_category,cs_subject,cs_content)

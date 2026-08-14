@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td>viewCBdao.m_id</td>
+			<td>${viewCBdao.m_id}</td>
 		</tr>
 		<tr>
 			<td>작성일</td>
@@ -32,6 +33,22 @@
 			<td colspan=2>${viewCBdao.cb_content}</td>
 		</tr>
 	</table>
+	<c:if test="${not empty responseQnaDto}">
+    <h3>답변</h3>
+    <table border="1">
+        <tr>
+            <td>답변 제목</td>
+            <td>${responseQnaDto.res_subject}</td>
+        </tr>
+        <tr>
+            <td>답변일</td>
+            <td>${fn:substring(responseQnaDto.res_date, 0, 10)}</td>
+        </tr>
+        <tr>
+            <td colspan=2>${responseQnaDto.res_content}</td>
+        </tr>
+    </table>
+</c:if>
 	<a href="/guest/cb_qnaList">목록</a>
 	<sec:authorize access="hasRole('USER')">
 		<a href="/member/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>

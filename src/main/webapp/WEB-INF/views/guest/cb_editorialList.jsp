@@ -24,7 +24,7 @@
 		<tr>
 			<td>${EDL.cb_no}</td>
 			<td><a href="/guest/cb_editorialDetail?cb_no=${EDL.cb_no}">${EDL.cb_subject}</a></td>
-			<td>${EDL.m_no}</td>
+			<td>${EDL.m_id}</td>
 			<td>${fn:substring(EDL.cb_date, 0, 10)}</td>
 			<td>${EDL.cb_view_count}</td>
 		</tr>

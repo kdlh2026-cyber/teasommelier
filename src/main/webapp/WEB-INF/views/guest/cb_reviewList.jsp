@@ -27,7 +27,7 @@
 			<td>${RVL.cb_no}</td>
 			<td>리뷰 상품 이미지 끌어오기+상품 상세페이지 링크</td>
 			<td><a href="/guest/cb_reviewDetail?cb_no=${RVL.cb_no}">${RVL.cb_subject}</a></td>
-			<td>작성자 아이디 끌어오기</td>
+			<td>${RVL.m_id}</td>
 			<td>${fn:substring(RVL.cb_date, 0, 10)}</td>
 			<td>${RVL.cb_view_count}</td>
 			<td>${RVL.cb_rating}</td>
