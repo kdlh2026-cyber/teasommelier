@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.teasommelier.dao.IProductDao;
@@ -86,6 +87,24 @@ public class ProductController {
 	   model.addAttribute("totalPage", 2);
 
 	   return "guest/productList";
+	}
+
+	// 상품명 검색 (대량주문문의 상품/주문검색 모달에서 사용) - 기존 select_tea_products_List() 재사용
+	@RequestMapping("/guest/productSearch")
+	@ResponseBody
+	public List<ProductDto> productSearch(@RequestParam(value = "keyword", required = false) String keyword) {
+
+		List<ProductDto> allList = IProductDao.select_tea_products_List();
+
+		if (keyword == null || keyword.trim().isEmpty()) {
+			return new ArrayList<>();
+		}
+
+		String kw = keyword.trim();
+
+		return allList.stream()
+				.filter(p -> p.getP_name() != null && p.getP_name().contains(kw))
+				.collect(Collectors.toList());
 	}
 
 	// 기프트 세트

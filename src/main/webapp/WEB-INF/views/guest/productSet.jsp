@@ -67,13 +67,13 @@
     <div class="product-grid">
         <c:forEach var="product" items="${productSet}">
             <div class="product-card">
-                <div class="product-card"> 
-					<a href="/guest/productDetail?p_no=${product.p_no}">       
-					   <img class="card-img" src="/images/product/${product.p_img}"
-					    alt="${product.p_name}">    </a>    
-					    <p class="card-name">${product.p_name}</p>   
-      					<p class="card-price">
-      			<fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</p></div>
+                <!-- 상품 이미지 + 상세페이지 링크 (호버시 p_img2로 전환) -->
+                <a href="${pageContext.request.contextPath}/guest/productDetail?p_no=${product.p_no}" class="img-wrap">
+                    <img class="card-img img-default" src="/images/product/${product.p_img}" alt="${product.p_name}">
+                    <c:if test="${not empty product.p_img2}">
+                        <img class="card-img img-hover" src="/images/product/${product.p_img2}" alt="${product.p_name}">
+                    </c:if>
+                </a>
                 <div class="product-name">
                     <a href="${pageContext.request.contextPath}/guest/productDetail?p_no=${product.p_no}">${product.p_name}</a>
                 </div>

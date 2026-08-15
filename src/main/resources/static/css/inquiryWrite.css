@@ -1,0 +1,270 @@
+/* ===== 대량 주문 & BtoB 문의 폼 ===== */
+
+.inquiry-page-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+.inquiry-page-title h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.inquiry-board-label {
+    font-size: 14px;
+    color: #666;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #222;
+    margin-bottom: 4px;
+}
+
+.inquiry-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inquiry-table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.inquiry-table th {
+    width: 160px;
+    text-align: left;
+    padding: 14px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    vertical-align: middle;
+}
+
+.inquiry-table td {
+    padding: 10px 12px;
+    vertical-align: middle;
+}
+
+/* 입력창 */
+.inquiry-table input[type="text"],
+.inquiry-table input[type="email"],
+.inquiry-table input[type="tel"],
+.inquiry-table select,
+.inquiry-table textarea {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    font-size: 14px;
+    width: 320px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* 내용 textarea */
+.inquiry-table textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+/* 라디오 버튼 */
+.inquiry-table input[type="radio"] {
+    margin-right: 4px;
+}
+
+/* 라벨 */
+.inquiry-table label {
+    margin-right: 16px;
+    font-size: 14px;
+}
+
+/* 필수 표시 */
+.required-dot {
+    color: #c0392b;
+    margin-left: 2px;
+}
+
+/* 검색 버튼 */
+.btn-search {
+    padding: 8px 16px;
+    border: 1px solid #999;
+    background: #f5f5f5;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+.btn-search:hover {
+    background: #eee;
+}
+
+/* 개인정보 안내 */
+.privacy-notice {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+/* 등록 버튼 영역 */
+.inquiry-btn-area {
+    text-align: center;
+    margin-top: 32px;
+}
+
+/* 등록 버튼 */
+.btn-submit {
+    background: #1a1a2e;
+    color: #fff;
+    border: none;
+    padding: 14px 60px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #33334d;
+}
+
+
+/* =========================================
+   상품 / 주문 검색 모달
+========================================= */
+
+.search-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.search-modal-overlay.open {
+    display: flex;
+}
+
+.search-modal {
+    background: #fff;
+    width: 480px;
+    max-width: 90%;
+    border: 1px solid #ccc;
+}
+
+/* 모달 헤더 */
+.search-modal-header {
+    background: #4a6b70;
+    color: #fff;
+    padding: 10px 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 모달 닫기 버튼 */
+.search-modal-header .modal-close {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* 탭 */
+.search-modal-tabs {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+
+    padding: 12px 16px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-modal-tabs .modal-tab {
+    background: none;
+    border: none;
+    padding: 6px 0 10px;
+    cursor: pointer;
+    color: #999;
+    font-size: 14px;
+}
+
+.search-modal-tabs .modal-tab.active {
+    color: #222;
+    font-weight: bold;
+    border-bottom: 2px solid #222;
+}
+
+/* 모달 내용 */
+.search-modal-body {
+    padding: 16px;
+    min-height: 260px;
+}
+
+.search-modal-panel {
+    display: none;
+}
+
+.search-modal-panel.active {
+    display: block;
+}
+
+/* 검색창 + 검색버튼 */
+.search-modal-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.search-modal-row input[type="text"] {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+}
+
+.search-modal-row button {
+    padding: 6px 14px;
+    border: 1px solid #999;
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+/* 검색 결과 */
+.search-modal-results {
+    margin-top: 12px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.search-modal-results .result-item {
+    padding: 8px 4px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.search-modal-results .result-item:hover {
+    background: #f5f5f5;
+}
+
+/* 검색 결과 없음 */
+.search-modal-empty {
+    color: #999;
+    font-size: 13px;
+    padding: 8px 4px;
+}
+
+/* 모달 하단 */
+.search-modal-footer {
+    padding: 10px 16px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+.search-modal-footer button {
+    padding: 6px 24px;
+    border: 1px solid #999;
+    background: #f5f5f5;
+    cursor: pointer;
+}
