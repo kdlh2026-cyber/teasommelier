@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- 머야 왜 안올라가 올라가라 이얍 -->
-<title>대량 문의ㅇㅇ</title>
+<title>대량 문의</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiryWrite.css">
 </head>
 <body>
