@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiry.css">
 </head>
 <body>
-<!--ㅇ -->
+<!--ㅇㄹㄹ -->
 <div class="inquiry-container">
     <div class="inquiry-header">
         <h2>대량주문문의 상세</h2>
