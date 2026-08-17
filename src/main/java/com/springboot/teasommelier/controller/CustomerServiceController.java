@@ -12,14 +12,11 @@ public class CustomerServiceController {
 	@Autowired
 	ICustomerServiceDao cs_dao;
 	
-	@RequestMapping("/guest/cs_customerServiceList")
-	public String csList() {
-		return "guest/cs_customerServiceList";
-	}
 	
-	@RequestMapping("/guest/customerService")
+	
+	@RequestMapping("/guest/cs_customerServiceList")
 	public String customerService(Model model) {
 	    model.addAttribute("csList", cs_dao.CustomerServiceList());
-	    return "guest/customerService";
+	    return "guest/cs_customerServiceList";
 	}
 }
