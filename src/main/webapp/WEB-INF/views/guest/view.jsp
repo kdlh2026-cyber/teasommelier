@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>제품 상세정보dd</h1>
+	<h1>제품 상세정보</h1>
 	<form action="/insertCart" method="get">
 		<input type="hidden" name="p_no" value="${view.p_no}">
 		<input type="hidden" name="ca_image" value="${view.p_img}">	
