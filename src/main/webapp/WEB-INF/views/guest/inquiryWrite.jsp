@@ -17,7 +17,7 @@
     <form id="inquiryForm" method="post" action="${pageContext.request.contextPath}/guest/InquiryWrite" enctype="multipart/form-data">
         <input type="hidden" id="p_no" name="p_no" value="${empty param.p_no ? 0 : param.p_no}">
 
-        <div class="inquiry-board-label">견적 게시판</div>
+        <div class="inquiry-board-label">견적OO 게시판</div>
 
         <table class="inquiry-table">
             <tbody>
