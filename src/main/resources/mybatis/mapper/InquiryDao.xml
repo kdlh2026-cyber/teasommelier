@@ -87,7 +87,8 @@
             i_email = #{i_email},
             i_phone = #{i_phone},
             i_name = #{i_name},
-            i_memo = #{i_memo}
+            i_memo = #{i_memo},
+            i_file = #{i_file, jdbcType=VARCHAR}
 
         WHERE i_no = #{i_no}
         AND m_id = #{m_id}

@@ -6,7 +6,7 @@ import lombok.Data;
 public class ShopDto {
 	private int sh_no;
 	private String sh_name;
-	private int sh_lat;
-	private int sh_lon;
+	private double sh_lat;   // int → double
+	private double sh_lon;   // int → double
 	private String sh_img;
 }
