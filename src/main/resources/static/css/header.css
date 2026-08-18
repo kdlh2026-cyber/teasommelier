@@ -4,14 +4,14 @@
         justify-content: space-between; /* 양 끝으로 정렬 */
         align-items: center;            /* 세로 중앙 정렬 */
         padding: 20px 40px;
-        border-bottom: 1px solid #e5e5e5;
         width: 100%;
         box-sizing: border-box;
     }
 
     /* 1. 로고 영역 */
     .header-logo img {
-        height: 45px; /* 로고 높이 조절 */
+    	width: 160px;
+        height: 80px; /* 로고 높이 조절 */
         object-fit: contain;
     }
 
@@ -27,25 +27,29 @@
         font-weight: 600;
         transition: color 0.2s;
     }
-    .header-nav a:hover {
-        color: #b8860b; /* 마우스 올렸을 때 포인트 색상 (예: 골드톤) */
-    }
+/* 우측 메뉴(로그인/회원가입/아이콘) 영역 가로 정렬 및 간격 */
+.header-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 16px;
+}
 
-    /* 3. 우측 유저/장바구니/검색 메뉴 */
-    .header-auth {
-        display: flex;
-        align-items: center;
-        gap: 15px; /* 항목 간 간격 */
-        font-size: 14px;
-    }
-    .header-auth a {
-        text-decoration: none;
-        color: #555;
-    }
-    .header-auth a:hover {
-        color: #000;
-    }
-    .header-auth .divider {
-        color: #ddd;
-        margin: 0 5px;
-    }
+.header-menu a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #555;
+}
+
+.header-menu a:hover {
+    color: #000;
+}
+
+/* 마이페이지, 장바구니, 검색 아이콘 크기 조절 */
+.header-menu img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+}

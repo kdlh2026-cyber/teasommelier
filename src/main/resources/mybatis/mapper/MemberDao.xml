@@ -17,7 +17,7 @@
 	</insert>
 	<update id="MemberUpdate">
 		update tea_member
-		set m_passwd=#{m_passwd}, m_tel=#{m_tel},m_phone=#{m_phone},m_email=#{m_email},m_zipno=#{m_zipno}, m_addr=#{m_addr}, m_rsms=#{m_rsms},m_remail=#{m_remail},m_birth=#{m_birth}
+		set m_passwd=#{m_passwd}, m_tel=#{m_tel, jdbcType=VARCHAR},m_phone=#{m_phone},m_email=#{m_email},m_zipno=#{m_zipno, jdbcType=VARCHAR}, m_addr=#{m_addr, jdbcType=VARCHAR}, m_rsms=#{m_rsms},m_remail=#{m_remail},m_birth=#{m_birth, jdbcType=VARCHAR}
 		where m_id=#{m_id}
 	</update>
 	<update id="RefundUpdate">

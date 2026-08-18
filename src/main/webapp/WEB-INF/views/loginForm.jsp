@@ -45,6 +45,11 @@
 			 <button type="submit">비회원 주문조회</button>
 		</form>	
 	</div>
+	<div class="sub-buttons">
+		<input type="button" value="회원가입" onclick="location.href='guest/MemberWriteForm'">
+		<input type="button" value="비회원주문조회">
+	</div>
+	</form>
 </div> 
 <%@ include file="footer.jsp" %>
 </body>

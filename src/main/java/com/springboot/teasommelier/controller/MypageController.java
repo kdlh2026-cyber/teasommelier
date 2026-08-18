@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,6 +40,7 @@ public class MypageController {
 	//마이페이지 적립금은 여기서
 	@RequestMapping("/member/mypage/MemberCash")
 	public String MemberCash(){
+		
 		return "member/mypage/MemberCash";
 	}
 		
@@ -58,7 +58,7 @@ public class MypageController {
 			String m_id = authentication.getName();
 			MemberDto m_dto = m_dao.MemberFindId(m_id);
 			model.addAttribute("m_dto", m_dto);
-			model.addAttribute("ShippingaddrList", s_dao.ShippingaddrList());
+			model.addAttribute("ShippingaddrList", s_dao.ShippingaddrList(m_id));
 		}
 		return "member/mypage/ShipaddrManagement";
 	}
@@ -102,12 +102,19 @@ public class MypageController {
 		
 		s_dao.ShippingaddrWrite(s_dto);
 		
-		return "redirect:member/mypage/ShipaddrManagement";
+		return "redirect:/member/mypage/ShipaddrManagement";
 	}
 
-	@RequestMapping("member/mypage/ShippingaddrUpdateForm")
-	public String ShippingaddrUpdateForm(HttpServletRequest request, ShippingaddrDto s_dto,
-			@RequestParam(value="m_no", required=false) Integer m_no) {
+	@RequestMapping("/member/mypage/ShippingaddrUpdateForm")
+	public String ShippingaddrUpdateForm(Model model, @RequestParam(value="s_no", required=false) Integer s_no) {
+		
+		ShippingaddrDto s_dto = s_dao.FindNo(s_no);
+		model.addAttribute("AddrlistUpdate", s_dto);
+		
+		return "member/mypage/ShippingaddrUpdateForm";
+	}
+	@RequestMapping("/ShippingaddrUpdate")
+	public String ShippingaddrUpdate(HttpServletRequest request, ShippingaddrDto s_dto) {
 		
 		String s_tel1 = request.getParameter("s_tel1");
 		String s_tel2 = request.getParameter("s_tel2");
@@ -129,16 +136,14 @@ public class MypageController {
 		}
 		
 		s_dao.ShippingaddrUpdate(s_dto);
-		
-		return "redirect:member/mypage/ShipaddrManagement";
+		return "redirect:/member/mypage/ShipaddrManagement";
 	}
 	
 	@RequestMapping("/ShippingaddrDelete")
-	public String MemberDelete(@RequestParam(value = "addr_chk") List<Integer> s_noList
-			,@RequestParam(value = "m_no") int m_no) {
-		
-		s_dao.ShippingaddrDelete(s_noList);
-		
-		return "redirect:member/mypage/ShipaddrManagement";
+	public String MemberDelete(@RequestParam(value = "addr_chk", required = false) List<Integer> s_noList) {
+	    if (s_noList != null && !s_noList.isEmpty()) {
+	        s_dao.ShippingaddrDelete(s_noList);
+	    }
+	    return "redirect:/member/mypage/ShipaddrManagement";
 	}
 }

@@ -3,19 +3,29 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springboot.teasommelier.dao.IShippingaddrDao">
-	<select id="ShippingaddrList" resultType="com.springboot.teasommelier.dto.ShippingaddrDto">
-		select * from tea_shippingaddr order by m_no desc
+	<select id="ShippingaddrList" resultType="com.springboot.teasommelier.dto.ShipaddrlistDto">
+		select s.s_deliveryname as sdeliveryname, s.s_name as sname, s.s_tel as stel, s.s_phone as sphone, s.s_addr as saddr,m.m_id as mid, s.s_no as sno
+		from tea_shippingaddr s, tea_member m
+		where s.m_no=m.m_no and m.m_id=#{m_id}
+		order by m.m_no desc
 	</select>
 	<insert id="ShippingaddrWrite">
-		insert into tea_shippingaddr(s_no, s_deliveryname, s_name, s_zipno, s_addr, s_phone, s_defaddr, m_no)
-		values(tea_shippingaddr_seq.NEXTVAL, #{s_deliveryname}, #{s_name}, #{s_zipno}, #{s_addr}, #{s_phone}, #{s_defaddr}, #{m_no})
+		insert into tea_shippingaddr(s_no, s_deliveryname, s_name, s_zipno, s_addr, s_tel, s_phone, s_defaddr, m_no)
+		values(tea_shippingaddr_seq.NEXTVAL, #{s_deliveryname}, #{s_name}, #{s_zipno}, #{s_addr}, #{s_tel}, #{s_phone}, #{s_defaddr}, #{m_no})
 	</insert>
 	<update id="ShippingaddrUpdate">
 		update tea_shippingaddr
-		set s_deliveryname=#{s_deliveryname}, s_name=#{s_name}, s_zipno=#{s_zipno}, s_addr=#{s_addr}, s_phone=#{s_phone}, s_defaddr=#{s_defaddr}
+		set s_deliveryname=#{s_deliveryname}, s_name=#{s_name}, s_zipno=#{s_zipno}, s_addr=#{s_addr}, s_tel=#{s_tel}, s_phone=#{s_phone}, s_defaddr=#{s_defaddr}
 		where s_no=#{s_no}
 	</update>
-	<delete id="ShippingaddrDelete">
-		delete from tea_shippingaddr where s_no=#{s_no} 
+	<delete id="ShippingaddrDelete" parameterType="java.util.List">
+    delete from tea_shippingaddr 
+    where s_no in 
+    <foreach item="s_no" collection="list" open="(" separator="," close=")">
+        #{s_no}
+    </foreach>
 	</delete>
+	<select id="FindNo" resultType="com.springboot.teasommelier.dto.ShippingaddrDto">
+		select * from tea_shippingaddr where s_no=#{s_no}
+	</select>
 </mapper>
