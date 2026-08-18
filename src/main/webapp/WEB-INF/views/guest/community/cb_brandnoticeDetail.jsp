@@ -8,7 +8,7 @@
 <title>브랜드 소식 게시글 상세 페이지</title>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="../../header.jsp" %>
 	<h2>브랜드 소식</h2>
 	<p>브랜드 소식입니다.</p>
 	<table border="1">
@@ -32,11 +32,11 @@
 			<td colspan=2>${viewCBdao.cb_content}</td>
 		</tr>
 	</table>
-	<a href="/guest/cb_brandnoticeList">목록</a>
+	<a href="/guest/community/cb_brandnoticeList">목록</a>
 	<sec:authorize access="hasRole('ADMIN')">
-		<a href="/admin/cb_brandnoticeUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
+		<a href="/admin/community/cb_brandnoticeUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
 		<a href="/cb_communityDelete?cb_no=${viewCBdao.cb_no}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
 	</sec:authorize>
-<%@ include file="../footer.jsp" %>
+<%@ include file="../../footer.jsp" %>
 </body>
 </html>

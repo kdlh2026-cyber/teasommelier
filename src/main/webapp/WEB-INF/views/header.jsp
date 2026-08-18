@@ -27,7 +27,7 @@
 	<sec:authorize access="isAnonymous()">	
 		<a href="/loginForm">로그인</a> 
 		<a href="/guest/MemberWriteForm">회원가입</a> 
-		<a href="/guest/">고객센터</a>
+		<a href="/guest/cs/cs_customerServiceList">고객센터</a>
 		<a href="/loginForm">마이페이지</a>
 		<a href="/cartList">장바구니</a>
 		<a href="#">서치</a>
@@ -37,7 +37,7 @@
 		<div class="member-menu">
 		<a href="/logout">로그아웃</a>
 		<a href="/member/MemberUpdateForm">정보수정</a>
-		<a href="/guest/">고객센터</a>
+		<a href="/guest/cs/cs_customerServiceList">고객센터</a>
 		<a href="/member/mypage/OrderSelect">마이페이지</a>
 		<a href="/cartList">장바구니</a>
 		<a href="#">서치</a>
