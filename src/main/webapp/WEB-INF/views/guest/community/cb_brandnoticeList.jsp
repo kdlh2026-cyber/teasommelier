@@ -9,7 +9,7 @@
 <title>브랜드 소식</title>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="../../header.jsp" %>
 	<h2>브랜드 소식</h2>
 	<p>브랜드 소식입니다.</p>
 	<table border=1>
@@ -23,7 +23,7 @@
 	<c:forEach var="BNL" items="${brandnoticeList}">
 		<tr>
 			<td>${BNL.cb_no}</td>
-			<td><a href="/guest/cb_brandnoticeDetail?cb_no=${BNL.cb_no}">${BNL.cb_subject}</a></td>
+			<td><a href="/guest/community/cb_brandnoticeDetail?cb_no=${BNL.cb_no}">${BNL.cb_subject}</a></td>
 			<td>${BNL.m_id}</td>
 			<td>${fn:substring(BNL.cb_date, 0, 10)}</td>
 			<td>${BNL.cb_view_count}</td>
@@ -31,8 +31,8 @@
 	</c:forEach>
 	</table>
 	<sec:authorize access="hasRole('ADMIN')">
-		<a href="/admin/cb_brandnoticeInsertForm">새 공지 작성</a>
+		<a href="/admin/community/cb_brandnoticeInsertForm">새 공지 작성</a>
 	</sec:authorize>
-<%@ include file="../footer.jsp" %>
+<%@ include file="../../footer.jsp" %>
 </body>
 </html>

@@ -56,6 +56,7 @@
 	<update id="CommunityUpdate">
 		update tea_community
 		 set cb_subject=#{cb_subject, jdbcType=VARCHAR},
+		 	 cb_qna_category=#{cb_qna_category, jdbcType=VARCHAR},
 		     cb_rating=#{cb_rating, jdbcType=NUMERIC},
 		     cb_content=#{cb_content, jdbcType=VARCHAR},
 		     cb_url=#{cb_url, jdbcType=VARCHAR},
