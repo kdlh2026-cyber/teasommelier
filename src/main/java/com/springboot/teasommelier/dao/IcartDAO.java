@@ -21,4 +21,9 @@ public interface IcartDAO {
 	
 	// 장바구니 상품 모두 삭제
 	public int deleteAll(int m_no);
+	
+	// 장바구니 수량 변경
+	public void updateCartQty(@Param("m_no") int m_no,
+							  @Param("ca_no") int ca_no,
+							  @Param("ca_qty") int ca_qty);	
 }

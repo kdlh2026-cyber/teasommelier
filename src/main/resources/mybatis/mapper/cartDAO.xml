@@ -23,15 +23,14 @@
         	)
 	</insert>
 	<select id="cartList" resultType="com.springboot.teasommelier.dto.cartDTO">
-		select c.ca_image, c.ca_info, c.ca_qty, c.ca_price, c.ca_del, p.p_name, p.p_price
+		select c.ca_no, c.ca_image, c.ca_info, c.ca_qty, c.ca_price, c.ca_del, p.p_name, p.p_price, p.p_no
 		 from tea_cart c join tea_product p
 		 on c.p_no = p.p_no
 		 where c.m_no = #{m_no}
 	</select>
 	<delete id="deleteCarts">
 		delete from tea_cart
-		 where m_no = #{m_no}
-		 and ca_no in
+		 where ca_no in
 		 <foreach collection="ca_no" item="no" open="(" separator="," close=")">
 		 	#{no}
 		 </foreach>
@@ -39,4 +38,10 @@
 	<delete id="deleteAll">
 		delete from tea_cart where m_no = #{m_no}
 	</delete>
+	<update id="updateCartQty">
+    	update tea_cart
+    	set ca_qty = #{ca_qty}
+    	where ca_no = #{ca_no}
+      		and m_no = #{m_no}
+	</update>
 </mapper>	
