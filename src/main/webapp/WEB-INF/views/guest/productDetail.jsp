@@ -113,7 +113,7 @@
         </div>
     </div>
     <div id="tab-guide" class="tab-panel">
-        <p class="tab-empty">가이드 준비중입니다.</p>
+        <%@ include file="/WEB-INF/views/guest/guide.jsp" %>
     </div>
     <div id="tab-review" class="tab-panel">
         <p class="tab-empty">등록된 구매후기가 없습니다.</p>
@@ -214,5 +214,8 @@
 		document.getElementById('imgViewerModal').classList.remove('active');
 	}
 	</script>
+	<div>
+        <%@ include file="/WEB-INF/views/footer.jsp" %>
+    </div>
 </body>
 </html>

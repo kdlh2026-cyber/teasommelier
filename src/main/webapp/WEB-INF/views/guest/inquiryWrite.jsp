@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 머야 왜 안올라가 올라가라 이얍 -->
 <title>대량 문의</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiryWrite.css">
 </head>
@@ -17,7 +16,7 @@
     <form id="inquiryForm" method="post" action="${pageContext.request.contextPath}/guest/InquiryWrite" enctype="multipart/form-data">
         <input type="hidden" id="p_no" name="p_no" value="${empty param.p_no ? 0 : param.p_no}">
 
-        <div class="inquiry-board-label">견적OO 게시판</div>
+        <div class="inquiry-board-label">견적 게시판</div>
 
         <table class="inquiry-table">
             <tbody>

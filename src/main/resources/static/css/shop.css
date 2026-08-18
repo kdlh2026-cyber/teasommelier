@@ -1,0 +1,62 @@
+@charset "UTF-8";
+.shop-page {
+    width: 1200px;
+    margin: 30px auto;
+}
+
+/* 매장 탭 - 동그란 pill 형태 */
+.shop-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    margin-top: 60px;
+}
+
+.tab-btn {
+    padding: 10px 24px;
+    border: 1px solid #ddd;
+    border-radius: 30px;   /* 동그란 형태 */
+    background: #fff;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #b8860b;
+    color: #fff;
+    border-color: #b8860b;
+}
+
+/* 카테고리 라인 (TEA SALON | TEA BOUTIQUE 등) */
+.shop-category {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+/* 매장 타이틀 (TWG Tea OOO점) */
+.shop-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 선택된 매장 이미지 (사진+주소정보 포함된 전체 이미지, 비율 유지) */
+.shop-img-box {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.shop-img-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 카카오맵 - 이미지 바로 아래 위치 */
+#map {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
