@@ -25,9 +25,12 @@ public class cartDTO {
 	private String p_name;
 	private int p_price;
 	private String p_img;
-	public void setCartDTOList(List<String> cartDTOList2) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+
+	// 회원 테이블과 조인할 때
+	private String m_name;
+	private String m_phone;
+	private String m_email;
+	private String m_addr;
+	private String m_zipno;
+	private String m_cash;
 }

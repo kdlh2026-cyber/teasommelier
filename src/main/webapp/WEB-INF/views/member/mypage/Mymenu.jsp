@@ -5,7 +5,7 @@
 		<a href="../mypage/OrderSelect">주문조회</a>
 	</li>
 	<li>
-		<a href="../mypage/FavoriteProduct">관심상품</a>
+		<a href="/myFavorite?m_no=${sessionScope.loginMember.m_no}">관심상품</a>
 	</li>
 	<li>
 		<a href="../mypage/MemberCash">적립금</a>

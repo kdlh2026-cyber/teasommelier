@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.teasommelier.dao.IFavoriteDao">
+	<select id="favList" resultType="com.springboot.teasommelier.dto.FavoriteDto">
+		select f.f_no, f.f_image, f.f_info, f.f_price, p.p_name, p.p_price, p.p_no
+		 from tea_favorite f join tea_product p
+		 on f.p_no = p.p_no
+		 where f.m_no = #{m_no}
+	</select>
+	<insert id="insertFavorite">
+		insert into tea_favorite(f_no, f_image, f_info, f_price, f_date, m_no, p_no)
+		values(tea_favorite_seq.NEXTVAL, #{f_image}, 
+				#{f_info}, #{f_price}, 
+				SYSDATE, #{m_no}, #{p_no})
+	</insert>
+</mapper>	

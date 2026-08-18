@@ -26,6 +26,8 @@
 		<label>수량: </label>
     	<input type="number" name="ca_qty" value="1" min="1" max="99">
 		<button type="submit">장바구니 담기</button>
+		<a href="/insertFavorite?p_no=${view.p_no}">관심상품</a>
+		<a href="#" onclick="location.href='/orderWriteDirect?p_no=${view.p_no}&ca_qty=' + document.querySelector('input[name=ca_qty]').value; return false;" class="btn">바로 구매하기</a>
 	</form>
 </body>
 </html>
