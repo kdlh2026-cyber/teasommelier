@@ -7,7 +7,7 @@
 	<select id="select_tea_shop_List" resultType="com.springboot.teasommelier.dto.ShopDto">
 		select sh_no, sh_name, sh_lat, sh_lon, sh_img
 		from tea_shop
-		order by sh_no desc
+		order by sh_no asc
 	</select>
 
 	<!-- 매장 상세 조회 -->

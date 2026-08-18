@@ -1,0 +1,98 @@
+/* ===== 구매안내 페이지 스타일 ===== */
+
+body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    color: #444;
+    line-height: 1.8;
+    background: #f2f2f2;
+    margin: 0;
+}
+
+/* 상단 탭 메뉴 (상품정보 / 가이드 / 구매후기 / 질문답변) */
+.guide-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    background: #fff;
+    padding: 24px 0;
+    font-size: 14px;
+    color: #999;
+    border-bottom: 1px solid #eee;
+}
+
+.guide-tabs .active {
+    color: #222;
+    font-weight: bold;
+}
+
+/* 전체 감싸는 흰색 컨텐츠 영역 */
+.guide-wrap {
+    max-width: 640px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 60px 50px;
+    box-sizing: border-box;
+}
+
+/* 섹션 하나(결제정보/배송정보/교환반품정보) */
+.guide-wrap > div {
+    padding: 40px 0;
+    border-top: none;
+}
+
+.guide-wrap > div:first-of-type {
+    padding-top: 0;
+}
+
+h3 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #222;
+    margin: 0 0 18px 0;
+    padding: 0;
+    border: none;
+}
+
+.guide-wrap div {
+    font-size: 13px;
+    color: #666;
+}
+
+/* 배송정보 리스트 */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    display: block;
+    padding: 3px 0;
+    font-size: 13px;
+    color: #666;
+    border-bottom: none;
+}
+
+/* strong 태그 (교환/반품 소제목) */
+strong {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    margin: 18px 0 6px 0;
+}
+
+strong:first-of-type {
+    margin-top: 0;
+}
+
+/* 강조 문구 (※ 로 시작하는 안내) */
+p {
+    font-size: 12px;
+    color: #999;
+    background: none;
+    padding: 20px 0 0 0;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    border-radius: 0;
+}

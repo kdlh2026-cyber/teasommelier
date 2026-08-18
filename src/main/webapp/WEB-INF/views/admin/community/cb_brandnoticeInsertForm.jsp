@@ -7,10 +7,10 @@
 <title>브랜 드소식 작성 폼 페이지</title>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="../../header.jsp" %>
 	<h2>브랜드 소식</h2>
 	<p>브랜드 소식입니다.</p>
-	<form id="brandnoticeInsertForm" method="post" action="/member/cb_communityInsert" enctype="multipart/form-data">
+	<form id="brandnoticeInsertForm" method="post" action="/cb_communityInsert" enctype="multipart/form-data">
 		<input name="m_no" type="hidden" value=1>
 		<input type="hidden" name="cb_category" value="브랜드소식">
 			<table border="1">
@@ -43,8 +43,8 @@
 			</tr>
 		</table>
 		<input type="submit" value="등록">
-		<a href="/guest/cb_brandnoticeList">취소</a>
+		<a href="/guest/community/cb_brandnoticeList">취소</a>
 	</form>
-<%@ include file="../footer.jsp" %>
+<%@ include file="../../footer.jsp" %>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiry.css">
 </head>
 <body>
-<!--ㅇㄹㄹ -->
 <div class="inquiry-container">
     <div class="inquiry-header">
         <h2>대량주문문의 상세</h2>
@@ -46,7 +46,17 @@
         <c:if test="${not empty inquiry.i_file}">
             <tr>
                 <th>첨부파일</th>
-                <td>${inquiry.i_file}</td>
+                <td>
+                    <c:forEach var="filename" items="${fn:split(inquiry.i_file, ',')}">
+                        <div style="margin-bottom:10px;">
+                            <a href="${pageContext.request.contextPath}/images/inquiry/${filename}" target="_blank">${filename}</a><br>
+                            <img src="${pageContext.request.contextPath}/images/inquiry/${filename}"
+                                 alt="${filename}"
+                                 style="max-width:200px; margin-top:5px; border:1px solid #ddd;"
+                                 onerror="this.style.display='none';">
+                        </div>
+                    </c:forEach>
+                </td>
             </tr>
         </c:if>
         <tr>

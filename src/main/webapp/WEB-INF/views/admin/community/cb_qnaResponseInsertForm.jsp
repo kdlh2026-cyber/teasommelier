@@ -7,10 +7,10 @@
 <title>Q&A 답변 작성 폼 페이지</title>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="../../header.jsp" %>
 	<h2>Q&A</h2>
 	<p>상품문의입니다.</p>
-	<form name="qnaResponseInsertForm" method="post" action="/admin/responseInsert">
+	<form name="qnaResponseInsertForm" method="post" action="/responseInsert">
 	<input type="hidden" name="m_no" value="${viewRESdao.m_no}">
 	<input type="hidden" name="cb_no" value="${viewRESdao.cb_no}">
 	<input type="hidden" name="cb_category" value="${viewRESdao.cb_category}">
@@ -37,10 +37,10 @@ ${viewRESdao.cb_content}
 				</td>
 			</tr>
 		</table>
-		<a href="/guest/cb_qnaList">목록</a>
+		<a href="/guest/community/cb_qnaList">목록</a>
 		<input type="submit" value="등록">
-		<a href="/guest/cb_qnaList" onclick="return confirm('사이트에서 나가시겠습니까?');">취소</a>
+		<a href="/guest/community/cb_qnaList" onclick="return confirm('사이트에서 나가시겠습니까?');">취소</a>
 	</form>
-<%@ include file="../footer.jsp" %>
+<%@ include file="../../footer.jsp" %>
 </body>
 </html>

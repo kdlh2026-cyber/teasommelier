@@ -1,0 +1,276 @@
+@charset "UTF-8";
+
+/* =========================
+   페이지 컨테이너
+========================= */
+
+.cs-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+}
+
+
+/* =========================
+   타이틀 / 전화번호
+========================= */
+
+.cs-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.cs-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.cs-phone {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.cs-divider {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 16px 0;
+}
+
+
+/* =========================
+   안내 문구
+========================= */
+
+.cs-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.cs-info-row p {
+    font-size: 13px;
+    color: #555;
+    margin: 4px 0;
+}
+
+.cs-hours {
+    color: #e04c4c;
+}
+
+
+/* =========================
+   카테고리 탭
+========================= */
+
+#csCategoryList {
+    display: flex;
+    list-style: none;
+    margin: 0 0 30px;
+    padding: 0;
+    border: 1px solid #ddd;
+}
+
+#csCategoryList li {
+    flex: 1;
+}
+
+.csCategoryBtn {
+    width: 100%;
+    padding: 16px 0;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    border: none;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+}
+
+#csCategoryList li:last-child .csCategoryBtn {
+    border-right: none;
+}
+
+.csCategoryBtn.active {
+    background: #000;
+    color: #fff;
+    font-weight: 700;
+}
+
+
+/* =========================
+   아코디언
+========================= */
+
+#csAccordionList {
+    border-top: 1px solid #333;
+}
+
+.csItem {
+    border-bottom: 1px solid #eee;
+}
+
+.csToggleBtn {
+    width: 100%;
+    text-align: left;
+    padding: 20px 8px;
+    font-size: 15px;
+    color: #222;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.csQMark {
+    display: inline-block;
+    width: 24px;
+    color: #999;
+    font-weight: 700;
+}
+
+.csContent {
+    background: #fafafa;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   관리자 버튼
+========================= */
+
+.csAdminForm {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.csAdminForm a,
+.csAdminForm button {
+    font-size: 12px;
+    color: #666;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cs-add-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.cs-add-btn:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* =========================
+   문의 작성 폼
+========================= */
+
+.cs-form-title h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.cs-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #222;
+}
+
+.cs-table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.cs-table th {
+    width: 160px;
+    text-align: left;
+    padding: 14px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    vertical-align: middle;
+}
+
+.cs-table td {
+    padding: 10px 12px;
+    vertical-align: middle;
+}
+
+.cs-table input[type="text"],
+.cs-table select {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    font-size: 14px;
+    width: 320px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.cs-table textarea {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    font-size: 14px;
+    width: 100%;
+    min-height: 160px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.cs-btn-area {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.cs-cancel-link {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 14px 60px;
+    font-size: 15px;
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.cs-cancel-link:hover {
+    text-decoration: underline;
+}
+
+/* 등록 버튼 영역 */
+.inquiry-btn-area {
+    text-align: center;
+    margin-top: 32px;
+}
+
+/* 등록 버튼 */
+.btn-submit {
+    background: #1a1a2e;
+    color: #fff;
+    border: none;
+    padding: 14px 60px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #33334d;
+}

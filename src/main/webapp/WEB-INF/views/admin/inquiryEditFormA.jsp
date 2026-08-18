@@ -61,6 +61,27 @@
                     </c:choose>
                 </td>
             </tr>
+             <tr>
+            	<th>첨부파일1</th>
+            	<td><input type="image" name="i_img" value="${inquiry.i_img}"></td>
+            </tr>
+            <tr>
+            	<th>첨부파일2</th>
+            	<td><input type="image" name="i_img" value="${inquiry.i_img}"></td>
+            </tr>
+            <tr>
+            	<th>첨부파일3</th>
+            	<td><input type="image" name="i_img" value="${inquiry.i_img}"></td>
+            </tr>
+            <tr>
+            	<th>첨부파일4</th>
+            	<td><input type="image" name="i_img" value="${inquiry.i_img}"></td>
+            </tr>
+            <tr>
+            	<th>첨부파일5</th>
+            	<td><input type="image" name="i_img" value="${inquiry.i_img}"></td>
+            </tr>
+            <tr>
 
             <!-- 실제 수정 가능 항목: 답변상태 + 답변내용 -->
             <tr>

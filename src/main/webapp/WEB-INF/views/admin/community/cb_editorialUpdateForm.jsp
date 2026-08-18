@@ -9,10 +9,10 @@
 <title>에디토리얼 수정 폼 페이지</title>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="../../header.jsp" %>
 	<h2>에디토리얼</h2>
 	<p>에디토리얼입니다.</p>
-	<form id="editorialInsertForm" method="post" action="/member/cb_communityUpdate" enctype="multipart/form-data">
+	<form id="editorialInsertForm" method="post" action="/cb_communityUpdate" enctype="multipart/form-data">
 		<input name="m_no" type="hidden" value="${viewCBdao.m_no}">
 		<input type="hidden" name="cb_no" value="${viewCBdao.cb_no}">
 		<input type="hidden" name="cb_category" value="에디토리얼">
@@ -46,8 +46,8 @@
 			</tr>
 		</table>
 		<input type="submit" value="등록">
-		<a href="/guest/cb_editorialList">취소</a>
+		<a href="/guest/community/cb_editorialList">취소</a>
 	</form>
-<%@ include file="../footer.jsp" %>
+<%@ include file="../../footer.jsp" %>
 </body>
 </html>
