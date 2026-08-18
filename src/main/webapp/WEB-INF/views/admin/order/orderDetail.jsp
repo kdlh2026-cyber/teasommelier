@@ -66,12 +66,14 @@
     <h3>주문 상품 목록</h3>
     <table>
          <tr>
+         	<th></th>
             <th>상품명</th>
             <th>수량</th>
             <th>상품 가격</th>
         </tr>
     <c:forEach var="item" items="${orderDetails}">
         <tr>
+        	<td><img src="/images/product/${item.p_img}" width="100"></td>
             <td>${item.od_product}</td>
             <td>${item.od_qty}개</td>
             <td><fmt:formatNumber value="${item.od_price}" pattern="#,###"/>원</td>
@@ -80,7 +82,7 @@
     </table>
 	<hr>
     <div>
-        <a href="/admin/order/orderList">목록으로 돌아가기</a>
+        <a href="#" onclick="history.back()">목록으로 돌아가기</a>
     </div>
 </body>
 </html>

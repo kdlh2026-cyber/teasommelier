@@ -13,7 +13,6 @@
 	
 	<nav class="header-nav">
 		<a href="/guest/productList">티 제품</a>
-		<a href="/guest/productTest">테스트</a>
 		<a href="/guest/productSet">기프트세트</a>
 		<a href="/guest/productWear">티 웨어</a>
 		<a href="/guest/productEvent">이벤트</a>

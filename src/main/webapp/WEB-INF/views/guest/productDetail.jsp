@@ -12,90 +12,101 @@
 		<jsp:include page="/WEB-INF/views/header.jsp" />
 	</div>
 <div class="detail-wrap">
-    <!-- 좌측: 이미지 영역 -->    
-    <div class="detail-img-area">        
-    <!-- 이미지 슬라이더: 좌/우 화살표로 main/sub 이미지를 전환 -->
-    <div class="img-slider">
-        <img id="mainImg" class="main-img"
-             src="/images/product/${product.p_img}"
-             alt="${product.p_name}"
-             onclick="openImgViewer(this.src)">
-
-        <c:if test="${not empty product.p_img2 && product.p_img2 != product.p_img}">
-        <button type="button" class="slider-arrow slider-prev" onclick="slideImg(-1)">&#8249;</button>
-        <button type="button" class="slider-arrow slider-next" onclick="slideImg(1)">&#8250;</button>
-        </c:if>
-    </div>
-    </div>
-    
-    <!-- 우측: 정보 영역 -->    
-    <div class="detail-info-area">
-        <h1 class="detail-name">${product.p_name}</h1>
+	<form id="productForm" action="/insertCart" method="get">
+		<input type="hidden" name="p_no" value="${product.p_no}">
+        <input type="hidden" name="ca_image" value="${product.p_img}">    
+        <input type="hidden" name="ca_info" value="${product.p_name}">    
+        <input type="hidden" name="ca_price" value="${product.p_price}">
         
-    <!-- 부가정보: 상품종류(용량) 형태로 표시 -->        
-    <p class="detail-subinfo">${product.p_type} (${product.p_capacity})</p>
-
-        <!-- 판매가 -->
-        <div class="info-row">
-            <span class="info-label">판매가</span>
-            <span class="info-value price-value">
-                <fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원
-            </span>
-        </div>
-
-        <!-- 재고 -->
-        <div class="info-row">
-            <span class="info-label">재고</span>
-            <span class="info-value">
-                <c:choose>
-                    <c:when test="${product.p_stock > 0}">${product.p_stock}개 남음</c:when>
-                    <c:otherwise>품절</c:otherwise>
-                </c:choose>
-            </span>
-        </div>
-
-        <!-- 유통기한 -->
-        <c:if test="${not empty product.p_time}">
-        <div class="info-row">
-            <span class="info-label">유통기한</span>
-            <span class="info-value">${product.p_time}</span>
-        </div>
-        </c:if>
-
-        <!-- 수량선택: -/+ 버튼형 스테퍼 -->
-        <c:if test="${product.p_stock > 0}">
-        <div class="info-row qty-row">
-            <span class="info-label">수량</span>
-            <div class="qty-stepper" data-unit-price="${product.p_price}">
-                <button type="button" class="qty-btn" onclick="changeQty(-1)">－</button>
-                <input type="number" id="qty" name="qty" value="1" min="1" max="${product.p_stock}"
-                       oninput="onQtyInput()" onblur="validateQtyInput()">
-                <button type="button" class="qty-btn" onclick="changeQty(1)">＋</button>
-            </div>
-        </div>
-
-        <div class="detail-total-price">
-            <span class="total-label">총 상품금액</span>
-            <span id="totalPrice"><fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</span>
-            <span class="total-count">(1개)</span>
-        </div>
-        </c:if>
-
-        <!-- 구매 버튼 영역: 재고(p_stock) 기준으로만 판단, 바로구매만 강조 스타일 -->        
-        <div class="detail-btn-area">            
-        <c:choose>                
-        <c:when test="${product.p_stock > 0}">                    
-        <a href ="#"><button type="button" class="btn-buy">바로구매</button></a>                    
-        <a href ="/cartList"><button type="button" class="btn-cart">장바구니</button></a>                   
-        <a href ="#"><button type="button" class="btn-wish">관심상품</button></a>               
-        </c:when>               
-         <c:otherwise>                    
-         <button type="button" class="btn-soldout" disabled>SOLD OUT</button>                    
-         <a href="#" class="btn-inquiry">관심상품</a>                
-         </c:otherwise>            
-         </c:choose>            
-         </div>
-    </div>
+	    <div class="detail-container" style="display: flex; width: 100%;">
+		    <!-- 좌측: 이미지 영역 -->    
+		    <div class="detail-img-area">        
+		    <!-- 이미지 슬라이더: 좌/우 화살표로 main/sub 이미지를 전환 -->
+		    <div class="img-slider">
+		        <img id="mainImg" class="main-img"
+		             src="/images/product/${product.p_img}"
+		             alt="${product.p_name}"
+		             onclick="openImgViewer(this.src)">
+		
+		        <c:if test="${not empty product.p_img2 && product.p_img2 != product.p_img}">
+			        <button type="button" class="slider-arrow slider-prev" onclick="slideImg(-1)">&#8249;</button>
+			        <button type="button" class="slider-arrow slider-next" onclick="slideImg(1)">&#8250;</button>
+		        </c:if>
+		    </div>
+		    </div>
+		    
+		    <!-- 우측: 정보 영역 -->    
+		    <div class="detail-info-area">
+		        <h1 class="detail-name">${product.p_name}</h1>
+		        
+		    <!-- 부가정보: 상품종류(용량) 형태로 표시 -->        
+		    <p class="detail-subinfo">${product.p_type} (${product.p_capacity})</p>
+		
+		        <!-- 판매가 -->
+		        <div class="info-row">
+		            <span class="info-label">판매가</span>
+		            <span class="info-value price-value">
+		                <fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원
+		            </span>
+		        </div>
+		
+		        <!-- 재고 -->
+		        <div class="info-row">
+		            <span class="info-label">재고</span>
+		            <span class="info-value">
+		                <c:choose>
+		                    <c:when test="${product.p_stock > 0}">${product.p_stock}개 남음</c:when>
+		                    <c:otherwise>품절</c:otherwise>
+		                </c:choose>
+		            </span>
+		        </div>
+		
+		        <!-- 유통기한 -->
+		        <c:if test="${not empty product.p_time}">
+			        <div class="info-row">
+			            <span class="info-label">유통기한</span>
+			            <span class="info-value">${product.p_time}</span>
+			        </div>
+		        </c:if>
+		
+		        <!-- 수량선택: -/+ 버튼형 스테퍼 -->
+		        <c:if test="${product.p_stock > 0}">
+		        <div class="info-row qty-row">
+		            <span class="info-label">수량</span>
+		            <div class="qty-stepper" data-unit-price="${product.p_price}">
+		                <button type="button" class="qty-btn" onclick="changeQty(-1)">－</button>
+		                <input type="number" id="qty" name="ca_qty" value="1" min="1" max="${product.p_stock}"
+		                       oninput="onQtyInput()" onblur="validateQtyInput()">
+		                <button type="button" class="qty-btn" onclick="changeQty(1)">＋</button>
+		            </div>
+		        </div>
+		
+		        <div class="detail-total-price">
+		            <span class="total-label">총 상품금액</span>
+		            <span id="totalPrice"><fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</span>
+		            <span class="total-count">(1개)</span>
+		        </div>
+		        </c:if>
+		
+		        <!-- 구매 버튼 영역: 재고(p_stock) 기준으로만 판단, 바로구매만 강조 스타일 -->        
+		        <div class="detail-btn-area">            
+			        <c:choose>                
+				        <c:when test="${product.p_stock > 0}">                    
+					        <button type="button" class="btn-buy" onclick="submitDirectOrder()">바로구매</button>                  
+					        <button type="submit" class="btn-cart">장바구니</button>                   
+				        	<a href="/insertFavorite?p_no=${product.p_no}">
+				                <button type="button" class="btn-wish">관심상품</button>
+				            </a>               
+				        </c:when>               
+				         <c:otherwise>                    
+					         <button type="button" class="btn-soldout" disabled>SOLD OUT</button>                    
+					         <a href="#" class="btn-inquiry">관심상품</a>                
+				         </c:otherwise>            
+			         </c:choose>            
+		         </div>
+		    </div>
+	    </div>
+    </form>
 </div>
 
 <!-- 탭 메뉴 + 내용: 상품정보 탭에서만 실제 설명(p_desc) 표시, 나머지는 준비중 -->
@@ -212,6 +223,13 @@
 	// 이미지 상세보기 모달 닫기
 	function closeImgViewer() {
 		document.getElementById('imgViewerModal').classList.remove('active');
+	}
+	
+	// 바로구매 버튼 클릭시 컨트롤러로 이동
+	function submitDirectOrder() {
+		const pNo = "${product.p_no}";
+		const qty = document.getElementById('qty').value;
+		location.href = '/orderWriteDirect?p_no=' + pNo + '&ca_qty=' + qty;
 	}
 	</script>
 	<div>

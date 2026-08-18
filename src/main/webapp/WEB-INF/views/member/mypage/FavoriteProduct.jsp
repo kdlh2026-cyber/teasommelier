@@ -17,7 +17,7 @@
 	</div>
 	<div>
 		<h1>관심상품</h1>
-		<form name="favList" method="post" action="/orderWriteFav">
+		<form name="favList">
 			<table border=1 width=1000>
 				<tr>
 					<th><input type="checkbox" class="checkAll" checked></th>
@@ -29,14 +29,14 @@
 			<c:forEach var="list" items="${fav}" varStatus="status">
 				<tr>
 					<td><input type="checkbox" name="f_no" value="${list.f_no}" checked class="favCheck"></td>
-					<td><a href="/guest/ViewForm?p_no=${list.p_no}"><img src="/images/product/${list.f_image}" width="150"></a></td>
-					<td><a href="/guest/ViewForm?p_no=${list.p_no}">${list.f_info}</a></td>
+					<td><a href="/guest/productDetail?p_no=${list.p_no}"><img src="/images/product/${list.f_image}" width="150"></a></td>
+					<td><a href="/guest/productDetail?p_no=${list.p_no}">${list.f_info}</a></td>
 					<td><fmt:formatNumber value="${list.f_price}" type="number"/>원</td>
 					<td><a href="/insertCart?p_no=${list.p_no}&ca_qty=1">장바구니 담기</a></td>
 				</tr>
 			</c:forEach>	
 			</table>
-			<button type="submit">전체상품주문</button>
+			<button type="button" class="buy" onclick="allOrderChoice(this)">전체상품주문</button>
 		</form>
 		
 		<form class="favForm" action="" method="post">
@@ -76,30 +76,38 @@ function choice(selectedTag){
 	favForm.submit();
 }
 
-document.querySelector('form[name="favList"]').addEventListener('submit', function(e){
-	const allCheckBoxes = document.querySelectorAll('.favCheck');
-	for(const box of allCheckBoxes){
-		box.checked = true;
+	function allOrderChoice(selectedTag){
+	    const allCheckBoxes = document.querySelectorAll('.favCheck');
+	    for(const box of allCheckBoxes){
+	        box.checked = true;
+	    }
+	    choice(selectedTag);
 	}
-});
 
-const checkAll = document.querySelector('.checkAll');
-const cartCheck = document.querySelectorAll('.favCheck');
+	document.querySelector('form[name="favList"]').addEventListener('submit', function(e){
+		const allCheckBoxes = document.querySelectorAll('.favCheck');
+		for(const box of allCheckBoxes){
+			box.checked = true;
+		}
+	});
 
-checkAll.addEventListener('click', function(){
-	const isChecked = checkAll.checked;	
-	const checkBoxes = document.querySelectorAll('.favCheck');
+	const checkAll = document.querySelector('.checkAll');
+	const cartCheck = document.querySelectorAll('.favCheck');
 	
-	if(isChecked){
-		for(const checkBox of checkBoxes){
-			checkBox.checked = true;
+	checkAll.addEventListener('click', function(){
+		const isChecked = checkAll.checked;	
+		const checkBoxes = document.querySelectorAll('.favCheck');
+		
+		if(isChecked){
+			for(const checkBox of checkBoxes){
+				checkBox.checked = true;
+			}
 		}
-	}
-	else{
-		for(const checkBox of checkBoxes){
-			checkBox.checked = false;
+		else{
+			for(const checkBox of checkBoxes){
+				checkBox.checked = false;
+			}
 		}
-	}
-});
+	});
 </script>
 </html>

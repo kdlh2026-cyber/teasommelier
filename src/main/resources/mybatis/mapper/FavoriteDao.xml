@@ -15,4 +15,24 @@
 				#{f_info}, #{f_price}, 
 				SYSDATE, #{m_no}, #{p_no})
 	</insert>
+	<delete id="deleteFav">
+		delete from tea_favorite
+		where f_no in
+		<foreach collection="f_no" item="no" open="(" separator="," close=")">
+			#{no}
+		</foreach>
+	</delete>
+	<delete id="deleteFavAll">
+		delete from tea_favorite where m_no = #{m_no}
+	</delete>
+	<select id="getOrderItemsFromFav" resultType="com.springboot.teasommelier.dto.cartDTO">
+		select f.f_no as ca_no, f.f_no as f_no, f.p_no as p_no, p.p_name as p_name, p.p_price as ca_price, p.p_img as ca_image, 1 as ca_qty
+		from tea_favorite f join tea_product p
+		on f.p_no = p.p_no
+		where f.m_no = #{m_no} 
+		and f.f_no in
+		<foreach collection="f_noList" item="f_no" open="(" separator="," close=")">
+			#{f_no}
+		</foreach>
+	</select>
 </mapper>	

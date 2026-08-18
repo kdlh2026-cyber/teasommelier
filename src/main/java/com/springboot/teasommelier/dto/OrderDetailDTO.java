@@ -15,4 +15,7 @@ public class OrderDetailDTO {
 	private String p_name;
 	private int p_price;
 	private String p_img;
+	
+	private String m_name;
+	private String m_id;
 }

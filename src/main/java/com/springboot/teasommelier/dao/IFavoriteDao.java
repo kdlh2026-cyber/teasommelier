@@ -18,11 +18,13 @@ public interface IFavoriteDao {
 	public List<FavoriteDto> favList(int m_no);
 	
 	// 관심상품 하나 이상 삭제
-	public int deleteFav(@Param("f_noList") List<Integer> f_noList);
+	public int deleteFav(@Param("m_no") int m_no,
+						 @Param("f_no") List<Integer> f_no);
 	
 	// 관심상품 모두 삭제
 	public int deleteFavAll(int m_no);
 	
 	// 선택한 관심상품
-	List<cartDTO> getOrderItemsFromFav(List<Integer> f_noList);
+	public List<cartDTO> getOrderItemsFromFav(@Param("m_no") int m_no, 
+			 @Param("f_noList") List<Integer> f_noList);
 }
