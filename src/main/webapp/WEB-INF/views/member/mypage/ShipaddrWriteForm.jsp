@@ -5,19 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TeaSommelier</title>
-<script>
-function goPopup(){
-	var pop = window.open("/guest/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-
-}
-
-function jusoCallBack(s_addr1,s_addr2,s_zipno){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.shipaddr.s_addr1.value = s_addr1;
-		document.shipaddr.s_addr2.value = s_addr2;
-		document.shipaddr.s_zipno.value = s_zipno;
-}
-</script>
+<script src="/js/addrcheck.js"></script>
 <style>
 .required {
   color: #007bff;        /* 파란색 별표 */
@@ -73,7 +61,7 @@ function jusoCallBack(s_addr1,s_addr2,s_zipno){
 				일반전화
 			</th>
 			<td>
-				<select name="s_tel1" id="m_tel1">
+				<select name="s_tel1" id="s_tel1">
 					    <option value="02">02</option>
 					    <option value="031">031</option>
 					    <option value="032">032</option>
@@ -108,7 +96,7 @@ function jusoCallBack(s_addr1,s_addr2,s_zipno){
 			<td><input type="checkbox" name="s_defaddr" value="T">기본배송지로 저장</td>
 		</tr>
 	</table>
-	<input type="submit" value="등록">
+	<input type="submit" value="등록" onclick="return addrcheck();">
 	<input type="button" value="취소" onclick="history.back();">
 	</form>
 </body>

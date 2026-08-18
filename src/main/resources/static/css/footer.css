@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/* 공통 초기화 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+/* 푸터 전체 컨테이너 */
+.footer-wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    color: #555555;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.footer-wrap a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 상단 영역 (고객센터/계좌 vs 매장안내 2열 배치) */
+.footer-top ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding-bottom: 40px;
+}
+
+.footer-top > ul > li:first-child {
+    flex: 1;
+}
+
+.footer-top > ul > li:last-child {
+    width: 250px;
+}
+
+/* 소제목 (고객센터, 무통장 입금, 매장안내) */
+.footer-wrap h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 12px;
+}
+
+/* 무통장 입금 섹션 */
+.bank-info {
+    margin-top: 25px;
+}
+
+.bank-info span {
+    margin-right: 12px;
+}
+
+.bank-info b {
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+/* 매장안내 목록 세로 나열 */
+.store-list a {
+    display: block;
+    margin-bottom: 6px;
+    color: #555555;
+}
+
+.store-list a:hover {
+    color: #111111;
+}
+
+/* 하단 영역 (구분선 및 회사정보) */
+.footer-bottom {
+    padding-top: 25px;
+    color: #777777;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* 하단 메뉴 (이용안내, 이용약관, 개인정보처리방침) */
+.footer-bottom .menu {
+    margin-bottom: 10px;
+}
+
+.footer-bottom .menu a {
+    font-size: 13px;
+    color: #333333;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+.footer-bottom .copyright {
+	border-top: 1px solid #eaeaea;
+    display: block;
+    margin-top: 8px;
+    color: #888888;
+}
