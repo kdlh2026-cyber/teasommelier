@@ -13,7 +13,6 @@
 	
 	<nav class="header-nav">
 		<a href="/guest/productList">티 제품</a>
-		<a href="/guest/productTest">테스트</a>
 		<a href="/guest/productSet">기프트세트</a>
 		<a href="/guest/productWear">티 웨어</a>
 		<a href="/guest/productEvent">이벤트</a>
@@ -27,7 +26,7 @@
 	<sec:authorize access="isAnonymous()">	
 		<a href="/loginForm">로그인</a> 
 		<a href="/guest/MemberWriteForm">회원가입</a> 
-		<a href="/guest/">고객센터</a>
+		<a href="/guest/cs_customerServiceList">고객센터</a>
 		<a href="/loginForm">마이페이지</a>
 		<a href="/cartList">장바구니</a>
 		<a href="#">서치</a>
@@ -37,7 +36,7 @@
 		<div class="member-menu">
 		<a href="/logout">로그아웃</a>
 		<a href="/member/MemberUpdateForm">정보수정</a>
-		<a href="/guest/">고객센터</a>
+		<a href="/guest/cs_customerServiceList">고객센터</a>
 		<a href="/member/mypage/OrderSelect">마이페이지</a>
 		<a href="/cartList">장바구니</a>
 		<a href="#">서치</a>
@@ -50,7 +49,7 @@
 		<a href="/logout">로그아웃</a>
 		<a href="/admin/MemberList">회원목록</a>
 		<a href="/admin/productLists">상품목록</a>
-		<a href="#">주문목록</a>
+		<a href="/admin/orderList">주문목록</a>
 		</div>
 	</sec:authorize>
 	</div>

@@ -27,10 +27,18 @@ public class cartDTO {
 	private String p_img;
 
 	// 회원 테이블과 조인할 때
+	private String m_id;
 	private String m_name;
 	private String m_phone;
 	private String m_email;
 	private String m_addr;
 	private String m_zipno;
 	private String m_cash;
+	
+	// 관심상품을 List<cartDTO> 담을 떄
+	private int f_no;
+	private String f_image;
+	private String f_info;
+	private int f_price;
+	private Date f_date;
 }

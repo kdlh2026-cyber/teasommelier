@@ -2,6 +2,7 @@ package com.springboot.teasommelier.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,5 +65,29 @@ public class FavoriteController {
 		model.addAttribute("fav", favDAO.favList(member.getM_no()));
 		
 		return "member/mypage/FavoriteProduct";
+	}
+	
+	// 관심상품 삭제(선택, 모두)
+	@RequestMapping("/deleteFav")
+	public String deleteFav(@RequestParam(value="f_no", required = false) List<String> f_noList,
+							Principal principal){
+		
+		MemberDto member = memberDao.MemberFindId(principal.getName());
+		int m_no = member.getM_no();
+		
+		// 전체 삭제
+		if(f_noList == null || f_noList.isEmpty() || (f_noList.size() == 1 && "all".equals(f_noList.get(0)))){
+			favDAO.deleteFavAll(m_no);
+			return "redirect:/myFavorite";
+		}
+		
+		// 선택 삭제
+		List<Integer> nos = f_noList.stream()
+							.map(Integer::parseInt)
+							.collect(Collectors.toList());
+		
+		favDAO.deleteFav(m_no, nos);
+		
+		return "redirect:/myFavorite";
 	}
 }

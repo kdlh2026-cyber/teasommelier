@@ -22,12 +22,13 @@
             <tr>
                 <td><a href="/admin/orderDetail?o_no=${order.o_no}">${order.o_no}</a></td>
                 <td>${order.m_id}</td>
-                <td>${order.o_name}</td>
+                <td>${order.m_name}</td>
                 <td><fmt:formatNumber value="${order.o_price}" pattern="#,###"/>원</td>
                 <td>${order.o_pay}</td>
                 <td><fmt:formatDate value="${order.o_date}" pattern="yyyy-MM-dd HH:mm"/></td>
             </tr>
      </c:forEach>
     </table>
+    <a href="#" onclick="history.back()">관리자 메인</a>
 </body>
 </html>

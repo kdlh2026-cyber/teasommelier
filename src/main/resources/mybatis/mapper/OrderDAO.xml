@@ -4,10 +4,10 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springboot.teasommelier.dao.IorderDAO">
 	<select id="orderList" resultType="com.springboot.teasommelier.dto.cartDTO">
-		select c.*, p.p_name, p.p_price, m.m_name, m.m_phone, m.m_email, m.m_addr, m.m_zipno, m.m_cash 
+		select c.*, p.p_name, p.p_price, m.m_id, m.m_name, m.m_phone, m.m_email, m.m_addr, m.m_zipno, m.m_cash 
 			from tea_cart c
-			join tea_product p on c.p_no = p.p_no
-			join tea_member m on c.m_no = m.m_no
+			left join tea_product p on c.p_no = p.p_no
+			left join tea_member m on c.m_no = m.m_no
 			where c.m_no = #{m_no}
 			and c.ca_no in
 			<foreach item="ca_no" collection="caNoList" open="(" separator="," close=")">
@@ -30,11 +30,13 @@
     <insert id="orderDetailInsert">
     	insert into tea_order_detail(od_no, od_qty, od_product, od_price, o_no, p_no)
     	 values(tea_order_detail_seq.NEXTVAL, #{od_qty, jdbcType=INTEGER},
-    	 #{od_product, jdbcType=INTEGER}, #{od_price, jdbcType=INTEGER},
+    	 #{od_product, jdbcType=VARCHAR}, #{od_price, jdbcType=INTEGER},
     	 #{o_no, jdbcType=INTEGER}, #{p_no, jdbcType=INTEGER})
     </insert>
     <select id="orderHeader" resultType="com.springboot.teasommelier.dto.OrderDTO">
-    	select o.*, m.m_name, m.m_id
+    	select o.*,
+    		nvl(m.m_id, '비회원') as m_id,
+	    	nvl(m.m_name, o.o_name) as m_name
     	from tea_order o
     	left join tea_member m on o.m_no = m.m_no
     	where o_no = #{o_no}
@@ -46,8 +48,21 @@
 		 where od.o_no = #{o_no}
 	</select>
 	<select id="allOrderList" resultType="com.springboot.teasommelier.dto.OrderDTO">
-	    SELECT *
-	    FROM tea_order
-	    ORDER BY o_date DESC
+	    select o.o_no, o.o_price, o.o_pay, o.o_name, o.o_date,
+	    		nvl(m.m_id, '비회원') as m_id,
+	    		nvl(m.m_name, o.o_name) as m_name
+	    from tea_order o
+	    left join tea_member m
+	    on o.m_no = m.m_no
+	    order by o.o_date desc
 	</select>
+	<!-- m_cash 업데이트 -->
+	<update id="deductMoney">
+		update tea_member set m_cash = #{m_cash}
+		where m_no = #{m_no}
+	</update>
+	<!-- 결제 후 장바구니 상품 삭제 -->
+	<delete id="deleteOrderCart">
+		delete from tea_cart where m_no = #{m_no} and p_no = #{p_no}
+	</delete>
 </mapper>	
