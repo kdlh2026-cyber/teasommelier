@@ -209,3 +209,46 @@
     color: #000;
     font-weight: 700;
 }
+
+/* 상품 카드 3열 그리드 */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 24px;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상품 이미지 영역: 호버시 p_img2로 전환 */
+.img-wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.img-wrap .card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.img-wrap .img-hover {
+    opacity: 0;
+}
+
+.img-wrap:hover .img-default {
+    opacity: 0;
+}
+
+.img-wrap:hover .img-hover {
+    opacity: 1;
+}
