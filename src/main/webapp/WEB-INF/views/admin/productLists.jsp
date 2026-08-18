@@ -12,6 +12,7 @@
 	<%@ include file="../header.jsp" %>
 	<h1>상품목록</h1>
 	<a href="/admin/productWriteForm">상품 등록</a>
+	<a href ="">상품수정</a>
 	<table border=1 width=1200>
 		<tr>
 			<th>상품번호</th>

@@ -170,7 +170,13 @@ public class InquiryController {
     @RequestMapping("/member/InquiryEditM")
     public String memberInquiryEditM(
             Authentication authentication,
-            InquiryDto i_dto) {
+            InquiryDto i_dto,
+            @RequestParam(value = "i_file1", required = false) MultipartFile i_file1,
+            @RequestParam(value = "i_file2", required = false) MultipartFile i_file2,
+            @RequestParam(value = "i_file3", required = false) MultipartFile i_file3,
+            @RequestParam(value = "i_file4", required = false) MultipartFile i_file4,
+            @RequestParam(value = "i_file5", required = false) MultipartFile i_file5)
+            throws Exception {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             return "redirect:/login";
@@ -191,6 +197,44 @@ public class InquiryController {
 
         if (check == null) {
             return "redirect:/member/inquiryListM";
+        }
+
+        File uploadDir = new File(UPLOAD_PATH);
+
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        List<MultipartFile> files = new ArrayList<>();
+        files.add(i_file1);
+        files.add(i_file2);
+        files.add(i_file3);
+        files.add(i_file4);
+        files.add(i_file5);
+
+        List<String> savedNames = new ArrayList<>();
+
+        for (MultipartFile file : files) {
+            if (file != null && !file.isEmpty()) {
+                String filename = file.getOriginalFilename();
+
+                file.transferTo(new File(UPLOAD_PATH + filename));
+
+                savedNames.add(filename);
+            }
+        }
+
+        if (!savedNames.isEmpty()) {
+            String existingFiles = check.getI_file();
+
+            if (existingFiles != null && !existingFiles.isEmpty()) {
+                i_dto.setI_file(existingFiles + "," + String.join(",", savedNames));
+            } else {
+                i_dto.setI_file(String.join(",", savedNames));
+            }
+        } else {
+            // 새 파일 없으면 기존 값 유지
+            i_dto.setI_file(check.getI_file());
         }
 
         inquiryDao.updateMyInquiry(i_dto);
@@ -278,7 +322,7 @@ public class InquiryController {
         return "admin/inquiryEditFormA";
     }
 
- // 관리자 - 문의 답변 저장
+    // 관리자 - 문의 답변 저장
     @RequestMapping("/admin/InquiryEditA")
     public String adminInquiryEditA(InquiryDto i_dto) {
 

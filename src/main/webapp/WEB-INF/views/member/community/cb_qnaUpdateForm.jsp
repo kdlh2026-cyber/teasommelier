@@ -7,9 +7,10 @@
 <title>Q&A 수정 폼 페이지</title>
 </head>
 <body>
+<%@ include file="../../header.jsp" %>
 	<h2>Q&A</h2>
 	<p>상품문의입니다.</p>
-	<form id="qnaUpdateForm" method="post" action="/member/cb_communityUpdate" enctype="multipart/form-data">
+	<form id="qnaUpdateForm" method="post" action="/cb_communityUpdate" enctype="multipart/form-data">
 		<input name="m_no" type="hidden" value="${viewCBdao.m_no}">
 		<input name="p_no" type="hidden" value="${viewCBdao.p_no}">
 		<input name="cb_no" type="hidden" value="${viewCBdao.cb_no}">
@@ -29,7 +30,8 @@
 			</tr>
 		</table>
 		<input type="submit" value="등록">
-		<a href="/guest/cb_qnaList">취소</a>
+		<a href="/guest/community/cb_qnaList">취소</a>
 	</form>
+<%@ include file="../../footer.jsp" %>
 </body>
 </html>

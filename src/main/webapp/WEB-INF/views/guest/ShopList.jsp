@@ -8,156 +8,166 @@
 <meta charset="UTF-8">
 <title>매장안내</title>
 
-<!-- 카카오맵 JavaScript SDK -->
+<!-- 카카오맵 JavaScript SDK (autoload=false: 로드 후 수동으로 kakao.maps.load 호출) -->
 <script type="text/javascript"
-        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=26a58eff51243ea572aa7258f6dd02fd"></script>
+        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=26a58eff51243ea572aa7258f6dd02fd&autoload=false"></script>
 
-<style>
-    /* 카카오맵 크기 */
-    #map {
-        width: 100%;
-        height: 500px;
-        margin-bottom: 30px;
-    }
-
-    .shop-page {
-        width: 1200px;
-        margin: 30px auto;
-    }
-
-    .shop-table {
-        width: 100%;
-    }
-
-    .table-row {
-        display: grid;
-        grid-template-columns: 150px 1fr 250px 100px;
-        align-items: center;
-        border-bottom: 1px solid #ddd;
-        min-height: 100px;
-    }
-
-    .table-row.header {
-        min-height: 50px;
-        background-color: #f5f5f5;
-        font-weight: bold;
-    }
-
-    .col {
-        padding: 10px;
-        text-align: center;
-    }
-
-    .img-box {
-        width: 100px;
-        height: 70px;
-        object-fit: cover;
-    }
-</style>
-
+<link rel="stylesheet" href="/css/shop.css">
 </head>
 
 <body>
 
 <div class="shop-page">
-
-    <h2>매장안내</h2>
-
-    <!-- 카카오맵 -->
-    <div id="map"></div>
-
-
-    <!-- 매장 목록 -->
-    <div class="shop-table">
-
-        <div class="table-row header">
-            <div class="col">이미지</div>
-            <div class="col">매장명</div>
-            <div class="col">위치(위도/경도)</div>
-            <div class="col">상세보기</div>
-        </div>
-
-        <c:forEach var="shop" items="${shopList}">
-
-            <div class="table-row">
-
-                <div class="col">
-                    <img class="img-box"
-                         src="${shop.sh_img}"
-                         alt="${shop.sh_name}">
-                </div>
-
-                <div class="col">
-                    ${shop.sh_name}
-                </div>
-
-                <div class="col">
-                    ${shop.sh_lat}, ${shop.sh_lon}
-                </div>
-
-                <div class="col">
-                    <a href="/guest/shopDetail?sh_no=${shop.sh_no}">
-                        보기
-                    </a>
-                </div>
-
-            </div>
-
-        </c:forEach>
-
+    <div>
+        <%@ include file="/WEB-INF/views/header.jsp" %>
     </div>
+    <!-- 매장 선택 탭 -->
+    <div class="shop-tabs">
+        <c:forEach var="shop" items="${shopList}" varStatus="status">
+            <button type="button"
+                    class="tab-btn ${status.first ? 'active' : ''}"
+                    data-name="${shop.sh_name}"
+                    data-img="${shop.sh_img}"
+                    data-lat="${shop.sh_lat}"
+                    data-lon="${shop.sh_lon}"
+                    onclick="selectShop(this)">
+                ${shop.sh_name}
+            </button>
+        </c:forEach>
+    </div>
+
+    <!-- 카테고리 라인 (매장별로 JS에서 갱신) -->
+    <div class="shop-category" id="shopCategory"></div>
+
+    <!-- 매장 타이틀 (매장별로 JS에서 갱신) -->
+    <div class="shop-title" id="shopTitle"></div>
+
+    <!-- 선택된 매장 이미지 (사진+주소정보 전체 포함) -->
+    <div class="shop-img-box">
+        <img id="shopImg" src="" alt="매장 정보">
+    </div>
+
+    <!-- 카카오맵 (이미지 끝난 바로 다음에 표시) -->
+    <div id="map"></div>
 
 </div>
 
 
 <script>
 
-    // 지도 표시 영역
-    var container = document.getElementById('map');
-
-    // 기본 지도 위치
-    var options = {
-        center: new kakao.maps.LatLng(37.5665, 126.9780),
-        level: 7
+    // 매장별 카테고리 / 타이틀 (DB 컬럼 없어서 하드코딩)
+    var shopDetailMap = {
+        '에비뉴엘 월드타워점': {
+            category: 'TEA SALON | TEA BOUTIQUE',
+            title: 'TWG Tea 에비뉴엘 월드타워점'
+        },
+        '광화문점': {
+            category: 'TEA SALON | TEA BOUTIQUE | TAKEAWAY TEA',
+            title: 'TWG Tea 광화문점'
+        },
+        '성수낙낙점': {
+            category: 'TEA BOUTIQUE | TAKEAWAY TEA',
+            title: 'TWG Tea 성수낙낙점'
+        },
+        '안다즈점': {
+            category: 'TEA SALON | TEA BOUTIQUE',
+            title: 'TWG Tea 안다즈점'
+        }
     };
 
-    // 지도 생성
-    var map = new kakao.maps.Map(container, options);
+    // SDK 로드 후 지도 초기화 (autoload=false 이므로 수동 호출)
+    if (typeof kakao !== 'undefined') {
+        kakao.maps.load(function () {
+            initMap();
+        });
+    }
 
 
-    // 지도 범위
-    var bounds = new kakao.maps.LatLngBounds();
+    // 지도 관련 전역 변수
+    var map;
+    var currentMarker = null;
+
+    // 지도 초기화 함수
+    function initMap() {
+
+        var container = document.getElementById('map');
+
+        var options = {
+            center: new kakao.maps.LatLng(37.5665, 126.9780),
+            level: 4
+        };
+
+        map = new kakao.maps.Map(container, options);
+
+        // 레이아웃이 늦게 잡히는 문제 방지 - 지도 재정렬
+        setTimeout(function () {
+            map.relayout();
+        }, 300);
+
+        // 페이지 최초 로드 시 첫 번째 매장 자동 선택
+        var firstTab = document.querySelector('.tab-btn');
+        if (firstTab != null) {
+            selectShop(firstTab);
+        }
+    }
 
 
-    <c:forEach var="shop" items="${shopList}">
+    // 매장 선택 처리 함수
+    function selectShop(btn) {
 
-        var lat = parseFloat("${shop.sh_lat}");
-        var lon = parseFloat("${shop.sh_lon}");
+        // 지도가 아직 생성 안 됐으면 무시 (SDK 로드 실패 시 방어)
+        if (typeof map === 'undefined' || map == null) {
+            return;
+        }
+
+        // 탭 active 클래스 갱신
+        var tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(function (t) {
+            t.classList.remove('active');
+        });
+        btn.classList.add('active');
+
+        // 버튼에 담아둔 매장 정보 꺼내기
+        var name = btn.getAttribute('data-name');
+        var img = btn.getAttribute('data-img');
+        var lat = parseFloat(btn.getAttribute('data-lat'));
+        var lon = parseFloat(btn.getAttribute('data-lon'));
+
+        // 이미지 경로: static/images/shop/ 폴더 기준
+        document.getElementById('shopImg').src = '/images/shop/' + img;
+
+        // 카테고리 / 타이틀 갱신
+        var detail = shopDetailMap[name];
+        if (detail) {
+            document.getElementById('shopCategory').innerText = detail.category;
+            document.getElementById('shopTitle').innerText = detail.title;
+        } else {
+            document.getElementById('shopCategory').innerText = '';
+            document.getElementById('shopTitle').innerText = name;
+        }
 
         if (!isNaN(lat) && !isNaN(lon)) {
 
             var position = new kakao.maps.LatLng(lat, lon);
 
-            // 마커 생성
-            var marker = new kakao.maps.Marker({
+            // 지도 중심 이동
+            map.setCenter(position);
+
+            // 기존 마커 제거 후 새 마커 생성
+            if (currentMarker != null) {
+                currentMarker.setMap(null);
+            }
+
+            currentMarker = new kakao.maps.Marker({
                 position: position,
                 map: map
             });
-
-            // 지도 범위에 추가
-            bounds.extend(position);
-
         }
-
-    </c:forEach>
-
-
-    // 매장이 있으면 모든 매장이 보이도록 지도 이동
-    <c:if test="${not empty shopList}">
-        map.setBounds(bounds);
-    </c:if>
+    }
 
 </script>
-
+	<div>
+        <%@ include file="/WEB-INF/views/footer.jsp" %>
+    </div>
 </body>
 </html>

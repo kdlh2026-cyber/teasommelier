@@ -1,0 +1,161 @@
+@charset "UTF-8";
+/* /css/admin-shop.css - 관리자 매장 등록/수정/목록 공통 스타일 */
+
+.admin-shop-wrap {
+	max-width: 900px;
+	margin: 40px auto;
+	padding: 0 20px;
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.admin-shop-wrap h1 {
+	font-size: 22px;
+	font-weight: 700;
+	margin-bottom: 20px;
+	border-bottom: 2px solid #222;
+	padding-bottom: 12px;
+}
+
+/* 등록/수정 폼 테이블 */
+.admin-shop-form table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.admin-shop-form th {
+	width: 140px;
+	background: #f7f7f7;
+	text-align: left;
+	padding: 12px 14px;
+	border: 1px solid #ddd;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.admin-shop-form td {
+	padding: 10px 14px;
+	border: 1px solid #ddd;
+}
+
+.admin-shop-form input[type="text"],
+.admin-shop-form input[type="file"] {
+	width: 100%;
+	max-width: 320px;
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+.admin-shop-form input[readonly] {
+	background: #f2f2f2;
+	color: #555;
+}
+
+/* 주소검색 버튼 옆 배치 */
+.addr-search-row {
+	display: flex;
+	gap: 8px;
+}
+
+.addr-search-row input {
+	flex: 1;
+}
+
+.addr-search-row button {
+	flex-shrink: 0;
+	padding: 8px 14px;
+	background: #333;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+.addr-search-row button:hover {
+	background: #555;
+}
+
+/* 등록/수정/취소 버튼 */
+.admin-shop-form input[type="submit"],
+.admin-shop-form input[type="reset"] {
+	padding: 10px 24px;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+	margin-right: 8px;
+}
+
+.admin-shop-form input[type="submit"] {
+	background: #222;
+	color: #fff;
+}
+
+.admin-shop-form input[type="submit"]:hover {
+	background: #444;
+}
+
+.admin-shop-form input[type="reset"] {
+	background: #eee;
+	color: #333;
+}
+
+.admin-shop-form input[type="reset"]:hover {
+	background: #ddd;
+}
+
+/* 매장 목록 테이블 */
+.admin-shop-list {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 16px;
+}
+
+.admin-shop-list th {
+	background: #222;
+	color: #fff;
+	padding: 12px;
+	font-size: 13px;
+}
+
+.admin-shop-list td {
+	padding: 10px 12px;
+	border-bottom: 1px solid #eee;
+	font-size: 14px;
+	text-align: center;
+}
+
+.admin-shop-list tr:hover {
+	background: #fafafa;
+}
+
+.admin-shop-list a {
+	margin: 0 4px;
+	color: #333;
+	text-decoration: none;
+	font-size: 13px;
+}
+
+.admin-shop-list a:hover {
+	text-decoration: underline;
+}
+
+/* 매장등록 버튼 (목록 상단) */
+.btn-shop-write {
+	display: inline-block;
+	margin-bottom: 16px;
+	padding: 8px 16px;
+	background: #222;
+	color: #fff;
+	border-radius: 4px;
+	text-decoration: none;
+	font-size: 13px;
+}
+
+.btn-shop-write:hover {
+	background: #444;
+}

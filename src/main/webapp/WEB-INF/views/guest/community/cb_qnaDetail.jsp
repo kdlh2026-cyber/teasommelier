@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
@@ -9,7 +10,13 @@
 <title>Q&A 상세 페이지</title>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="../../header.jsp" %>
+	<div>
+		<c:if test="${not empty product}">
+			<img src="${product.p_img}" alt="${product.p_name}" width="75" height="75">
+			<p>${product.p_name}</p>
+		</c:if>
+	</div>
 	<h2>Q&A</h2>
 	<p>상품 문의입니다.</p>
 	<table border="1">
@@ -49,16 +56,16 @@
         </tr>
     </table>
 </c:if>
-	<a href="/guest/cb_qnaList">목록</a>
+	<a href="/guest/community/cb_qnaList">목록</a>
 	<sec:authorize access="hasRole('USER')">
-		<a href="/member/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
+		<a href="/member/community/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
 		<a href="/cb_communityDelete?cb_no=${viewCBdao.cb_no}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
 	</sec:authorize>
 	<sec:authorize access="hasRole('ADMIN')">
-		<a href="/admin/cb_qnaResponseInsertForm?cb_no=${viewCBdao.cb_no}">답변</a>
-		<a href="/member/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
+		<a href="/admin/community/cb_qnaResponseInsertForm?cb_no=${viewCBdao.cb_no}">답변</a>
+		<a href="/member/community/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
 		<a href="/cb_communityDelete?cb_no=${viewCBdao.cb_no}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
 	</sec:authorize>
-<%@ include file="../footer.jsp" %>
+<%@ include file="../../footer.jsp" %>
 </body>
 </html>

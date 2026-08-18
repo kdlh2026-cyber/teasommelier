@@ -130,11 +130,16 @@ public class orderController {
 			return "redirect:/login";
 		}
 		
-		List<cartDTO> orderItems = favDAO.getOrderItemsFromFav(f_noList);
+		if (f_noList == null || f_noList.isEmpty()) {
+	        return "redirect:/myFavorite";
+	    }
 		
 		MemberDto member = memberDao.MemberFindId(principal.getName());
-		model.addAttribute("member", member);
 		
+		int m_no = member.getM_no();
+		List<cartDTO> orderItems = favDAO.getOrderItemsFromFav(m_no, f_noList);
+
+		model.addAttribute("member", member);
 		model.addAttribute("orderItems", orderItems);
 		model.addAttribute("orderType", "favorite");
 		model.addAttribute("f_no", f_noList);
@@ -153,7 +158,7 @@ public class orderController {
 							 @RequestParam("o_addr2") String addr2,
 							 @RequestParam("paymentId") String paymentId,
 							 @RequestParam("orderType") String orderType,
-							 @RequestParam("m_cash") int m_cash,
+							 @RequestParam(value="m_cash", required=false) Integer m_cash,
 							 @RequestParam(value="p_no", required=false) Integer p_no,
 							 @RequestParam(value="ca_qty", required=false) Integer ca_qty,
 							 @RequestParam(value="f_no", required=false) List<Integer> fNoList,
@@ -175,6 +180,7 @@ public class orderController {
 		// 바로구매, 장바구니, 관심상품 모두 cartDTO에 담아서 주문서로 넘김
 		List<cartDTO> orderItems = new ArrayList<>();
 		
+		// 바로구매
 		if("direct".equals(orderType)) {
 			ProductDto pdto = pdao.select_tea_product(p_no);
 			
@@ -187,6 +193,7 @@ public class orderController {
 			
 			orderItems.add(cdto);
 			
+		// 장바구니 구매	
 		} else if("cart".equals(orderType)) {
 			if(loggedIn) {
 				orderItems = ordao.orderList(caNoList, orderDto.getM_no());
@@ -200,34 +207,62 @@ public class orderController {
 					.collect(Collectors.toList());
 			}
 			
+		// 관심상품 구매
 		} else if("favorite".equals(orderType)) {
 			if(!loggedIn) {
 				return "redirect:/login";
 			}
 			
-			orderItems = favDAO.getOrderItemsFromFav(fNoList);
+			int m_no = getMno(principal);
 			
+			 System.out.println("fNoList: " + fNoList);
+			 System.out.println("m_no: " + m_no);
+			    
+			orderItems = favDAO.getOrderItemsFromFav(m_no, fNoList);
+			
+			  System.out.println("orderItems size: " + (orderItems != null ? orderItems.size() : "null"));
 			if(orderItems == null || orderItems.isEmpty()) {
 				return "redirect:/myFavorite";
 			}
 		}
 		
+		// 합계 금액 계산
 		int totalPrice = 0;
 		for(cartDTO cdto : orderItems) {
 			totalPrice += cdto.getCa_price() * cdto.getCa_qty();
 		}
 		
-		int finalPrice = totalPrice - m_cash;
+		// 적립금(할인) 계산
+		int useCash = 0;
+		if(m_cash != null) {
+			useCash = m_cash;
+		}
+		
+		// 총 결제 금액 계산
+		int finalPrice = totalPrice - useCash;
+		
+		// 결제금액, 적립금 order 테이블에 set
 		orderDto.setO_price(finalPrice);
 		orderDto.setO_earn(finalPrice/100);
 		
 		ordao.orderInsert(orderDto);
 		
+		// cartDTO 필드에 담아둔 값들 꺼내서 orderDetail 
 		for(cartDTO cdto : orderItems) {
+			System.out.println("저장 시도 - o_no: " + orderDto.getO_no() +
+                    ", p_no: " + cdto.getP_no() +
+                    ", qty: " + cdto.getCa_qty() +
+                    ", name: " + cdto.getP_name() +
+                    ", price: " + cdto.getCa_price());
+			
 			ordao.orderDetailInsert(orderDto.getO_no(), cdto.getP_no(),
                     				cdto.getCa_qty(), cdto.getP_name(),
                     				cdto.getCa_price());
 		};
+		
+
+		// 결제 완료 후 장바구니에서 주문한 상품 삭제
+		
 		
 		session.setAttribute("ono", orderDto.getO_no());
 		

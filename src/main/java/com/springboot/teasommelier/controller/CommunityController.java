@@ -3,147 +3,208 @@ package com.springboot.teasommelier.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.teasommelier.dao.ICommunityDao;
+import com.springboot.teasommelier.dao.IProductDao;
 import com.springboot.teasommelier.dto.CommunityDto;
+import com.springboot.teasommelier.dto.ProductDto;
 import com.springboot.teasommelier.dto.QnaResponseDto;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CommunityController {
 	@Autowired
 	ICommunityDao cb_dao;
+	@Autowired
+	private IProductDao p_dao;
 	
 	@RequestMapping("/cb_communityBoard")
 	public String CBoard(){
 		return "cb_communityBoard";
 	}
 	
-	@RequestMapping("/guest/cb_brandnoticeList")
+	@RequestMapping("/guest/community/cb_brandnoticeList")
 	public String brandnoticeList(Model model) {
 	    model.addAttribute("brandnoticeList", cb_dao.CommunityList_category("브랜드소식"));
-	    return "guest/cb_brandnoticeList";
+	    return "guest/community/cb_brandnoticeList";
 	}
 	
-	@RequestMapping("/guest/cb_brandnoticeDetail")
+	@RequestMapping("/guest/community/cb_brandnoticeDetail")
 	public String brandnoticeDetail(@RequestParam("cb_no") int cb_no,Model model) {
 		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_no));
 		cb_dao.CommunityHit(cb_no);
-		return "guest/cb_brandnoticeDetail";
+		return "guest/community/cb_brandnoticeDetail";
 	}
 	
-	@RequestMapping("/guest/cb_editorialList")
+	@RequestMapping("/guest/community/cb_editorialList")
 	public String editorialList(Model model) {
 		model.addAttribute("editorialList",cb_dao.CommunityList_category("에디토리얼"));
-		return "guest/cb_editorialList";
+		return "guest/community/cb_editorialList";
 	}
 	
-	@RequestMapping("/guest/cb_editorialDetail")
+	@RequestMapping("/guest/community/cb_editorialDetail")
 	public String editorialDetail(@RequestParam("cb_no") int cb_no,Model model) {
 		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_no));
 		cb_dao.CommunityHit(cb_no);
-		return "guest/cb_editorialDetail";
+		return "guest/community/cb_editorialDetail";
 	}
 	
-	@RequestMapping("/guest/cb_reviewList")
+	@RequestMapping("/guest/community/cb_reviewList")
 	public String reviewList(Model model) {
-		model.addAttribute("reviewList",cb_dao.CommunityList_category("리뷰"));
-		return "guest/cb_reviewList";
+
+	    List<CommunityDto> reviewList = cb_dao.CommunityList_category("리뷰");
+	    model.addAttribute("reviewList", reviewList);
+
+	    Map<Integer, ProductDto> productMap = new HashMap<>();
+	    for (CommunityDto review : reviewList) {
+	        Integer p_no = review.getP_no();
+	        if (p_no != null && !productMap.containsKey(p_no)) {
+	            productMap.put(p_no, p_dao.select_tea_product(p_no));
+	        }
+	    }
+	    model.addAttribute("productMap", productMap);
+
+	    return "guest/community/cb_reviewList";
 	}
 	
-	@RequestMapping("/guest/cb_reviewDetail")
-	public String reviewDetail(@RequestParam("cb_no") int cb_no,Model model) {
-		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_no));
-		cb_dao.CommunityHit(cb_no);
-		return "guest/cb_reviewDetail";
-	}
-	
-	@RequestMapping("/guest/cb_qnaList")
-	public String qnaList(Model model) {
-		model.addAttribute("qnaList",cb_dao.CommunityList_category("Q&A"));
-		return "guest/cb_qnaList";
-	}
-	
-	@RequestMapping("/guest/cb_qnaDetail")
-	public String qnaDetail(@RequestParam("cb_no") int cb_no, Model model) {
-	    model.addAttribute("viewCBdao", cb_dao.CommunityView(cb_no));
-	    model.addAttribute("responseQnaDto", cb_dao.ResponseQnaView(cb_no));
+	@RequestMapping("/guest/community/cb_reviewDetail")
+	public String reviewDetail(@RequestParam("cb_no") int cb_no, Model model) {
+
+	    CommunityDto viewCBdao = cb_dao.CommunityView(cb_no);
+	    model.addAttribute("viewCBdao", viewCBdao);
 	    cb_dao.CommunityHit(cb_no);
-	    return "guest/cb_qnaDetail";
+
+	    if (viewCBdao.getP_no() != null) {
+	        ProductDto p_dto = p_dao.select_tea_product(viewCBdao.getP_no());
+	        model.addAttribute("product", p_dto);
+	    }
+
+	    return "guest/community/cb_reviewDetail";
 	}
 	
-	@RequestMapping("/guest/cb_qnaResponseDetail")
+	@RequestMapping("/guest/community/cb_qnaList")
+	public String qnaList(Model model) {
+
+	    List<CommunityDto> qnaList = cb_dao.CommunityList_category("Q&A");
+	    model.addAttribute("qnaList", qnaList);
+
+	    Map<Integer, ProductDto> productMap = new HashMap<>();
+	    for (CommunityDto qna : qnaList) {
+	        Integer p_no = qna.getP_no();
+	        if (p_no != null && !productMap.containsKey(p_no)) {
+	            productMap.put(p_no, p_dao.select_tea_product(p_no));
+	        }
+	    }
+	    model.addAttribute("productMap", productMap);
+
+	    return "guest/community/cb_qnaList";
+	}
+	
+	@RequestMapping("/guest/community/cb_qnaDetail")
+	public String qnaDetail(@RequestParam("cb_no") int cb_no, Model model) {
+
+	    CommunityDto viewCBdao = cb_dao.CommunityView(cb_no);
+	    model.addAttribute("viewCBdao", viewCBdao);
+	    model.addAttribute("responseQnaDto", cb_dao.ResponseQnaView(cb_no));
+
+	    cb_dao.CommunityHit(cb_no);
+
+	    if (viewCBdao.getP_no() != null) {
+	        ProductDto p_dto = p_dao.select_tea_product(viewCBdao.getP_no());
+	        model.addAttribute("product", p_dto);
+	    }
+
+	    return "guest/community/cb_qnaDetail";
+	}
+	
+	@RequestMapping("/guest/community/cb_qnaResponseDetail")
 	public String cb_qnaResponseDetail() {
-		return "guest/cb_qnaResponseDetail";
+		return "guest/community/cb_qnaResponseDetail";
 	}
 	
-	@RequestMapping("/admin/cb_brandnoticeInsertForm")
+	@RequestMapping("/admin/community/cb_brandnoticeInsertForm")
 	public String brandnoticeInsertForm() {
-	    return "admin/cb_brandnoticeInsertForm";
+	    return "admin/community/cb_brandnoticeInsertForm";
 	}
 	
-	@RequestMapping("/admin/cb_brandnoticeUpdateForm")
+	@RequestMapping("/admin/community/cb_brandnoticeUpdateForm")
 	public String brandnoticeUpdateForm(CommunityDto cb_dto, Model model) {
 	    model.addAttribute("viewCBdao", cb_dao.CommunityView(cb_dto.getCb_no()));
-	    return "admin/cb_brandnoticeUpdateForm";
+	    return "admin/community/cb_brandnoticeUpdateForm";
 	}
 	
-	@RequestMapping("/admin/cb_editorialInsertForm")
+	@RequestMapping("/admin/community/cb_editorialInsertForm")
 	public String editorialInsertForm() {
-	    return "admin/cb_editorialInsertForm";
+	    return "admin/community/cb_editorialInsertForm";
 	}
 	
-	@RequestMapping("/admin/cb_editorialUpdateForm")
+	@RequestMapping("/admin/community/cb_editorialUpdateForm")
 	public String editorialUpdateForm(CommunityDto cb_dto,Model model) {
 		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_dto.getCb_no()));
-		return "admin/cb_editorialUpdateForm";
+		return "admin/community/cb_editorialUpdateForm";
 	}
 	
-	@RequestMapping("/member/cb_reviewInsertForm")
-	public String reviewInsertForm() {
-	    return "member/cb_reviewInsertForm";
+	@RequestMapping(value = "/member/community/cb_reviewInsertForm", method = RequestMethod.GET)
+	public String reviewInsertForm(
+	        @RequestParam(value = "p_no", required = false) Integer p_no,
+	        Model model) {
+
+	    if (p_no != null) {
+	        ProductDto p_dto = p_dao.select_tea_product(p_no);
+	        model.addAttribute("product", p_dto);
+	    }
+	    model.addAttribute("p_no", p_no);
+
+	    return "member/community/cb_reviewInsertForm";
 	}
 	
-	@RequestMapping("/member/cb_reviewUpdateForm")
+	@RequestMapping("/member/community/cb_reviewUpdateForm")
 	public String reviewUpdateForm(CommunityDto cb_dto,Model model) {
 		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_dto.getCb_no()));
-		return "member/cb_reviewUpdateForm";
+		return "member/community/cb_reviewUpdateForm";
 	}
 	
-	@RequestMapping("/member/cb_qnaInsertForm")
-	public String qnaInsertForm() {
-	    return "member/cb_qnaInsertForm";
+	@RequestMapping("/member/community/cb_qnaInsertForm")
+	public String qnaInsertForm(@RequestParam(value = "p_no", required = false) Integer p_no, Model model) {
+
+	    if (p_no != null) {
+	        ProductDto p_dto = p_dao.select_tea_product(p_no);
+	        model.addAttribute("product", p_dto);
+	    }
+	    model.addAttribute("p_no", p_no);
+
+	    return "member/community/cb_qnaInsertForm";
 	}
 	
-	@RequestMapping("/member/cb_qnaUpdateForm")
-	public String qnaUpdateForm(CommunityDto cb_dto,Model model) {
-		model.addAttribute("viewCBdao",cb_dao.CommunityView(cb_dto.getCb_no()));
-		return "member/cb_qnaUpdateForm";
+	@RequestMapping("/member/community/cb_qnaUpdateForm")
+	public String qnaUpdateForm(CommunityDto cb_dto, Model model) {
+	    model.addAttribute("viewCBdao", cb_dao.CommunityView(cb_dto.getCb_no()));
+	    return "member/community/cb_qnaUpdateForm";
 	}
 	
-	@RequestMapping("/admin/cb_qnaResponseInsertForm")
+	@RequestMapping("/admin/community/cb_qnaResponseInsertForm")
 	public String qnaResponseInsertForm(@RequestParam("cb_no") int cb_no, Model model) {
 	    model.addAttribute("viewRESdao", cb_dao.CommunityView(cb_no));
-	    return "admin/cb_qnaResponseInsertForm";
+	    return "admin/community/cb_qnaResponseInsertForm";
 	}
 	
-	@RequestMapping("/admin/responseInsert")
+	@RequestMapping("/responseInsert")
 	public String qnaResponseInsert(QnaResponseDto res_dto,@RequestParam("cb_no") int cb_no) {
 		res_dto.setCb_no(cb_no);
 		// res_dto.setM_no(m_no);
 		cb_dao.ResponseQnaInsert(res_dto);
-		return "redirect:/guest/cb_qnaList";
+		return "redirect:/guest/community/cb_qnaList";
 	}
 	
 	// 카테고리 -> 목록 페이지 경로 매핑
@@ -152,19 +213,19 @@ public class CommunityController {
 
 	    switch (category) {
 	        case "브랜드소식":
-	            return "redirect:/guest/cb_brandnoticeList";
+	            return "redirect:/guest/community/cb_brandnoticeList";
 	        case "에디토리얼":
-	            return "redirect:/guest/cb_editorialList";
+	            return "redirect:/guest/community/cb_editorialList";
 	        case "리뷰":
-	            return "redirect:/guest/cb_reviewList";
+	            return "redirect:/guest/community/cb_reviewList";
 	        case "Q&A":
-	            return "redirect:/guest/cb_qnaList";
+	            return "redirect:/guest/community/cb_qnaList";
 	        default:
 	            return "redirect:/main";
 	    }
 	}
 	
-	@RequestMapping("/member/cb_communityInsert")
+	@RequestMapping("/cb_communityInsert")
 	public String communityInsert(CommunityDto cb_dto,
 	                               @RequestParam(value = "files", required = false) List<MultipartFile> files) {
 
@@ -196,7 +257,7 @@ public class CommunityController {
 	    return getCategoryListUrl(cb_dto.getCb_category());
 	}
 
-	@RequestMapping("/member/cb_communityUpdate")
+	@RequestMapping("/cb_communityUpdate")
 	public String communityUpdate(CommunityDto cb_dto,
 	                               @RequestParam(value = "files", required = false) List<MultipartFile> files) {
 

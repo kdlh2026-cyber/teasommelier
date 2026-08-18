@@ -35,4 +35,10 @@ public interface IorderDAO {
 	// 관리자 페이지에서 회원들이 주문한 주문 목록 조회하기
 	public List<OrderDTO> allOrderList();
 	
+	// [결제 후] 회원 테이블의 m_cash(적립금) 차감
+	public int deductMoney(IMemberDao member);
+	
+	// [결제 후] 장바구니 상품 정보 삭제
+	public int deleteOrderCart(cartDTO cdto);
+	
 }

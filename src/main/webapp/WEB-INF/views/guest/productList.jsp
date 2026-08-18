@@ -104,8 +104,9 @@
         </c:forEach>
         <a href="${pageContext.request.contextPath}/guest/productList?productType=${productType}&filter=${filter}&sort=${sort}&page=${pageNum < totalPage ? pageNum + 1 : totalPage}" class="page-btn page-next">NEXT</a>
     </div>
-
 </div>
-
+	<div>
+        <%@ include file="/WEB-INF/views/footer.jsp" %>
+    </div>
 </body>
 </html>

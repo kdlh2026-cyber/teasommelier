@@ -10,14 +10,23 @@ body {
     color: #222;
 }
 
+/* ===== 전체 레이아웃 컨테이너 추가 ===== */
+.detail-container {
+    display: flex;
+    width: 100%;
+    gap: 60px; /* 좌측 이미지 영역과 우측 정보 영역 사이의 간격 */
+    align-items: flex-start;
+}
+
 /* 전체 레이아웃: 좌측 이미지 / 우측 정보 2단 구성 */
 .detail-wrap {
-    display: flex;
-    gap: 60px;
     max-width: 1100px;
     margin: 50px auto;
     padding: 0 20px;
-    align-items: flex-start;
+}
+
+.detail-wrap > form {
+    width: 100%;
 }
 
 /* ===== 좌측: 이미지 영역 ===== */
@@ -245,7 +254,16 @@ body {
 /* 구매 버튼 영역: 바로구매(강조, 맨왼쪽) - 장바구니 - 관심상품, 틈 없이 붙어서 배치 (TWG 참고) */
 .detail-btn-area {
     display: flex;
-    margin-top: 10px;
+    margin-top: 20px;
+    width: 100%;
+    gap: 0; /* 틈 없이 붙이기 */
+}
+
+/* form 안이든 a 태그 안이든 버튼들이 균등하게 자리를 잡도록 설정 */
+.detail-btn-area > * {
+    flex: 1;
+    text-decoration: none;
+    margin: 0;
 }
 
 .detail-btn-area a {
@@ -259,6 +277,7 @@ body {
 .btn-soldout,
 .btn-inquiry {
     width: 100%;
+    height: 50px;
     padding: 15px 0;
     font-size: 14px;
     font-weight: 600;
@@ -273,7 +292,7 @@ body {
 }
 
 /* 맨 왼쪽 버튼은 좌측 테두리도 필요 */
-.detail-btn-area a:first-child .btn-buy,
+.detail-btn-area > *:first-child button,
 .detail-btn-area .btn-soldout {
     border-left: 1px solid #ccc;
 }

@@ -10,63 +10,75 @@
 <title>장바구니</title>
 </head>
 <body>
-	<h1>CART</h1>
-	<form name="cartList">
-		<table border=1 width=1000>
-			<tr>
-				<th><input type="checkbox" class="checkAll" checked></th>
-				<th>이미지</th>
-				<th>상품정보</th>
-				<th>수량</th>
-				<th>상품구매금액</th>
-				<th>할인금액</th>
-				<th>적립금</th>
-				<th>배송구분</th>
-				<th>배송비</th>
-			</tr>
-		<c:forEach var="list" items="${list}" varStatus="status">
-			<tr>
-				<td><input type="checkbox" value="${list.ca_no}" checked class="cartCheck"></td>
-				<td><a href="/guest/ViewForm?p_no=${list.p_no}"><img src="/images/product/${list.ca_image}" width="150"></a></td>
-				<td><a href="/guest/ViewForm?p_no=${list.p_no}">${list.ca_info}</a></td>
-				<td>
-					<input type="number" name="ca_qty" value="${list.ca_qty}" min="1" class="qtyInput" data-unit-price="${list.ca_price}" data-original-qty="${list.ca_qty}"> 개
-					<input type="button" value="변경하기" class="updateQtyBtn" data-cano="${list.ca_no}">
-				</td> 
-				
-				<!-- 상품구매금액 -->
-				<td class="itemPrice" data-price="${list.ca_price * list.ca_qty}">
-					<fmt:formatNumber value="${list.ca_price * list.ca_qty}" type="number"/>원
-				</td>
-				
-				<td></td>
-				
-				<!-- 적립금 칸에 itemPoint 클래스 추가 -->
-				<td class="itemPoint">
-					<fmt:formatNumber value="${(list.ca_price * list.ca_qty) * 0.01}" type="number"/>원
-				</td>
-				
-				<td>${list.ca_del}</td>
-				<td>무료</td> 
-			</tr>
-		</c:forEach>
-		</table>
-		<div>총가격 : <span class="finalPrice">0</span>원</div>
-		<button type="button" class="buy" onclick="allOrderChoice(this)">전체상품주문</button>
-	</form>
-	
-	<form class="cartForm" action="" method="post">
-		<button type="button" class="buy" onclick="choice(this)">선택상품주문</button>
-		<button type="button" class="delete" onclick="choice(this)">선택상품삭제</button>
-	</form>
-	
-	<!-- 수량 변경 전용 form (별도, 화면에는 안 보임) -->
-	<form id="qtyUpdateForm" action="/updateCartQty" method="post" style="display:none;">
-		<input type="hidden" name="ca_no" id="update_ca_no">
-		<input type="hidden" name="ca_qty" id="update_ca_qty">
-	</form>
-	
-	<a href="/guest/productTest">쇼핑계속하기</a>
+	<%@ include file="header.jsp" %>
+		<h1>CART</h1>
+		<form name="cartList">
+			<table border=1 width=1000>
+				<tr>
+					<th><input type="checkbox" class="checkAll" checked></th>
+					<th>이미지</th>
+					<th>상품정보</th>
+					<th>수량</th>
+					<th>상품구매금액</th>
+					<th>할인금액</th>
+					<th>적립금</th>
+					<th>배송구분</th>
+					<th>배송비</th>
+				</tr>
+			<c:forEach var="cart" items="${list}" varStatus="status">
+				<tr>
+					<td><input type="checkbox" value="${cart.ca_no}" checked class="cartCheck"></td>
+					<td><a href="/guest/productDetail?p_no=${cart.p_no}"><img src="/images/product/${cart.ca_image}" width="150"></a></td>
+					<td><a href="/guest/productDetail?p_no=${cart.p_no}">${cart.ca_info}</a></td>
+					<td>
+						<input type="number" name="ca_qty" value="${cart.ca_qty}" min="1" class="qtyInput" data-unit-price="${cart.ca_price}" data-original-qty="${cart.ca_qty}"> 개
+						<input type="button" value="변경하기" class="updateQtyBtn" data-cano="${cart.ca_no}">
+					</td> 
+					
+					<!-- 상품구매금액 -->
+					<td class="itemPrice" data-price="${cart.ca_price * cart.ca_qty}">
+						<fmt:formatNumber value="${cart.ca_price * cart.ca_qty}" type="number"/>원
+					</td>
+					
+					<td></td>
+					
+					<!-- 적립금 -->
+					<td class="itemPoint">
+						<fmt:formatNumber value="${(cart.ca_price * cart.ca_qty) * 0.01}" type="number"/>원
+					</td>
+					
+					<td>${cart.ca_del}</td>
+					
+					<c:if test="${status.first}">
+						<td rowspan="${fn:length(list)}">무료</td>
+					</c:if> 
+				</tr>
+			</c:forEach>
+				<tr>
+					<td colspan=4 class="subtext">기본배송</td>
+					<td colspan=5>
+						<div class="totalPrice">총가격 : <span class="finalPrice">0</span>원</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+		<div class="orderBtn">
+				<button type="button" class="buy" onclick="allOrderChoice(this)">전체상품주문</button>
+			<form class="cartForm" action="" method="post">
+				<button type="button" class="buy" onclick="choice(this)">선택상품주문</button>
+				<button type="button" class="delete" onclick="choice(this)">선택상품삭제</button>
+			</form>
+		</div>
+		
+		<!-- 수량 변경 전용 form (별도, 화면에는 안 보임) -->
+		<form id="qtyUpdateForm" action="/updateCartQty" method="post" style="display:none;">
+			<input type="hidden" name="ca_no" id="update_ca_no">
+			<input type="hidden" name="ca_qty" id="update_ca_qty">
+		</form>
+		
+		<a href="/main">쇼핑계속하기</a>
+	<%@ include file="footer.jsp" %>
 </body>
 <script>
 	function choice(selectedTag){
