@@ -338,3 +338,130 @@ body {
     max-height: 90%;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
+
+/* ===== 구매후기 / 질문답변 테이블 (productDetail.css 톤 맞춤) ===== */
+.review-table,
+.qna-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+/* 헤더 행 */
+.review-table tr:first-child,
+.qna-table tr:first-child {
+    border-bottom: 1px solid #ddd;
+}
+
+.review-table th,
+.qna-table th {
+    padding: 14px 8px;
+    font-weight: 600;
+    color: #888;
+    text-align: center;
+}
+
+/* 데이터 행 */
+.review-table tr:not(:first-child),
+.qna-table tr:not(:first-child) {
+    border-top: 1px solid #eee;
+}
+
+.review-table td,
+.qna-table td {
+    padding: 14px 8px;
+    color: #222;
+    text-align: center;
+}
+
+/* 컬럼 너비 */
+.col-no {
+    width: 60px;
+    color: #888;
+}
+
+.col-category {
+    width: 100px;
+}
+
+.col-subject {
+    text-align: left !important;
+}
+
+.col-writer {
+    width: 100px;
+    color: #888;
+}
+
+.col-date {
+    width: 110px;
+    color: #888;
+}
+
+.col-view {
+    width: 70px;
+    color: #888;
+}
+
+.col-rating {
+    width: 110px;
+}
+
+/* 제목 링크 */
+.review-subject-link,
+.qna-subject-link {
+    color: #222;
+    text-decoration: none;
+}
+
+.review-subject-link:hover,
+.qna-subject-link:hover {
+    text-decoration: underline;
+}
+
+/* Q&A 카테고리 뱃지 */
+.qna-category-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #555;
+    background: #f7f7f7;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
+
+/* 별점 */
+.review-stars {
+    letter-spacing: 1px;
+    color: #222;
+}
+
+/* ===== 후기/문의 목록 하단 버튼 (사진 참고 - 우측 정렬, 작은 사이즈) ===== */
+.tab-btn-area {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.tab-btn-area .btn-write,
+.tab-btn-area .btn-list {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 400;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.tab-btn-area .btn-write:hover,
+.tab-btn-area .btn-list:hover {
+    background: #f7f7f7;
+}

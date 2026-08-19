@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>    
@@ -127,11 +128,86 @@
         <%@ include file="/WEB-INF/views/guest/guide.jsp" %>
     </div>
     <div id="tab-review" class="tab-panel">
-        <p class="tab-empty">등록된 구매후기가 없습니다.</p>
-    </div>
-    <div id="tab-qna" class="tab-panel">
-        <p class="tab-empty">등록된 질문답변이 없습니다.</p>
-    </div>
+    <c:choose>
+        <c:when test="${empty reviewList}">
+            <p class="tab-empty">등록된 구매후기가 없습니다.</p>
+        </c:when>
+        <c:otherwise>
+            <table class="review-table">
+                <tr>
+                    <th class="col-no">번호</th>
+                    <th class="col-subject">제목</th>
+                    <th class="col-writer">작성자</th>
+                    <th class="col-date">작성일</th>
+                    <th class="col-view">조회</th>
+                    <th class="col-rating">평점</th>
+                </tr>
+                <c:forEach var="RVL" items="${reviewList}">
+                    <tr>
+                        <td class="col-no">${RVL.cb_no}</td>
+                        <td class="col-subject">
+                            <a class="review-subject-link" href="/guest/community/cb_reviewDetail?cb_no=${RVL.cb_no}">${RVL.cb_subject}</a>
+                        </td>
+                        <td class="col-writer">${RVL.m_id}</td>
+                        <td class="col-date">${fn:substring(RVL.cb_date, 0, 10)}</td>
+                        <td class="col-view">${RVL.cb_view_count}</td>
+                        <td class="col-rating">
+                            <span class="review-stars">
+                                <c:forEach begin="1" end="5" var="i">
+                                    <c:choose>
+                                        <c:when test="${i <= RVL.cb_rating}">★</c:when>
+                                        <c:otherwise>☆</c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </span>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
+    <div class="tab-btn-area">
+	    <a href="/member/community/cb_reviewInsertForm?p_no=${product.p_no}" class="btn-write">상품후기쓰기</a>
+	    <a href="/guest/community/cb_communityBoard" class="btn-list">모두 보기</a>
+	</div>
+</div>
+<div id="tab-qna" class="tab-panel">
+    <c:choose>
+        <c:when test="${empty qnaList}">
+            <p class="tab-empty">등록된 질문답변이 없습니다.</p>
+        </c:when>
+        <c:otherwise>
+            <table class="qna-table">
+                <tr>
+                    <th class="col-no">번호</th>
+                    <th class="col-category">카테고리</th>
+                    <th class="col-subject">제목</th>
+                    <th class="col-writer">작성자</th>
+                    <th class="col-date">작성일</th>
+                    <th class="col-view">조회</th>
+                </tr>
+                <c:forEach var="QAL" items="${qnaList}">
+                    <tr>
+                        <td class="col-no">${QAL.cb_no}</td>
+                        <td class="col-category">
+                            <span class="qna-category-badge">${QAL.cb_qna_category}</span>
+                        </td>
+                        <td class="col-subject">
+                            <a class="qna-subject-link" href="/guest/community/cb_qnaDetail?cb_no=${QAL.cb_no}">${QAL.cb_subject}</a>
+                        </td>
+                        <td class="col-writer">${QAL.m_id}</td>
+                        <td class="col-date">${fn:substring(QAL.cb_date, 0, 10)}</td>
+                        <td class="col-view">${QAL.cb_view_count}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
+    <div class="tab-btn-area">
+	    <a href="/member/community/cb_qnaInsertForm?p_no=${product.p_no}" class="btn-write">상품문의하기</a>
+	    <a href="/guest/community/cb_communityBoard" class="btn-list">모두 보기</a>
+	</div>
+</div>
 </div>
 
 <!-- 이미지 상세보기 모달: 이미지 클릭시 원본 크게 표시, 배경 클릭시 닫힘 -->

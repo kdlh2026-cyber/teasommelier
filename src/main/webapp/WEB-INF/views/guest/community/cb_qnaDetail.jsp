@@ -7,65 +7,88 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A 상세 페이지</title>
+<title>Q&amp;A 상세 페이지</title>
+<link rel="stylesheet" href="/css/cb-detail.css">
 </head>
 <body>
 <%@ include file="../../header.jsp" %>
-	<div>
+	<div class="cb-detail-page">
 		<c:if test="${not empty product}">
-			<img src="${product.p_img}" alt="${product.p_name}" width="75" height="75">
-			<p>${product.p_name}</p>
+			<div class="product-info-box">
+				<a href="/guest/productDetail?p_no=${product.p_no}"><img class="product-info-thumb" src="${product.p_img}" alt="${product.p_name}"></a>
+				<div class="product-info-body">
+					<a href="/guest/productDetail?p_no=${product.p_no}"><p class="product-info-name">${product.p_name}</p></a>
+					<p class="product-info-price">${product.p_price}원</p>
+				</div>
+			</div>
 		</c:if>
+
+		<div class="cb-detail-title-row">
+			<h2 class="cb-detail-title">Q&amp;A</h2>
+			<span class="cb-detail-subtitle">상품 문의입니다.</span>
+		</div>
+
+		<table class="cb-detail-table">
+			<tr>
+				<td class="label-cell">제목</td>
+				<td>${viewCBdao.cb_subject}</td>
+			</tr>
+			<tr>
+				<td class="label-cell">작성자</td>
+				<td>${viewCBdao.m_id}</td>
+			</tr>
+			<tr>
+				<td class="label-cell">작성일</td>
+				<td>${fn:substring(viewCBdao.cb_date, 0, 10)}</td>
+			</tr>
+			<tr>
+				<td class="label-cell">조회수</td>
+				<td>${viewCBdao.cb_view_count}</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="content-cell">${viewCBdao.cb_content}</td>
+			</tr>
+		</table>
+
+		<c:if test="${not empty responseQnaDto}">
+			<div class="qna-answer-box">
+				<h3 class="qna-answer-title">답변</h3>
+				<table class="cb-detail-table">
+					<tr>
+						<td class="label-cell">답변 제목</td>
+						<td>${responseQnaDto.res_subject}</td>
+					</tr>
+					<tr>
+						<td class="label-cell">답변일</td>
+						<td>${fn:substring(responseQnaDto.res_date, 0, 10)}</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="content-cell">${responseQnaDto.res_content}</td>
+					</tr>
+				</table>
+			</div>
+		</c:if>
+		<sec:authorize access="hasRole('ADMIN')">
+			<c:if test="${not empty responseQnaDto}">
+				<a class="cb-delete-btn" href="/responseDelete?res_no=${responseQnaDto.res_no}">답변 삭제</a>
+			</c:if>
+		</sec:authorize>
+		<div class="cb-detail-actions">
+			<a class="cb-list-btn" href="/guest/community/cb_communityBoard">목록</a>
+			<sec:authorize access="hasRole('USER')">
+				<a class="cb-edit-btn" href="/member/community/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
+				<a class="cb-delete-btn" href="/cb_communityDelete?cb_no=${viewCBdao.cb_no}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ADMIN')">
+			    <%-- 답변이 등록되지 않은 경우에만 '답변' 버튼 표시 --%>
+			    <c:if test="${empty responseQnaDto}">
+			        <a class="cb-answer-btn" href="/admin/community/cb_qnaResponseInsertForm?cb_no=${viewCBdao.cb_no}">답변</a>
+			    </c:if>
+			    <a class="cb-edit-btn" href="/member/community/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
+			    <a class="cb-delete-btn" href="/cb_communityDelete?cb_no=${viewCBdao.cb_no}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+			</sec:authorize>
+		</div>
 	</div>
-	<h2>Q&A</h2>
-	<p>상품 문의입니다.</p>
-	<table border="1">
-		<tr>
-			<td>제목</td>
-			<td>${viewCBdao.cb_subject}</td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td>${viewCBdao.m_id}</td>
-		</tr>
-		<tr>
-			<td>작성일</td>
-			<td>${fn:substring(viewCBdao.cb_date, 0, 10)}</td>
-		</tr>
-		<tr>
-			<td>조회수</td>
-			<td>${viewCBdao.cb_view_count}</td>
-		</tr>
-		<tr>
-			<td colspan=2>${viewCBdao.cb_content}</td>
-		</tr>
-	</table>
-	<c:if test="${not empty responseQnaDto}">
-    <h3>답변</h3>
-    <table border="1">
-        <tr>
-            <td>답변 제목</td>
-            <td>${responseQnaDto.res_subject}</td>
-        </tr>
-        <tr>
-            <td>답변일</td>
-            <td>${fn:substring(responseQnaDto.res_date, 0, 10)}</td>
-        </tr>
-        <tr>
-            <td colspan=2>${responseQnaDto.res_content}</td>
-        </tr>
-    </table>
-</c:if>
-	<a href="/guest/community/cb_qnaList">목록</a>
-	<sec:authorize access="hasRole('USER')">
-		<a href="/member/community/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
-		<a href="/cb_communityDelete?cb_no=${viewCBdao.cb_no}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-	</sec:authorize>
-	<sec:authorize access="hasRole('ADMIN')">
-		<a href="/admin/community/cb_qnaResponseInsertForm?cb_no=${viewCBdao.cb_no}">답변</a>
-		<a href="/member/community/cb_qnaUpdateForm?cb_no=${viewCBdao.cb_no}">수정</a>
-		<a href="/cb_communityDelete?cb_no=${viewCBdao.cb_no}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-	</sec:authorize>
 <%@ include file="../../footer.jsp" %>
 </body>
 </html>
