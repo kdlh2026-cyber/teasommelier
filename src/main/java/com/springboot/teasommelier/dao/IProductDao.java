@@ -16,6 +16,9 @@ public interface IProductDao {
 	// 기프트 세트
 	public List<ProductDto> select_tea_products_set();
 	
+	// 기프트 세트 main
+	public List<ProductDto> select_tea_products_main();
+	
 	// 티 웨어 
 	public List<ProductDto> select_tea_products_wear();
 	

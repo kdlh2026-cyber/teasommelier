@@ -223,6 +223,6 @@ document.getElementById('searchModalOverlay').addEventListener('click', function
     if (e.target === this) closeSearchModal();
 });
 </script>
-
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>

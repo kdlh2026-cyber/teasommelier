@@ -7,104 +7,126 @@
 <head>
 <meta charset="UTF-8">
 <title>TeaSommelier</title>
-<style>
-.banner-section {
-    width: 100%;
-    margin: 40px 0;
-}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('slideTrack');
+    let isDown = false;
+    let startX;
+    let autoSlideInterval;
+    let isAnimating = false;
 
-.banner-list {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
+    // 한 방향(오른쪽)으로만 무한 슬라이드 되도록 처리하는 함수
+    function moveToNextSlide() {
+        if (isAnimating) return;
+        isAnimating = true;
 
-.banner-item {
-    flex: 1;
-    overflow: hidden; /* 확대 시 영역 밖으로 이미지가 넘치지 않도록 방지 */
-}
+        slider.scrollTo({ left: slider.clientWidth, behavior: 'smooth' });
 
-/* 링크 전체를 블록 요소 및 기준점으로 설정 */
-.banner-link {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    overflow: hidden;
-}
+        setTimeout(() => {
+            slider.classList.add('dragging');
+            slider.appendChild(slider.firstElementChild);
+            slider.scrollLeft = 0;
+            
+           	requestAnimationFrame(() => {
+                slider.classList.remove('dragging');
+                isAnimating = false;
+            });
+        }, 600); 
+    }
 
-/* 이미지 감싸는 영역 */
-.banner-img {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
+    // 자동 슬라이드 시작
+    function startAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(moveToNextSlide, 3000);
+    }
 
-/* 기본 이미지 스타일 및 부드러운 애니메이션 */
-.banner-img img {
-    width: 100%;
-    height: 100%;
-    min-height: 520px;
-    max-height: 650px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease; /* 부드러운 확대 애니메이션 */
-}
+    // 자동 슬라이드 정지
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
 
-/* 호버 시 이미지 확대 */
-.banner-link:hover .banner-img img {
-    transform: scale(1.15);
-}
+    // --- 개선된 마우스 드래그 컨트롤 ---
 
-/* 텍스트 & 버튼 오버레이 */
-.banner-content {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-    pointer-events: none; /* 클릭 이벤트가 부모 <a>로 전달되도록 설정 */
-}
+    // 1. 슬라이드 안에서 마우스를 꾹 눌렀을 때
+    slider.addEventListener('mousedown', (e) => {
+        if (isAnimating) return; 
+        
+        // 브라우저가 링크(a)를 강제로 드래그하려는 기본 동작을 원천 차단
+        e.preventDefault(); 
+        
+        isDown = true;
+        slider.classList.add('dragging');
+        startX = e.pageX;
+        stopAutoSlide(); // 꾹 누르고 있는 동안에는 자동 슬라이드가 완전히 멈춤
+    });
 
-.banner-content {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.4;
-    margin: 0 0 24px 0;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
+    // 마우스가 슬라이드 밖으로 삐져나가도 드래그가 끊기지 않도록 'window'에서 감지
+    window.addEventListener('mousemove', (e) => {
+        if (!isDown || isAnimating) return;
+        e.preventDefault();
+        
+        const walk = startX - e.pageX; 
+        
+        // 왼쪽으로 드래그(이전 장으로 돌아가기) 방지
+        if (walk < 0) {
+            slider.scrollLeft = 0;
+        } else {
+            slider.scrollLeft = walk; 
+        }
+    });
 
-/* 더 알아보기 버튼 */
-.banner-content .btn-more {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: rgba(45, 45, 45, 0.85);
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background-color 0.3s;
-}
+    // 클릭을 떼는 동작도 'window' 전체에서 감지
+    window.addEventListener('mouseup', (e) => {
+        if (!isDown) return;
+        isDown = false;
+        slider.classList.remove('dragging');
+        
+        const dragDistance = startX - e.pageX;
+        
+        if (dragDistance > 100) {
+            moveToNextSlide();
+        } else {
+            slider.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+        
+        startAutoSlide(); // 드래그가 끝난 후 다시 3초 자동 슬라이드 재시작
+    });
 
-</style>
+    // --- a 태그(링크) 오작동 방지 ---
+    let dragStartX = 0;
+    slider.addEventListener('mousedown', (e) => { dragStartX = e.pageX; });
+    slider.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            // 마우스를 10px 이상 끌었다면 드래그로 간주하고 링크 이동을 취소
+            if (Math.abs(dragStartX - e.pageX) > 10) {
+                e.preventDefault(); 
+            }
+        });
+    });
+
+    // 페이지 로드 시 최초 자동 실행
+    startAutoSlide();
+});
+</script>
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <%@ include file="header.jsp" %>
 <div>
-	<div class="main-slide">
+	<div class="main-slide" id="main-slide">
+	    <div id="slideTrack">
+	        <div class="slide-item"><a href="">
+	            <img src="/images/main_img/main_5-1.jpg" alt="메인이미지1">
+	            </a>
+	        </div>
+	        <div class="slide-item">
+	        	<a href="">
+	            <img src="/images/main_img/main_5_0.jpg" alt="메인이미지2">
+	            </a>
+	        </div>
+	    </div>
 	</div>
-	<div>
-		<h1>베스트 상품만 모아서</h1>
-	</div>
+	
 	<div class="banner-section">
     <ul class="banner-list">
         <li class="banner-item">
@@ -132,9 +154,11 @@
             </a>
         </li>
     </ul>
-</div>
-	<div>
-		<h1>다양하게 즐기는 티 세트</h1>
+	</div>
+	
+	<div class="product">
+		<h2>다양하게 즐기는 티 세트</h2>
+    	<%@ include file="guest/productMain.jsp" %>
 	</div>
 </div>
 <%@ include file="footer.jsp" %>

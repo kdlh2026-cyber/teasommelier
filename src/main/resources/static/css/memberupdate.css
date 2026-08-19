@@ -1,0 +1,154 @@
+@charset "UTF-8";
+/* 폼 전체 영역 */
+.form-wrap {
+    max-width: 1200px;
+    margin: 40px auto;
+    font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    color: #333;
+}
+
+.form-wrap h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+/* 상단 기본정보 & 필수입력사항 헤더 */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid #222;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #222;
+}
+
+.req-info {
+    font-size: 13px;
+    color: #666;
+}
+
+.required {
+    color: #007bff; /* 파란색 별표 */
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+/* 테이블 스타일 */
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: none;
+}
+
+.form-table th, 
+.form-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    vertical-align: middle;
+}
+
+.form-table th {
+    width: 160px;
+    text-align: left;
+    background-color: #fafafa;
+    font-size: 14px;
+    font-weight: normal;
+    color: #333;
+}
+
+.form-table td {
+    font-size: 14px;
+}
+
+/* 입력 폼 공통 스타일 */
+input[type="text"], 
+input[type="password"], 
+select {
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus {
+    outline: none;
+    border-color: #666;
+}
+
+input[readonly] {
+    background-color: #f9f9f9;
+}
+
+/* 버튼 스타일 */
+.btn_white {
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    font-size: 13px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.btn_white:hover {
+    background-color: #f5f5f5;
+}
+
+/* 특정 인풋 너비 */
+#m_id, #m_passwd, #chk_passwd, #m_name { width: 200px; }
+#m_email { width: 250px; }
+
+/* 주소 영역 */
+.address-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.address-list li {
+    margin-bottom: 8px;
+}
+.address-list li:last-child {
+    margin-bottom: 0;
+}
+#m_zipno { width: 100px; text-align: center; }
+#m_addr1, #m_addr2 { width: 100%; max-width: 600px; }
+
+/* 전화번호 영역 */
+.phone-group input { width: 70px; text-align: center; }
+.phone-group select { width: 80px; }
+.phone-dash { margin: 0 5px; color: #666; }
+
+/* 설명 텍스트 */
+.desc {
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+/* 하단 버튼 영역 */
+.btn-group {
+    text-align: center;
+    margin-top: 30px;
+}
+.btn-group input[type="submit"],
+.btn-group input[type="button"] {
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid #333;
+    background-color: #fff;
+    margin: 0 5px;
+}
+.btn-group input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+}

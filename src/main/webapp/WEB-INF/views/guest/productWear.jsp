@@ -29,7 +29,7 @@
     <!-- 세부 필터: 상품종류(p_type)에 따라 필터 목록이 달라짐 -->
     <c:if test="${productType eq '티웨어'}">
     <div class="filter-tabs">
-        <a href="${pageContext.request.contextPath}/guest/productWear?productType=${productType}&filter=티웨어" class="filter ${empty filter or filter eq '티웨어' ? 'active' : ''}">티웨어</a>
+        <a href="${pageContext.request.contextPath}/guest/productWear?productType=${productType}&filter=티 웨어" class="filter ${empty filter or filter eq '티웨어' ? 'active' : ''}">티웨어</a>
     </div>
     </c:if>  
 
