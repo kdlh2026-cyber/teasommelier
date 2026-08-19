@@ -24,7 +24,7 @@ public class WebSecurityConfig {
 					.requestMatchers("/member/**", "/member/mypage/**").hasAnyRole("USER","ADMIN") // member 폴더는 USER, ADMIN만 허용(회원페이지)
 					.requestMatchers("/admin/**","/AdminMDelete").hasAnyRole("ADMIN") // admin 폴더는 ADMIN만 허용(관리자 페이지)
 					.requestMatchers("/cart", "/cartList", "/insertCart", "/deleteCarts", "/clearCart").permitAll()
-					.requestMatchers("/orderWrite", "/updateCartQty", "/orderSubmit", "/orderConfirm", "/orderWriteDirect").permitAll()
+					.requestMatchers("/orderWrite", "/updateCartQty", "/orderSubmit", "/orderConfirm", "/orderWriteDirect", "/guestOrderConfirm").permitAll()
 					.anyRequest().authenticated() //나머지 모두 인증이 필요	
 			);
 		

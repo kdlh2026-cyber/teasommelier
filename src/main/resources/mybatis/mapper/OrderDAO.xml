@@ -56,9 +56,9 @@
 	    on o.m_no = m.m_no
 	    order by o.o_date desc
 	</select>
-	<!-- 회원 마이페이지 주문조회 -->
+	<!-- 회원 마이페이지 주문조회-->
 	<select id="memberOrderList" resultType="com.springboot.teasommelier.dto.OrderDTO">
-		 select o.o_no, o.o_price, o.o_pay, o.o_name, o.o_date, 
+		 select o.o_no, o.o_price, o.o_pay, o.o_name, o.o_date,
 		 		od.od_qty, od.od_product, od.od_price, p.p_img, p.p_name
 		 from tea_order o
 		 join tea_order_detail od on o.o_no = od.o_no
@@ -80,4 +80,11 @@
 		    set m_cash = m_cash - #{usedCash} + #{earnCash}
 		    where m_no = #{m_no} 
 	</update>
+	<!-- 회원 적립금 내역 조회 (주문 단위) -->
+	<select id="memberCashList" resultType="com.springboot.teasommelier.dto.OrderDTO">
+	    select o_no, o_date, o_earn, o_used_cash, o_price
+	    from tea_order
+	    where m_no = #{m_no}
+	    order by o_date desc
+	</select>
 </mapper>	

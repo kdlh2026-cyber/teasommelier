@@ -23,7 +23,7 @@
 		<a href="/loginForm">로그인</a> 
 		<a href="/guest/MemberWriteForm">회원가입</a> 
 		<a href="/guest/cs/cs_customerServiceList">고객센터</a>
-		<a href="/member/mypage/OrderSelect">
+		<a href="/member/orderList">
     		<img src="/images/main_img/mypage.png" alt="마이페이지">
 		</a>
 		<a href="/cartList">
@@ -40,7 +40,7 @@
 		<a href="/logout">로그아웃</a>
 		<a href="/member/MemberUpdateForm">정보수정</a>
 		<a href="/guest/cs/cs_customerServiceList">고객센터</a>
-		<a href="/member/mypage/OrderSelect">
+		<a href="/member/orderList">
     		<img src="/images/main_img/mypage.png" alt="마이페이지">
 		</a>
 		<a href="/cartList">

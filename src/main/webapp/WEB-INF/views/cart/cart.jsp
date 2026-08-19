@@ -10,7 +10,7 @@
 <title>장바구니</title>
 </head>
 <body>
-	<%@ include file="header.jsp" %>
+	<%@ include file="../header.jsp" %>
 		<h1>CART</h1>
 		<form name="cartList">
 			<table border=1 width=1000>
@@ -79,7 +79,7 @@
 		</form>
 		
 		<a href="/main">쇼핑계속하기</a>
-	<%@ include file="footer.jsp" %>
+	<%@ include file="../footer.jsp" %>	
 </body>
 <script>
 	function choice(type){
