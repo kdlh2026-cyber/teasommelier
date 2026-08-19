@@ -51,7 +51,7 @@
         </tr>
     </table>
 
-    <a href="/admin/productList">목록으로</a>
+    <a href="/admin/productLists">목록으로</a>
     <a href="/admin/productModify?p_no=${product.p_no}">수정하기</a>
     <a href="/admin/productDelete?p_no=${product.p_no}">삭제하기</a>    
     

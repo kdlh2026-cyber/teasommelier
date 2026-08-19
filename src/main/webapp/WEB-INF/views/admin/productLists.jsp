@@ -7,13 +7,41 @@
 <head>
 <meta charset="UTF-8">
 <title>상품목록 및 등록</title>
+<style>
+.productlist {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: sans-serif;
+    color: #333;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+    font-size: 14px;
+}
+th {
+    background-color: #fafafa;
+    padding: 10px 1px; 
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+}
+
+td {
+    padding: 14px 10px;
+    border-bottom: 1px solid #eee;
+}
+</style>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
+<%@ include file="../header.jsp" %>
+<div class="productlist">
 	<h1>상품목록</h1>
 	<a href="/admin/productWriteForm">상품 등록</a>
-	<a href ="">상품수정</a>
-	<table border=1 width=1200>
+	<table>
 		<tr>
 			<th>상품번호</th>
 			<th>이미지</th>
@@ -39,6 +67,7 @@
 		</tr>
 	</c:forEach>
 	</table>
-	<%@ include file="../footer.jsp" %>
+</div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

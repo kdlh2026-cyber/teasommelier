@@ -359,8 +359,6 @@ body {
                 <label class="inline-label" style="min-width: auto; margin-right: 5px;"><span class="required">*</span></label>
                 <select name="m_phone1" id="m_phone1">
                     <option value="010">010</option>
-                    <option value="011">011</option>
-                    <option value="016">016</option>
                 </select>
             </div>
             <div class="input-box flex-1">

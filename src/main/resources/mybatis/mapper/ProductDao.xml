@@ -17,12 +17,20 @@
 		where p_category = '기프트 세트'
 		order by p_no desc			
 	</select>
+	<!-- 기프트 세트 main -->
+	<select id="select_tea_products_main" resultType="com.springboot.teasommelier.dto.ProductDto">
+		select *
+		from tea_product 
+		where p_category = '기프트 세트' and 
+		p_no ='1062' or p_no='1063' or p_no='1064' or p_no='1066'
+		order by p_price asc		
+	</select>
 	
 	 <!-- 티웨어 -->
 	<select id="select_tea_products_wear" resultType="com.springboot.teasommelier.dto.ProductDto">
 		select *
 		from tea_product 
-		where p_category = '티 웨어'
+		where p_category = '티웨어'
 		order by p_no desc			
 	</select>
 	

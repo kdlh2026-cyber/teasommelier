@@ -16,11 +16,8 @@
 </head>
 
 <body>
-
+<%@ include file="/WEB-INF/views/header.jsp" %>
 <div class="shop-page">
-    <div>
-        <%@ include file="/WEB-INF/views/header.jsp" %>
-    </div>
     <!-- 매장 선택 탭 -->
     <div class="shop-tabs">
         <c:forEach var="shop" items="${shopList}" varStatus="status">
@@ -164,10 +161,7 @@
             });
         }
     }
-
 </script>
-	<div>
-        <%@ include file="/WEB-INF/views/footer.jsp" %>
-    </div>
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>

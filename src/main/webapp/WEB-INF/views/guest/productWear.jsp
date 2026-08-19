@@ -29,7 +29,7 @@
     <!-- 세부 필터: 상품종류(p_type)에 따라 필터 목록이 달라짐 -->
     <c:if test="${productType eq '티웨어'}">
     <div class="filter-tabs">
-        <a href="${pageContext.request.contextPath}/guest/productWear?productType=${productType}&filter=티웨어" class="filter ${empty filter or filter eq '티웨어' ? 'active' : ''}">티웨어</a>
+        <a href="${pageContext.request.contextPath}/guest/productWear?productType=${productType}&filter=티 웨어" class="filter ${empty filter or filter eq '티웨어' ? 'active' : ''}">티웨어</a>
     </div>
     </c:if>  
 
@@ -43,7 +43,7 @@
 
     <!-- 상품 목록 카드 그리드 (3열) -->
     <div class="product-grid">
-        <c:forEach var="product" items="${productSet}">
+        <c:forEach var="product" items="${productWear}">
             <div class="product-card">
                 <!-- 상품 이미지 + 상세페이지 링크 (호버시 p_img2로 전환) -->
                 <a href="${pageContext.request.contextPath}/guest/productDetail?p_no=${product.p_no}" class="img-wrap">
