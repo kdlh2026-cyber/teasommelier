@@ -77,7 +77,6 @@
 						상품명 ${orderP.p_name}
 						수량 ${orderP.ca_qty}개
 						가격 <fmt:formatNumber value="${orderP.ca_qty * orderP.ca_price}" pattern="#,###" />원
-						<button type="button" onclick="remove(this)">삭제</button>
 					</div>
 				</c:forEach>
 				<div>
@@ -201,21 +200,6 @@
 			console.error("결제 중 오류 발생:", error);
 			alert("결제 진행 중 오류 발생");
 		}
-	}
-	
-	// 상품 삭제(주문서에서 제외)
-	function remove(button){
-		const item = button.closest('.orderItem')
-		if(item){
-			item.remove();
-			recalculateTotal();
-		}
-	}
-	
-	// 상품 삭제 후 재 계산
-	function recalculateTotal(){
-		let newOrderPtotal = 0;
-		
 	}
 </script>
 </html>

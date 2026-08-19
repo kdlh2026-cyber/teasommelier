@@ -47,7 +47,7 @@
 		적립 예정금액  <span><fmt:formatNumber value="${orderInfo.o_earn}" pattern="#,###"/>원</span>
 	</div>
 	<div>
-		<a href="/member/mypage/OrderSelect">주문확인하기</a>
+		<a href="/member/orderList">주문확인하기</a>
 		<a href="/main">쇼핑 계속하기</a>
 	</div>
 </body>

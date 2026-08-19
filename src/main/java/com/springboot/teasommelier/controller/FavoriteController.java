@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springboot.teasommelier.dao.IFavoriteDao;
 import com.springboot.teasommelier.dao.IMemberDao;
@@ -38,10 +39,14 @@ public class FavoriteController {
 		String m_id = principal.getName();
 		MemberDto member = memberDao.MemberFindId(m_id);
 		if(member == null) return "redirect:/login";
+		
 		int m_no = member.getM_no();
 		
+		int count = favDAO.checkFavorite(m_no, p_no);
+		if(count > 0) return "redirect:/guest/productDetail?p_no=" + p_no + "&favDuplicate=true";				
+		
 		ProductDto product = p_dao.select_tea_product(p_no);
-	
+		
 		FavoriteDto fdto = new FavoriteDto();
 		fdto.setM_no(m_no);
 		fdto.setP_no(p_no);

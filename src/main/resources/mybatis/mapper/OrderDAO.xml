@@ -18,14 +18,14 @@
 	    <selectKey keyProperty="o_no" resultType="int" order="BEFORE">
 	        SELECT tea_order_seq.NEXTVAL FROM DUAL
 	    </selectKey>
-    	insert into tea_order(o_no, o_date, o_deliver, o_price, o_earn, o_passwd, o_name, o_phone, o_zip, o_addr, o_email, o_message, o_pay, m_no, paymentId)
+    	insert into tea_order(o_no, o_date, o_deliver, o_price, o_earn, o_passwd, o_name, o_phone, o_zip, o_addr, o_email, o_message, o_pay, m_no, paymentId, o_used_cash)
     	 values(#{o_no}, SYSDATE, '기본배송', #{o_price, jdbcType=VARCHAR}, 
     	 		#{o_earn, jdbcType=VARCHAR}, #{o_passwd, jdbcType=VARCHAR},
     	 		#{o_name, jdbcType=VARCHAR}, #{o_phone, jdbcType=VARCHAR},
     	 		#{o_zip, jdbcType=VARCHAR}, #{o_addr, jdbcType=VARCHAR}, 
     	 		#{o_email, jdbcType=VARCHAR}, #{o_message, jdbcType=VARCHAR}, 
     	 		#{o_pay, jdbcType=VARCHAR}, #{m_no, jdbcType=VARCHAR},
-    	 		#{paymentId})
+    	 		#{paymentId}, #{o_used_cash})
     </insert>
     <insert id="orderDetailInsert">
     	insert into tea_order_detail(od_no, od_qty, od_product, od_price, o_no, p_no)
@@ -56,13 +56,28 @@
 	    on o.m_no = m.m_no
 	    order by o.o_date desc
 	</select>
-	<!-- m_cash 업데이트 -->
-	<update id="deductMoney">
-		update tea_member set m_cash = #{m_cash}
-		where m_no = #{m_no}
-	</update>
+	<!-- 회원 마이페이지 주문조회 -->
+	<select id="memberOrderList" resultType="com.springboot.teasommelier.dto.OrderDTO">
+		 select o.o_no, o.o_price, o.o_pay, o.o_name, o.o_date, 
+		 		od.od_qty, od.od_product, od.od_price, p.p_img, p.p_name
+		 from tea_order o
+		 join tea_order_detail od on o.o_no = od.o_no
+		 left join tea_product p on od.p_no = p.p_no
+		 where o.m_no = #{m_no}
+		 order by o.o_date desc
+	</select>
 	<!-- 결제 후 장바구니 상품 삭제 -->
 	<delete id="deleteOrderCart">
-		delete from tea_cart where m_no = #{m_no} and p_no = #{p_no}
+		delete from tea_cart where m_no = #{m_no} and ca_no = #{ca_no}
 	</delete>
+	<!-- 결제 후 관심상품 상품 삭제 -->
+	<delete id="deleteOrderFavorite">
+		delete from tea_favorite where f_no = #{f_no} and m_no = #{m_no}
+	</delete>
+	<!--  결제 후 적립금 보유금액 업데이트 -->
+	<update id="updateMcash" parameterType="com.springboot.teasommelier.dto.MemberDto">
+		 update tea_member
+		    set m_cash = m_cash - #{usedCash} + #{earnCash}
+		    where m_no = #{m_no} 
+	</update>
 </mapper>	
