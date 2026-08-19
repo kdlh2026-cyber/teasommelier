@@ -15,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.springboot.teasommelier.dao.ICommunityDao;
 import com.springboot.teasommelier.dao.IProductDao;
+import com.springboot.teasommelier.dto.CommunityDto;
 import com.springboot.teasommelier.dto.ProductDto;
 
 @Controller
 public class ProductController {
 	@Autowired
 	private IProductDao IProductDao;
+	@Autowired
+	private ICommunityDao cb_dao;
 	
 	// -- test -- 
 	@RequestMapping("/guest/productTest")
@@ -264,10 +268,16 @@ public class ProductController {
 
 	// 상품 상세 조회 - guest 경로, 인증 불필요
 	@RequestMapping(value = "/guest/productDetail", method = RequestMethod.GET)
-	public String productDetail(@RequestParam("p_no") int p_no, Model model){   
-	ProductDto product = IProductDao.select_tea_product(p_no);   
-	 model.addAttribute("product", product);    
-	 return "guest/productDetail";
+	public String productDetail(@RequestParam("p_no") int p_no, Model model){
+	    ProductDto product = IProductDao.select_tea_product(p_no);
+	    model.addAttribute("product", product);
+
+	    List<CommunityDto> reviewList = cb_dao.CommunityList_product(p_no, "리뷰");
+	    List<CommunityDto> qnaList = cb_dao.CommunityList_product(p_no, "Q&A");
+	    model.addAttribute("reviewList", reviewList);
+	    model.addAttribute("qnaList", qnaList);
+
+	    return "guest/productDetail";
 	}
 
 	// -- 관리자 전용 (ADMIN) --

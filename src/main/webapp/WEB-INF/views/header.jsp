@@ -13,7 +13,7 @@
 		<a href="/guest/productWear">티 웨어</a>
 		<a href="/guest/productEvent">이벤트</a>
 		<a href="/guest/ShopList">매장 안내</a>
-		<a href="/cb_communityBoard">커뮤니티</a>
+		<a href="/guest/community/cb_communityBoard">커뮤니티</a>
 		<a href="/guest/inquiryWrite">기업구매</a>
 	</nav>
 	<div class="login">
@@ -22,7 +22,7 @@
 		<div class="header-menu">
 		<a href="/loginForm">로그인</a> 
 		<a href="/guest/MemberWriteForm">회원가입</a> 
-		<a href="/guest/">고객센터</a>
+		<a href="/guest/cs/cs_customerServiceList">고객센터</a>
 		<a href="/member/mypage/OrderSelect">
     		<img src="/images/main_img/mypage.png" alt="마이페이지">
 		</a>
@@ -39,7 +39,7 @@
 		<div class="header-menu">
 		<a href="/logout">로그아웃</a>
 		<a href="/member/MemberUpdateForm">정보수정</a>
-		<a href="/guest/">고객센터</a>
+		<a href="/guest/cs/cs_customerServiceList">고객센터</a>
 		<a href="/member/mypage/OrderSelect">
     		<img src="/images/main_img/mypage.png" alt="마이페이지">
 		</a>

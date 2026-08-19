@@ -29,9 +29,9 @@ public class CommunityController {
 	@Autowired
 	private IProductDao p_dao;
 	
-	@RequestMapping("/cb_communityBoard")
+	@RequestMapping("/guest/community/cb_communityBoard")
 	public String CBoard(){
-		return "cb_communityBoard";
+		return "guest/community/cb_communityBoard";
 	}
 	
 	@RequestMapping("/guest/community/cb_brandnoticeList")
@@ -66,11 +66,18 @@ public class CommunityController {
 	    List<CommunityDto> reviewList = cb_dao.CommunityList_category("리뷰");
 	    model.addAttribute("reviewList", reviewList);
 
+	    // Key 타입을 Integer로 설정
 	    Map<Integer, ProductDto> productMap = new HashMap<>();
+	    
 	    for (CommunityDto review : reviewList) {
 	        Integer p_no = review.getP_no();
-	        if (p_no != null && !productMap.containsKey(p_no)) {
-	            productMap.put(p_no, p_dao.select_tea_product(p_no));
+	        if (p_no != null && p_no > 0) {
+	            if (!productMap.containsKey(p_no)) {
+	                ProductDto product = p_dao.select_tea_product(p_no);
+	                if (product != null) {
+	                    productMap.put(p_no, product);
+	                }
+	            }
 	        }
 	    }
 	    model.addAttribute("productMap", productMap);
@@ -99,11 +106,18 @@ public class CommunityController {
 	    List<CommunityDto> qnaList = cb_dao.CommunityList_category("Q&A");
 	    model.addAttribute("qnaList", qnaList);
 
+	 // Key 타입을 Integer로 설정
 	    Map<Integer, ProductDto> productMap = new HashMap<>();
+	    
 	    for (CommunityDto qna : qnaList) {
 	        Integer p_no = qna.getP_no();
-	        if (p_no != null && !productMap.containsKey(p_no)) {
-	            productMap.put(p_no, p_dao.select_tea_product(p_no));
+	        if (p_no != null && p_no > 0) {
+	            if (!productMap.containsKey(p_no)) {
+	                ProductDto product = p_dao.select_tea_product(p_no);
+	                if (product != null) {
+	                    productMap.put(p_no, product);
+	                }
+	            }
 	        }
 	    }
 	    model.addAttribute("productMap", productMap);
@@ -204,25 +218,18 @@ public class CommunityController {
 		res_dto.setCb_no(cb_no);
 		// res_dto.setM_no(m_no);
 		cb_dao.ResponseQnaInsert(res_dto);
-		return "redirect:/guest/community/cb_qnaList";
+		return "redirect:/guest/community/cb_communityBoard";
+	}
+	
+	@RequestMapping("/responseDelete")
+	public String responseDelete(@RequestParam("res_no") int res_no) {
+		cb_dao.ResponseQnaDelete(res_no);
+		return "redirect:/guest/community/cb_communityBoard";
 	}
 	
 	// 카테고리 -> 목록 페이지 경로 매핑
 	private String getCategoryListUrl(String category) {
-	    if (category == null) return "redirect:/main";
-
-	    switch (category) {
-	        case "브랜드소식":
-	            return "redirect:/guest/community/cb_brandnoticeList";
-	        case "에디토리얼":
-	            return "redirect:/guest/community/cb_editorialList";
-	        case "리뷰":
-	            return "redirect:/guest/community/cb_reviewList";
-	        case "Q&A":
-	            return "redirect:/guest/community/cb_qnaList";
-	        default:
-	            return "redirect:/main";
-	    }
+		return "redirect:/guest/community/cb_communityBoard";
 	}
 	
 	@RequestMapping("/cb_communityInsert")
@@ -254,11 +261,12 @@ public class CommunityController {
 	    cb_dto.setCb_file(String.join(",", savedFileNames));
 	    cb_dao.CommunityInsert(cb_dto);
 
-	    return getCategoryListUrl(cb_dto.getCb_category());
+	    return "redirect:/guest/community/cb_communityBoard";
 	}
 
 	@RequestMapping("/cb_communityUpdate")
 	public String communityUpdate(CommunityDto cb_dto,
+	                               @RequestParam(value = "existingFiles", required = false) String existingFiles,
 	                               @RequestParam(value = "files", required = false) List<MultipartFile> files) {
 
 	    String uploadDir = "C:\\teasommelier\\src\\main\\resources\\static\\images\\community\\";
@@ -267,7 +275,9 @@ public class CommunityController {
 	        dirCheck.mkdirs();
 	    }
 
-	    List<String> savedFileNames = new ArrayList<>();
+	    List<String> newFileNames = new ArrayList<>();
+	    
+	    // 새로 업로드된 파일이 있는지 확인
 	    if (files != null) {
 	        for (MultipartFile file : files) {
 	            if (file != null && !file.isEmpty()) {
@@ -275,7 +285,7 @@ public class CommunityController {
 	                    String originalName = file.getOriginalFilename();
 	                    String savedName = UUID.randomUUID().toString() + "_" + originalName;
 	                    file.transferTo(new File(uploadDir + savedName));
-	                    savedFileNames.add(savedName);
+	                    newFileNames.add(savedName);
 	                } catch (IOException e) {
 	                    e.printStackTrace();
 	                }
@@ -283,16 +293,16 @@ public class CommunityController {
 	        }
 	    }
 
-	    if (savedFileNames.isEmpty()) {
-	        CommunityDto existing = cb_dao.CommunityView(cb_dto.getCb_no());
-	        cb_dto.setCb_file(existing != null ? existing.getCb_file() : null);
+	    // 새로 첨부한 파일이 없으면 기존 파일명을 유지, 있으면 새로 입력된 파일명으로 교체
+	    if (newFileNames.isEmpty()) {
+	        cb_dto.setCb_file(existingFiles);
 	    } else {
-	        cb_dto.setCb_file(String.join(",", savedFileNames));
+	        cb_dto.setCb_file(String.join(",", newFileNames));
 	    }
 
 	    cb_dao.CommunityUpdate(cb_dto);
 
-	    return getCategoryListUrl(cb_dto.getCb_category());
+	    return "redirect:/guest/community/cb_communityBoard";
 	}
 	
 	@RequestMapping("/cb_communityDelete")

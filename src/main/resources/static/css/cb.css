@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+/* =========================
+   페이지 컨테이너 / 타이틀
+   (에디토리얼, 브랜드 소식 공용)
+========================= */
+
+.cb-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 16px 60px;
+}
+
+.cb-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.cb-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+    padding-right: 12px;
+    border-right: 1px solid #ddd;
+}
+
+.cb-subtitle {
+    font-size: 14px;
+    color: #999;
+}
+
+
+/* =========================
+   목록 테이블
+========================= */
+
+.cb-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #222;
+}
+
+.cb-table th {
+    background: #fafafa;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    padding: 14px 8px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.cb-table td {
+    font-size: 13px;
+    color: #555;
+    padding: 16px 8px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.col-no {
+    width: 70px;
+    color: #999;
+}
+
+.col-subject {
+    text-align: left;
+}
+
+.col-writer {
+    width: 110px;
+}
+
+.col-date,
+.col-view {
+    width: 100px;
+    color: #999;
+}
+
+
+/* 제목 링크 */
+.cb-subject-link {
+    color: #333;
+    text-decoration: none;
+}
+
+.cb-subject-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   글쓰기 버튼
+========================= */
+
+.cb-write-btn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.cb-write-btn:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}

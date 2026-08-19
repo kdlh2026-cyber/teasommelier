@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+/* =========================
+   페이지 컨테이너 / 타이틀
+========================= */
+
+.review-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 16px 60px;
+}
+
+.review-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.review-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+    padding-right: 12px;
+    border-right: 1px solid #ddd;
+}
+
+.review-subtitle {
+    font-size: 14px;
+    color: #999;
+}
+
+
+/* =========================
+   리뷰 테이블
+========================= */
+
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #222;
+}
+
+.review-table th {
+    background: #fafafa;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    padding: 14px 8px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.review-table td {
+    font-size: 13px;
+    color: #555;
+    padding: 16px 8px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.col-no {
+    width: 70px;
+    color: #999;
+}
+
+.col-product {
+    width: 90px;
+}
+
+.col-subject {
+    text-align: left;
+}
+
+.col-writer {
+    width: 110px;
+}
+
+.col-date,
+.col-view {
+    width: 100px;
+    color: #999;
+}
+
+.col-rating {
+    width: 110px;
+}
+
+
+/* 상품 썸네일 */
+.review-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* 제목 링크 */
+.review-subject-link {
+    color: #333;
+    text-decoration: none;
+}
+
+.review-subject-link:hover {
+    text-decoration: underline;
+}
+
+
+/* 별점 */
+.review-stars {
+    color: #e04c4c;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   글쓰기 버튼
+========================= */
+
+.review-write-btn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.review-write-btn:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
