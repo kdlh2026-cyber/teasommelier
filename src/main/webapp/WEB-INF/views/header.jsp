@@ -40,7 +40,7 @@
 		<a href="/logout">로그아웃</a>
 		<a href="/member/MemberUpdateForm">정보수정</a>
 		<a href="/guest/">고객센터</a>
-		<a href="/member/mypage/OrderSelect">
+		<a href="/member/orderList">
     		<img src="/images/main_img/mypage.png" alt="마이페이지">
 		</a>
 		<a href="/cartList">
@@ -58,7 +58,7 @@
 		<a href="/logout">로그아웃</a>
 		<a href="/admin/MemberList">회원목록</a>
 		<a href="/admin/productLists">상품목록</a>
-		<a href="#">주문목록</a>
+		<a href="/admin/orderList">주문목록</a>
 		<a href ="/admin/inquiryListA">기업주문목록</a>
 		<a href ="/admin/ShopList">매장안내목록</a>
 		</div>

@@ -23,7 +23,7 @@
     </div>
       <!-- 굵은 제목: 현재 선택된 상품종류 이름 (티백/잎차/미니 컬렉션 등) -->
     <h2 class="product-type-title">
-    ${empty productType ? '티 웨어' : productType}
+    ${empty productType ? '티웨어' : productType}
 	</h2>
 		
     <!-- 세부 필터: 상품종류(p_type)에 따라 필터 목록이 달라짐 -->
@@ -43,7 +43,7 @@
 
     <!-- 상품 목록 카드 그리드 (3열) -->
     <div class="product-grid">
-        <c:forEach var="product" items="${productSet}">
+        <c:forEach var="product" items="${productWear}">
             <div class="product-card">
                 <!-- 상품 이미지 + 상세페이지 링크 (호버시 p_img2로 전환) -->
                 <a href="${pageContext.request.contextPath}/guest/productDetail?p_no=${product.p_no}" class="img-wrap">

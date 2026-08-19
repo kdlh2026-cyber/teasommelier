@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </style>
 <ul class="mypage-menu">
 	<li>
-		<a href="/member/mypage/OrderSelect">주문조회</a>
+		<a href="/member/orderList">주문조회</a>
 	</li>
 	<li>
 		<a href="/myFavorite?m_no=${sessionScope.loginMember.m_no}">관심상품</a>

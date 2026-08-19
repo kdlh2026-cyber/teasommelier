@@ -35,4 +35,8 @@
 			#{f_no}
 		</foreach>
 	</select>
+	<select id="checkFavorite" resultType="int">
+		select count(*) from tea_favorite
+		where m_no = #{m_no} and p_no = #{p_no}
+	</select>
 </mapper>	

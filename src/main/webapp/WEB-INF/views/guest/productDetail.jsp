@@ -231,6 +231,12 @@
 		const qty = document.getElementById('qty').value;
 		location.href = '/orderWriteDirect?p_no=' + pNo + '&ca_qty=' + qty;
 	}
+	
+	// 관심상품 동일상품 중복 알람
+	<c:if test="${param.favDuplicate == 'true'}">
+		alert('이미 관심상품에 들어있습니다.');
+	</c:if>
+	
 	</script>
 	<div>
         <%@ include file="/WEB-INF/views/footer.jsp" %>
