@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <title>주문서 작성 폼</title>
 <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script>
+    // JSP 변수/EL 태그 값을 자바스크립트 전역 변수로 선언
+    const orderPtotal = ${orderPtotal};
+    const maxLimit = 3000;
+</script>
+<script src="/js/orderWriteMember.js"></script>
 </head>
 <body>
 <%@ include file="../header.jsp" %>
@@ -116,90 +122,4 @@
 	</div>
 <%@ include file="../footer.jsp" %>	
 </body>
-<script>
-	function goPopup(){
-		var pop = window.open("/guest/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	}
-	
-	function jusoCallBack(o_addr1, o_addr2, o_zip){
-		document.writeForm.o_zip.value = o_zip;
-		document.writeForm.o_addr1.value = o_addr1;
-		document.writeForm.o_addr2.value = o_addr2;
-	}
-
-	const maxLimit = 3000;
-	const orderPtotal = ${orderPtotal};
-	const shipping = 0;
-
-	function allCash(){
-		let userCash = parseInt(document.querySelector(".maxCash").innerText) || 0;
-		let useAmount = userCash > maxLimit ? maxLimit : userCash;
-		
-		document.querySelector(".useCash").value = useAmount;
-		totalDiscount();
-	}
-	
-	function totalDiscount(){
-		const cashInput = document.querySelector(".useCash");
-		let val = parseInt(cashInput.value) || 0;
-
-		if(val < 0) val = 0;
-		if(val > maxLimit){
-			alert("적립금은 1회 최대 3,000원까지만 사용 가능합니다.");
-			val = maxLimit;
-		}
-		
-		const userCash = parseInt(document.querySelector(".maxCash").innerText) || 0;
-		if(val > userCash) val = userCash;
-		
-		cashInput.value = val;
-		document.querySelector(".totalDiscount").innerText = val.toLocaleString();
-		
-		updateTotal(val);
-	}
-	
-	function updateTotal(discount){
-		const finalTotal = orderPtotal + shipping - discount;
-		const earnPoint = Math.floor(finalTotal * 0.01);
-		
-		document.querySelector(".discountTotal").innerText = discount.toLocaleString();
-		document.querySelector(".finalTotal").innerText = finalTotal.toLocaleString();
-		document.querySelector(".earnPoint").innerText = earnPoint.toLocaleString();
-	}
-	
-	updateTotal(0);
-
-	async function requestPayment(){
-		const finalTotalStr = document.querySelector(".finalTotal").innerText.replace(/,/g, '');
-		const finalTotalAmount = parseInt(finalTotalStr, 10);
-		const paymentId = "order-" + new Date().getTime();
-		
-		console.log("생성된 paymentId:", paymentId);
-		
-		try{
-			const response = await PortOne.requestPayment({
-				storeId : "store-06537574-48da-43b1-9835-1ed0b17839e4",
-				channelKey : "channel-key-af20f4e3-df0f-4219-8594-260e8269a7fb",
-				paymentId : paymentId,
-				orderName : "차 주문",
-				totalAmount : finalTotalAmount,
-				currency: "CURRENCY_KRW",
-				payMethod: "EASY_PAY",
-			});
-			
-			if(response.code != null){
-				alert("결제 실패: " + response.message);
-				return;
-			}
-			
-			document.getElementById("paymentId").value = paymentId;  
-			
-			alert("결제가 완료되었습니다.");
-			document.writeForm.submit();
-		}catch(error){
-			console.error("결제 중 오류 발생:", error);
-			alert("결제 진행 중 오류 발생");
-		}
-	}
-</script>
 </html>

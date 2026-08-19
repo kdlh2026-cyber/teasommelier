@@ -114,7 +114,7 @@ public class cartController {
 		}
 
 		model.addAttribute("list", list);
-		return "cart";
+		return "cart/cart";
 	}
 
 	// 장바구니 상품 삭제(선택, 모두)
@@ -157,6 +157,7 @@ public class cartController {
 		return "redirect:/cart";
 	}
 	
+	// 장바구니 수량 변경 후 DB 업데이트 한 다음에 카트로 넘어온다
 	@RequestMapping("/updateCartQty")
 	public String updateCartQty(@RequestParam("ca_no") int ca_no,
 								@RequestParam("ca_qty") int ca_qty,

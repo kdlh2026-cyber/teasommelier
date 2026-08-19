@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springboot.teasommelier.dao.IFavoriteDao;
 import com.springboot.teasommelier.dao.IMemberDao;
@@ -18,7 +19,6 @@ import com.springboot.teasommelier.dao.IcartDAO;
 import com.springboot.teasommelier.dao.IorderDAO;
 import com.springboot.teasommelier.dto.MemberDto;
 import com.springboot.teasommelier.dto.OrderDTO;
-import com.springboot.teasommelier.dto.OrderDetailDTO;
 import com.springboot.teasommelier.dto.ProductDto;
 import com.springboot.teasommelier.dto.cartDTO;
 
@@ -41,14 +41,12 @@ public class orderController {
 	@Autowired
 	private IFavoriteDao favDAO;
 	
-	// Principal을 활용한 회원 번호 조회 메서드로 통일
 	private int getMno(Principal principal) {
 		String m_id = principal.getName();
 		MemberDto member = memberDao.MemberFindId(m_id);
 		return member.getM_no();
 	}
 	
-	// 상품상세에서 바로 구매하기로 주문서 폼으로 이동
 	@RequestMapping("/orderWriteDirect")
 	public String orderWriteDirect(@RequestParam("p_no") int p_no,
 								   @RequestParam("ca_qty") int ca_qty,
@@ -81,7 +79,6 @@ public class orderController {
 		return loggedIn ? "order/orderWriteMember" : "order/orderWriteGuest";
 	}
 	
-	// 장바구니에서 주문서 폼으로 이동
 	@RequestMapping("/orderWrite")
 	public String orderWrite(@RequestParam("ca_no") List<Integer> caNoList,
 						     Principal principal,
@@ -95,16 +92,16 @@ public class orderController {
 		if (loggedIn) {
 			int m_no = getMno(principal);
 			orderItems = ordao.orderList(caNoList, m_no);
-			  
+			
 			MemberDto member = memberDao.MemberFindId(principal.getName());
 			model.addAttribute("member", member);
 		} else {
 			List<cartDTO> guestCart = (List<cartDTO>) session.getAttribute("guestCart");
-			  
+			
 			if (guestCart == null || guestCart.isEmpty()) {
-				throw new IllegalStateException("비회원 장바구니 정보가 없거나 세션이 만료되었습니다. 다시 시도해주세요.");
+				throw new IllegalStateException("비회원 장바구니 정보가 없거나 세션이 만료되었습니다.");
 			}
-			  
+			
 			orderItems = guestCart.stream()
 					.filter(item -> caNoList.contains(item.getCa_no()))
 					.collect(Collectors.toList());
@@ -120,7 +117,6 @@ public class orderController {
 		return loggedIn ? "order/orderWriteMember" : "order/orderWriteGuest";
 	}
 	
-	// 관심상품에서 주문서 폼으로 이동 (조인 방식 적용)
 	@RequestMapping("/orderWriteFav")
 	public String orderWriteFav(@RequestParam("f_no") List<Integer> f_noList,
 								Principal principal,
@@ -147,7 +143,6 @@ public class orderController {
 		return "order/orderWriteMember";
 	}
 	
-	// 결제하고 tea_order DB에 저장하기 (favorite 처리부 수정 완료)
 	@RequestMapping("/orderSubmit")
 	public String orderSubmit(OrderDTO orderDto,
 							 @RequestParam(value="ca_no", required=false) List<Integer> caNoList,
@@ -172,14 +167,11 @@ public class orderController {
 		String o_addr = addr1 + "," + addr2;
 		orderDto.setO_addr(o_addr);
 		
-		// 로그인 여부(비회원은 null값을 담기)
 		boolean loggedIn = (principal != null);
 		orderDto.setM_no(loggedIn ? getMno(principal) : null);
 		
-		// 바로구매, 장바구니, 관심상품 모두 cartDTO에 담아서 주문서로 넘김
 		List<cartDTO> orderItems = new ArrayList<>();
 		
-		// 바로구매
 		if("direct".equals(orderType)) {
 			ProductDto pdto = pdao.select_tea_product(p_no);
 			
@@ -192,12 +184,10 @@ public class orderController {
 			
 			orderItems.add(cdto);
 			
-		// 장바구니 구매	
 		} else if("cart".equals(orderType)) {
 			if(loggedIn) {
 				orderItems = ordao.orderList(caNoList, orderDto.getM_no());
 			} else {
-				// 비회원은 세션 장바구니를 생성하여 회원과 구분 cart db에 담지 않기
 				List<cartDTO> guestCart = (List<cartDTO>) session.getAttribute("guestCart");
 				if (guestCart == null || guestCart.isEmpty()) {
 					return "redirect:/cart";
@@ -207,7 +197,6 @@ public class orderController {
 					.collect(Collectors.toList());
 			}
 			
-		// 관심상품 구매
 		} else if("favorite".equals(orderType)) {
 			if(!loggedIn) {
 				return "redirect:/login";
@@ -221,22 +210,18 @@ public class orderController {
 			}
 		}
 		
-		// 합계 금액 계산
 		int totalPrice = 0;
 		for(cartDTO cdto : orderItems) {
 			totalPrice += cdto.getCa_price() * cdto.getCa_qty();
 		}
 		
-		// 적립금(할인) 계산
 		int useCash = 0;
 		if(m_cash != null) {
 			useCash = m_cash;
 		}
 		
-		// 총 결제 금액 계산
 		int finalPrice = totalPrice - useCash;
 		
-		// 결제금액, 적립금 order 테이블에 set
 		orderDto.setO_price(finalPrice);
 		int earnPoint = (int) Math.floor(finalPrice * 0.01);
 		orderDto.setO_earn(earnPoint);
@@ -244,29 +229,21 @@ public class orderController {
 		
 		ordao.orderInsert(orderDto);
 		
-		// cartDTO 필드에 orderItems에 담아둔 값들 꺼내서 orderDetail 저장
 		for(cartDTO cdto : orderItems) {
-			// 주문 상세에 저장
 			ordao.orderDetailInsert(orderDto.getO_no(), cdto.getP_no(),
-                    				cdto.getCa_qty(), cdto.getP_name(),
-                    				cdto.getCa_price());
+                				cdto.getCa_qty(), cdto.getP_name(),
+                				cdto.getCa_price());
 		};
 
-		// 결제 완료 후 장바구니에서 주문한 상품 삭제
 		if("cart".equals(orderType)) {
 		    if(loggedIn) {
-		        // 회원 : DB 장바구니 삭제
 		        int m_no = orderDto.getM_no();
-
 		        for(cartDTO cdto : orderItems) {
 		            cdto.setM_no(m_no);
 		            ordao.deleteOrderCart(cdto);
 		        }
 		    } else {
-		        // 비회원 : 세션 장바구니 삭제
-		        List<cartDTO> guestCart =
-		                (List<cartDTO>) session.getAttribute("guestCart");
-
+		        List<cartDTO> guestCart = (List<cartDTO>) session.getAttribute("guestCart");
 		        if(guestCart != null && caNoList != null) {
 		            guestCart.removeIf(cart -> caNoList.contains(cart.getCa_no()));
 		            session.setAttribute("guestCart", guestCart);
@@ -274,17 +251,14 @@ public class orderController {
 		    }
 		}
 		
-		// 결제 완료 후 관심상품에서 주문한 상품 삭제
 		if("favorite".equals(orderType) && loggedIn) {
 			int m_no = orderDto.getM_no();
-			
 			for(cartDTO cdto :orderItems) {
 				int f_no = cdto.getF_no();
 				ordao.deleteOrderFavorite(f_no, m_no);
 			}
 		}
 		
-		// 결제 완료 후 회원의 적립금 상태 업데이트
 		if(loggedIn) {
 			ordao.updateMcash(orderDto.getM_no(), useCash, orderDto.getO_earn());
 		}
@@ -297,7 +271,7 @@ public class orderController {
 	@RequestMapping("/orderConfirm")
 	public String orderConfirm(@RequestParam("o_no") int o_no, Model model) {
 		OrderDTO orderInfo = ordao.orderHeader(o_no);
-		List<OrderDetailDTO> orderDetails = ordao.orderDetailList(o_no);
+		List<OrderDTO> orderDetails = ordao.orderDetailList(o_no);
 		
 		model.addAttribute("orderDetails", orderDetails);
 		model.addAttribute("orderInfo", orderInfo);
@@ -313,10 +287,11 @@ public class orderController {
 		return "admin/order/orderList";
 	}
 	
+	// [수정 완료] OrderDTO로 통일하여 컴파일 에러 해결
 	@RequestMapping("/admin/orderDetail")
 	public String orderDetail(@RequestParam("o_no") int o_no, Model model) {
 		OrderDTO orderInfo = ordao.orderHeader(o_no);
-		List<OrderDetailDTO> orderDetails = ordao.orderDetailList(o_no);
+		List<OrderDTO> orderDetails = ordao.orderDetailList(o_no);
 		
 		model.addAttribute("orderInfo", orderInfo);
 		model.addAttribute("orderDetails", orderDetails);
@@ -325,14 +300,41 @@ public class orderController {
 	}
 	
 	@RequestMapping("/member/orderList")
-	public String memberOrderList(Principal principal,
-	                              Model model) {
-
+	public String memberOrderList(Principal principal, Model model) {
 	    int m_no = getMno(principal);
-
 	    List<OrderDTO> orderList = ordao.memberOrderList(m_no);
 	    model.addAttribute("memberOrder", orderList);
-
 	    return "member/mypage/OrderSelect";
+	}
+	
+	// 비회원주문 확인 기능
+	@RequestMapping("/guestOrderConfirm")
+	@ResponseBody
+	public String guestOrderConfirm(@RequestParam("o_name") String o_name,
+	                                @RequestParam("o_no") int o_no,
+	                                @RequestParam("o_passwd") String o_passwd,
+	                                Principal principal,
+	                                Model model) {
+			
+		if (principal != null) {
+			return "redirect:/member/orderList";
+		}
+			
+		OrderDTO orderInfo = ordao.orderHeader(o_no);
+		
+		if (orderInfo == null || !orderInfo.getO_name().equals(o_name)) {
+		    return "<script>alert('주문자 정보가 일치하지 않습니다.'); location.href='/login';</script>";
+		}
+
+		if (!orderInfo.getO_passwd().equals(o_passwd)) {
+		    return "<script>alert('비밀번호가 일치하지 않습니다.'); location.href='/login';</script>";
+		}
+			
+		List<OrderDTO> orderDetails = ordao.orderDetailList(o_no);
+			
+		model.addAttribute("orderDetails", orderDetails);
+		model.addAttribute("orderInfo", orderInfo);
+			
+		return "<script>location.href='/orderConfirm?o_no=" + o_no + "';</script>";
 	}
 }

@@ -30,7 +30,7 @@ public interface IorderDAO {
 	public OrderDTO orderHeader(int o_no);
 	
 	// [결제 후]주문 확인서에 회원의 주문내역 출력하기(tea_order join tea_order_detail, orderConfirm)
-	public List<OrderDetailDTO> orderDetailList(int o_no);
+	public List<OrderDTO> orderDetailList(int o_no);
 	
 	// 관리자 페이지에서 회원들이 주문한 주문 목록 조회하기
 	public List<OrderDTO> allOrderList();
@@ -49,5 +49,8 @@ public interface IorderDAO {
 	public void updateMcash(@Param("m_no") int m_no,
 							@Param("usedCash") int usedCash,
 							@Param("earnCash") int earnCash);
+	
+	// 마이페이지 적립금 조회
+	public List<OrderDTO> memberCashList(int m_no);
 	
 }
