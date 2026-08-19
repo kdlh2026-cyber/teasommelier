@@ -30,7 +30,7 @@
       <input type="submit" value="로그인">
    </div>
    <div class="sub-buttons">
-      <input type="button" value="회원가입">
+      <input type="button" value="회원가입" onclick="location.href='guest/MemberWriteForm'">
       <button type="button" class="btn" onclick="guestForm()">비회원 주문조회</button>
    </div>
    </form>
@@ -41,16 +41,12 @@
 		<form method="post" action="/orderConfirm">
 			 주문자명 <input type="text" name="o_name" placeholder="주문자명"> <br>
 			 주문번호 <input type="text" name="o_no" placeholder="주문번호"> <br>
-			 비밈번호 <input type="password" name="o_passwd" placeholder="비회원주문 비밀번호"><br>
+			 비밀번호 <input type="password" name="o_passwd" placeholder="비회원주문 비밀번호"><br>
 			 <button type="submit">비회원 주문조회</button>
 		</form>	
 	</div>
-	<div class="sub-buttons">
-		<input type="button" value="회원가입" onclick="location.href='guest/MemberWriteForm'">
-		<input type="button" value="비회원주문조회">
-	</div>
 	</form>
-</div> 
+</div>
 <%@ include file="footer.jsp" %>
 </body>
 <script>

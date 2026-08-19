@@ -58,7 +58,7 @@
 		<a href="/logout">로그아웃</a>
 		<a href="/admin/MemberList">회원목록</a>
 		<a href="/admin/productLists">상품목록</a>
-		<a href="#">주문목록</a>
+		<a href="/admin/orderList">주문목록</a>
 		<a href ="/admin/inquiryListA">기업주문목록</a>
 		<a href ="/admin/ShopList">매장안내목록</a>
 		</div>

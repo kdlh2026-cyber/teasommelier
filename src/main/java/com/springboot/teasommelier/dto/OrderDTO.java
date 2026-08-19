@@ -21,6 +21,7 @@ public class OrderDTO {
 	private String o_message;
 	private String o_pay;
 	private Integer m_no;
+	private int o_used_cash;
 	
 	private List<cartDTO> orderItems;
 	
@@ -31,6 +32,7 @@ public class OrderDTO {
 	
 	private String p_img;
 	private String p_name;
+	private int p_no;
 	
 	private String od_product;
 	private int od_qty;

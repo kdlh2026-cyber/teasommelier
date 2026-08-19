@@ -37,77 +37,104 @@
 			</c:forEach>	
 			</table>
 			<button type="button" class="buy" onclick="allOrderChoice(this)">전체상품주문</button>
+			<button type="button" class="delete" onclick="allDeleteChoice()">전체상품삭제</button>
 		</form>
 		
 		<form class="favForm" action="" method="post">
-			<button type="button" class="buy" onclick="choice(this)">선택상품주문</button>
-			<button type="button" class="delete" onclick="choice(this)">선택상품삭제</button>
+			<button type="button" class="buy" onclick="choice('order')">선택상품주문</button>
+			<button type="button" class="delete" onclick="choice('delete')">선택상품삭제</button>
 		</form>
 	</div>
 </div>
 <%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 <script>
-function choice(selectedTag){
+function choice(type){
 	const favForm = document.querySelector('.favForm');
 	const checkedBoxes = document.querySelectorAll('.favCheck:checked');
 	
-	if(checkedBoxes.length == 0){
-		alert('선택한 상품이 없습니다.')
+	// 선택된 상품이 없는 경우
+	if(checkedBoxes.length === 0){
+		alert('선택한 상품이 없습니다.');
 		return;
 	}
 	
-	favForm.innerHTML = '';
+	favForm.querySelectorAll('input[name="f_no"]').forEach(input => input.remove());
 	
 	for(const box of checkedBoxes){
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'f_no';
-        input.value = box.value;
-        favForm.appendChild(input);
-    }
+		const input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = 'f_no';
+		input.value = box.value;
+
+		favForm.appendChild(input);
+	}
 	
-	if(selectedTag.innerText == '선택상품삭제'){
+	if(type === 'delete'){
 		favForm.action = '/deleteFav';
-	}else{
+	}else if(type === 'order'){
 		favForm.action = '/orderWriteFav';
 	}
 	
 	favForm.submit();
 }
 
-	function allOrderChoice(selectedTag){
-	    const allCheckBoxes = document.querySelectorAll('.favCheck');
-	    for(const box of allCheckBoxes){
-	        box.checked = true;
-	    }
-	    choice(selectedTag);
+// 전체 상품 주문
+function allOrderChoice(){
+	const allCheckBoxes = document.querySelectorAll('.favCheck');
+
+	// 모든 상품 체크
+	for(const box of allCheckBoxes){
+		box.checked = true;
 	}
 
-	document.querySelector('form[name="favList"]').addEventListener('submit', function(e){
-		const allCheckBoxes = document.querySelectorAll('.favCheck');
-		for(const box of allCheckBoxes){
-			box.checked = true;
+	// 전체 상품 주문
+	choice('order');
+}
+
+// 전체 상품 삭제
+function allDeleteChoice(){
+	const allCheckBoxes = document.querySelectorAll('.favCheck');
+
+	// 모든 상품 체크
+	for(const box of allCheckBoxes){
+		box.checked = true;
+	}
+
+	// 전체 상품 삭제
+	choice('delete');
+}
+
+// 체크박스 전체선택
+	const checkAll = document.querySelector('.checkAll');
+
+	checkAll.addEventListener('click', function(){
+
+		const isChecked = checkAll.checked;
+		const checkBoxes = document.querySelectorAll('.favCheck');
+
+		for(const checkBox of checkBoxes){
+			checkBox.checked = isChecked;
 		}
+
 	});
 
-	const checkAll = document.querySelector('.checkAll');
-	const cartCheck = document.querySelectorAll('.favCheck');
-	
-	checkAll.addEventListener('click', function(){
-		const isChecked = checkAll.checked;	
-		const checkBoxes = document.querySelectorAll('.favCheck');
-		
-		if(isChecked){
-			for(const checkBox of checkBoxes){
-				checkBox.checked = true;
-			}
-		}
-		else{
-			for(const checkBox of checkBoxes){
-				checkBox.checked = false;
-			}
-		}
+	// 개별 상품 체크 상태에 따라 전체선택 체크박스 상태 변경
+	const favChecks = document.querySelectorAll('.favCheck');
+
+	favChecks.forEach(function(checkBox){
+
+		checkBox.addEventListener('click', function(){
+
+			const total = document.querySelectorAll('.favCheck').length;
+			const checked = document.querySelectorAll('.favCheck:checked').length;
+
+			checkAll.checked = (total === checked);
+
+		});
+
 	});
+	
+// 개별 상품 체크 박스
 </script>
 </html>

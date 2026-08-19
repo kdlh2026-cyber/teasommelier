@@ -74,7 +74,6 @@
 						상품명 ${orderP.p_name}
 						수량 ${orderP.ca_qty}개
 						가격 <fmt:formatNumber value="${orderP.ca_qty * orderP.ca_price}" pattern="#,###" />원
-						<button type="button" onclick="remove()">삭제</button>
 					</div>
 				</c:forEach>
 				<div>

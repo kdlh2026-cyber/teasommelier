@@ -167,13 +167,12 @@ public class orderController {
 							 Model model) {
 		
 		orderDto.setPaymentId(paymentId);
-		
 		String o_phone = phone1 + "-" + phone2 + "-" + phone3;
 		orderDto.setO_phone(o_phone);
 		String o_addr = addr1 + "," + addr2;
 		orderDto.setO_addr(o_addr);
 		
-		// 로그인 여부
+		// 로그인 여부(비회원은 null값을 담기)
 		boolean loggedIn = (principal != null);
 		orderDto.setM_no(loggedIn ? getMno(principal) : null);
 		
@@ -198,6 +197,7 @@ public class orderController {
 			if(loggedIn) {
 				orderItems = ordao.orderList(caNoList, orderDto.getM_no());
 			} else {
+				// 비회원은 세션 장바구니를 생성하여 회원과 구분 cart db에 담지 않기
 				List<cartDTO> guestCart = (List<cartDTO>) session.getAttribute("guestCart");
 				if (guestCart == null || guestCart.isEmpty()) {
 					return "redirect:/cart";
@@ -213,14 +213,9 @@ public class orderController {
 				return "redirect:/login";
 			}
 			
-			int m_no = getMno(principal);
-			
-			 System.out.println("fNoList: " + fNoList);
-			 System.out.println("m_no: " + m_no);
-			    
+			int m_no = orderDto.getM_no();
 			orderItems = favDAO.getOrderItemsFromFav(m_no, fNoList);
-			
-			  System.out.println("orderItems size: " + (orderItems != null ? orderItems.size() : "null"));
+
 			if(orderItems == null || orderItems.isEmpty()) {
 				return "redirect:/myFavorite";
 			}
@@ -243,26 +238,56 @@ public class orderController {
 		
 		// 결제금액, 적립금 order 테이블에 set
 		orderDto.setO_price(finalPrice);
-		orderDto.setO_earn(finalPrice/100);
+		int earnPoint = (int) Math.floor(finalPrice * 0.01);
+		orderDto.setO_earn(earnPoint);
+		orderDto.setO_used_cash(useCash);
 		
 		ordao.orderInsert(orderDto);
 		
-		// cartDTO 필드에 담아둔 값들 꺼내서 orderDetail 
+		// cartDTO 필드에 orderItems에 담아둔 값들 꺼내서 orderDetail 저장
 		for(cartDTO cdto : orderItems) {
-			System.out.println("저장 시도 - o_no: " + orderDto.getO_no() +
-                    ", p_no: " + cdto.getP_no() +
-                    ", qty: " + cdto.getCa_qty() +
-                    ", name: " + cdto.getP_name() +
-                    ", price: " + cdto.getCa_price());
-			
+			// 주문 상세에 저장
 			ordao.orderDetailInsert(orderDto.getO_no(), cdto.getP_no(),
                     				cdto.getCa_qty(), cdto.getP_name(),
                     				cdto.getCa_price());
 		};
-		
 
 		// 결제 완료 후 장바구니에서 주문한 상품 삭제
+		if("cart".equals(orderType)) {
+		    if(loggedIn) {
+		        // 회원 : DB 장바구니 삭제
+		        int m_no = orderDto.getM_no();
+
+		        for(cartDTO cdto : orderItems) {
+		            cdto.setM_no(m_no);
+		            ordao.deleteOrderCart(cdto);
+		        }
+		    } else {
+		        // 비회원 : 세션 장바구니 삭제
+		        List<cartDTO> guestCart =
+		                (List<cartDTO>) session.getAttribute("guestCart");
+
+		        if(guestCart != null && caNoList != null) {
+		            guestCart.removeIf(cart -> caNoList.contains(cart.getCa_no()));
+		            session.setAttribute("guestCart", guestCart);
+		        }
+		    }
+		}
 		
+		// 결제 완료 후 관심상품에서 주문한 상품 삭제
+		if("favorite".equals(orderType) && loggedIn) {
+			int m_no = orderDto.getM_no();
+			
+			for(cartDTO cdto :orderItems) {
+				int f_no = cdto.getF_no();
+				ordao.deleteOrderFavorite(f_no, m_no);
+			}
+		}
+		
+		// 결제 완료 후 회원의 적립금 상태 업데이트
+		if(loggedIn) {
+			ordao.updateMcash(orderDto.getM_no(), useCash, orderDto.getO_earn());
+		}
 		
 		session.setAttribute("ono", orderDto.getO_no());
 		
@@ -297,5 +322,17 @@ public class orderController {
 		model.addAttribute("orderDetails", orderDetails);
 		
 		return "admin/order/orderDetail";
+	}
+	
+	@RequestMapping("/member/orderList")
+	public String memberOrderList(Principal principal,
+	                              Model model) {
+
+	    int m_no = getMno(principal);
+
+	    List<OrderDTO> orderList = ordao.memberOrderList(m_no);
+	    model.addAttribute("memberOrder", orderList);
+
+	    return "member/mypage/OrderSelect";
 	}
 }

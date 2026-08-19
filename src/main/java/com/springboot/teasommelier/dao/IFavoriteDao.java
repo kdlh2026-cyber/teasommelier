@@ -27,4 +27,8 @@ public interface IFavoriteDao {
 	// 선택한 관심상품
 	public List<cartDTO> getOrderItemsFromFav(@Param("m_no") int m_no, 
 			 @Param("f_noList") List<Integer> f_noList);
+	
+	// 관심상품에 중복된 상품이 있는지 확인
+	public int checkFavorite(@Param("m_no") int m_no,
+							 @Param("p_no") int p_no);
 }

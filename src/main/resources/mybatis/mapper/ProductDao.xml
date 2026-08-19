@@ -22,7 +22,7 @@
 	<select id="select_tea_products_wear" resultType="com.springboot.teasommelier.dto.ProductDto">
 		select *
 		from tea_product 
-		where p_category = '티 웨어'
+		where p_category = '티웨어'
 		order by p_no desc			
 	</select>
 	
