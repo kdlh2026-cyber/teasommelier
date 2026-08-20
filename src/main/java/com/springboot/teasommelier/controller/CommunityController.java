@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.teasommelier.dao.ICommunityDao;
+import com.springboot.teasommelier.dao.IMemberDao;
 import com.springboot.teasommelier.dao.IProductDao;
 import com.springboot.teasommelier.dto.CommunityDto;
+import com.springboot.teasommelier.dto.MemberDto;
 import com.springboot.teasommelier.dto.ProductDto;
 import com.springboot.teasommelier.dto.QnaResponseDto;
 
@@ -28,6 +31,7 @@ public class CommunityController {
 	ICommunityDao cb_dao;
 	@Autowired
 	private IProductDao p_dao;
+	@Autowired IMemberDao m_dao;
 	
 	@RequestMapping("/guest/community/cb_communityBoard")
 	public String CBoard(){
@@ -232,9 +236,15 @@ public class CommunityController {
 		return "redirect:/guest/community/cb_communityBoard";
 	}
 	
-	@RequestMapping("/cb_communityInsert")
+	@RequestMapping(value = "/cb_communityInsert", method = RequestMethod.POST)
 	public String communityInsert(CommunityDto cb_dto,
-	                               @RequestParam(value = "files", required = false) List<MultipartFile> files) {
+	                               @RequestParam(value = "files", required = false) List<MultipartFile> files,
+	                               Authentication authentication) {
+
+	    // 로그인한 회원의 m_id로 m_no 조회 후 DTO에 주입
+	    String m_id = authentication.getName();
+	    MemberDto m_dto = cb_dao.select_member_by_id(m_id); // 기존 회원 DAO 메서드 활용 (없으면 아래 매퍼 추가)
+	    cb_dto.setM_no(m_dto.getM_no());
 
 	    String uploadDir = "C:\\teasommelier\\src\\main\\resources\\static\\images\\community\\";
 	    File dirCheck = new File(uploadDir);
