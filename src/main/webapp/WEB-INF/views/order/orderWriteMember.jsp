@@ -3,6 +3,12 @@
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
+<c:set var="orderPtotal" value="0"/>
+<c:forEach var="orderP" items="${orderItems}">
+    <c:set var="orderPtotal" value="${orderPtotal + (orderP.ca_qty * orderP.ca_price)}"/>
+</c:forEach>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,26 +106,22 @@
 			</div>
 
 			<!-- 주문상품 섹션 -->
-			<div class="order-section products-section">
-				<h4>주문상품</h4>
-				<c:set var="orderPtotal" value="0"/>
-				<c:forEach var="orderP" items="${orderItems}" varStatus="status">
-					<c:set var="orderPtotal" value="${orderPtotal + (orderP.ca_qty * orderP.ca_price)}"/>
-					<div class="orderItem">
-						<div class="item-img"><img src="/images/product/${orderP.ca_image}" width="80"></div>
-						<div class="item-info">
-							<span class="item-name">상품명: ${orderP.p_name}</span>
-							<span class="item-qty">수량: ${orderP.ca_qty}개</span>
-						</div>
-						<div class="item-price">
-							가격: <fmt:formatNumber value="${orderP.ca_qty * orderP.ca_price}" pattern="#,###" />원
-						</div>
-					</div>
-				</c:forEach>
-				<div class="shipping-fee-text">
-					배송비 0원
-				</div>
-			</div>
+		<div class="order-section products-section">
+		    <h4>주문상품</h4>
+		    <c:forEach var="orderP" items="${orderItems}" varStatus="status">
+		        <div class="orderItem">
+		            <div class="item-img"><img src="/images/product/${orderP.ca_image}" width="80"></div>
+		            <div class="item-info">
+		                <span class="item-name">상품명: ${orderP.p_name}</span>
+		                <span class="item-qty">수량: ${orderP.ca_qty}개</span>
+		            </div>
+		            <div class="item-price">
+		                가격: <fmt:formatNumber value="${orderP.ca_qty * orderP.ca_price}" pattern="#,###" />원
+		            </div>
+		        </div>
+		    </c:forEach>
+		    <div class="shipping-fee-text">배송비 0원</div>
+		</div>
 
 			<!-- 할인/부가결제 섹션 -->
 			<div class="order-section discount-section">
