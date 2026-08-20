@@ -8,10 +8,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiry.css">
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <div class="inquiry-container">
+	<%@ include file="mypage/Mymenu.jsp" %>
     <div class="inquiry-header">
-        <h2>대량주문문의</h2>
-        <p>내가 등록한 대량주문문의를 확인할 수 있습니다.</p>
+        <h2>대량 구매문의</h2>
+        <p>고객님이 요청하신 상품 대량구매문의 내역 입니다.</p>
     </div>
     <table class="inquiry-table">
         <thead>
@@ -20,8 +22,8 @@
                 <th class="type">문의유형</th>
                 <th class="title">제목</th>
                 <th class="writer">작성자</th>
-                <th class="reply">답변상태</th>
-                <th class="action">관리</th>
+                <th class="reply">답변</th>
+                <th class="action">수정|삭제</th>
             </tr>
         </thead>
         <tbody>
@@ -59,5 +61,6 @@
         </tbody>
     </table>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

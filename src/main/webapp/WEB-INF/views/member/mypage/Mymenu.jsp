@@ -84,6 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		<a href="/member/mypage/ShipaddrManagement">배송주소관리</a>
 	</li>
 	<li>
-		<a href="/member/mypage/InqiryManagement">대량구매문의 관리</a>
+		<a href="/member/inquiryListM">대량구매문의 관리</a>
 	</li>
 </ul>

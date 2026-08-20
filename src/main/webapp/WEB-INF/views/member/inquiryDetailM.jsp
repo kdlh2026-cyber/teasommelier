@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiry.css">
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <div class="inquiry-container">
     <div class="inquiry-header">
         <h2>대량주문문의 상세</h2>
@@ -81,5 +82,6 @@
         <a href="${pageContext.request.contextPath}/member/inquiryListM" class="btn-list">목록</a>
     </div>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

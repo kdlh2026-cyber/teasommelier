@@ -16,7 +16,7 @@
 	<div class="cb-detail-page">
 		<c:if test="${not empty product}">
 			<div class="product-info-box">
-				<a href="/guest/productDetail?p_no=${product.p_no}"><img class="product-info-thumb" src="${product.p_img}" alt="${product.p_name}"></a>
+				<a href="/guest/productDetail?p_no=${product.p_no}"><img class="product-info-thumb" src="/images/product/${product.p_img}" alt="${product.p_name}"></a>
 				<div class="product-info-body">
 					<a href="/guest/productDetail?p_no=${product.p_no}"><p class="product-info-name">${product.p_name}</p></a>
 					<p class="product-info-price"><fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</p>

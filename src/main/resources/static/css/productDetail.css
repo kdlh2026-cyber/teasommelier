@@ -1,12 +1,14 @@
 @charset "UTF-8";
 /* ===== 상품 상세 페이지 전체 스타일 (productDetail.css) - TWG 실제 페이지 참고 ===== */
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     color: #222;
 }
 
@@ -20,7 +22,7 @@ body {
 
 /* 전체 레이아웃: 좌측 이미지 / 우측 정보 2단 구성 */
 .detail-wrap {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 50px auto;
     padding: 0 20px;
 }
@@ -32,7 +34,7 @@ body {
 /* ===== 좌측: 이미지 영역 ===== */
 .detail-img-area {
     flex: 1;
-    max-width: 480px;
+    max-width: 600px;
 }
 
 /* 이미지 슬라이더: 좌/우 화살표로 이미지 전환 */
@@ -143,13 +145,14 @@ body {
     width: 36px;
     height: 36px;
     border: none;
-    background: #f7f7f7;
+    background: #222;
+    color: #fff;
     font-size: 16px;
     cursor: pointer;
 }
 
 .qty-btn:hover {
-    background: #eee;
+    background: #444;
 }
 
 .qty-stepper input[type="number"] {
@@ -198,7 +201,7 @@ body {
 
 /* 상품설명 등: 좌우 2단 영역과 분리된 전체 폭 하단 섹션, 탭 메뉴로 구성 (TWG 참고) */
 .detail-tab-wrap {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 40px auto 60px;
     padding: 0 20px;
 }
@@ -289,12 +292,7 @@ body {
     display: block;
     text-align: center;
     text-decoration: none;
-}
-
-/* 맨 왼쪽 버튼은 좌측 테두리도 필요 */
-.detail-btn-area > *:first-child button,
-.detail-btn-area .btn-soldout {
-    border-left: 1px solid #ccc;
+    transition: background .15s;
 }
 
 /* 바로구매(맨 왼쪽, 강조) - TWG 구매하기 버튼 스타일 참고 */
@@ -304,6 +302,11 @@ body {
     border-color: #222;
 }
 
+/* 맨 왼쪽 버튼은 좌측 테두리도 필요 */
+.detail-btn-area > *:first-child button,
+.detail-btn-area .btn-soldout {
+    border-left: 1px solid #ccc;
+}
 .btn-soldout {
     background: #eee;
     color: #999;
@@ -343,6 +346,7 @@ body {
 .review-table,
 .qna-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     font-size: 14px;
 }
@@ -386,6 +390,9 @@ body {
 
 .col-subject {
     text-align: left !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .col-writer {
@@ -404,7 +411,8 @@ body {
 }
 
 .col-rating {
-    width: 110px;
+    width: 130px;
+    white-space: nowrap;
 }
 
 /* 제목 링크 */
@@ -432,11 +440,13 @@ body {
 
 /* 별점 */
 .review-stars {
+    display: inline-block;
     letter-spacing: 1px;
     color: #222;
+    white-space: nowrap;
 }
 
-/* ===== 후기/문의 목록 하단 버튼 (사진 참고 - 우측 정렬, 작은 사이즈) ===== */
+/* ===== 후기/질문답변 목록 하단 버튼 (사진 참고 - 우측 정렬, 작은 사이즈) ===== */
 .tab-btn-area {
     display: flex;
     justify-content: flex-end;
