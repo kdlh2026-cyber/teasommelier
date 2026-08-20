@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+/* 이 페이지 전체 폰트: 다른 페이지들과 동일하게 Noto Sans KR */
+.category-tabs,
+.sub-tabs,
+.filter-tabs,
+.sort-tabs,
+.product-grid {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 /* =========================
    대분류 탭
 ========================= */
@@ -7,8 +18,11 @@
 .category-tabs {
     display: flex;
     justify-content: space-around;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 12px 16px 12px 32px;
+    box-sizing: border-box;
     border-bottom: 1px solid #eee;
-    padding: 12px 0;
 }
 
 .tab {
@@ -17,10 +31,38 @@
     text-decoration: none;
 }
 
+/* 마우스 올려도 밑줄 안 생기게 */
+.tab:hover {
+    text-decoration: none;
+}
+
+.tab,
+.tab:link,
+.tab:visited,
+.tab:hover,
+.tab:active,
 .tab.active {
-    color: #000;
+    text-decoration: none !important;
+}
+
+.tab.active {
+    color: #305932;
     font-weight: 700;
-    border-bottom: 2px solid #000;
+}
+
+
+/* =========================
+   상품종류 제목 (예: "티 제품", "티백")
+========================= */
+
+.product-type-title {
+    max-width: 1400px;
+    margin: 20px auto 14px;
+    padding: 0 16px 0 32px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
 }
 
 
@@ -32,7 +74,10 @@
 .sub-tabs {
     display: flex;
     gap: 20px;
-    padding: 10px 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 16px 10px 32px;
+    box-sizing: border-box;
     border-bottom: 1px solid #eee;
 }
 
@@ -43,8 +88,12 @@
     text-decoration: none;
 }
 
+.sub-tab:hover {
+    text-decoration: none;
+}
+
 .sub-tab.active {
-    color: #000;
+    color: #305932;
     font-weight: 700;
 }
 
@@ -57,7 +106,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 10px 16px;
+    max-width: 1400px;
+    margin: 12px auto 0;
+    padding: 10px 16px 10px 32px;
+    box-sizing: border-box;
     background: #fafafa;
 }
 
@@ -70,10 +122,14 @@
     text-decoration: none;
 }
 
+.filter:hover {
+    text-decoration: none;
+}
+
 .filter.active {
-    background: #000;
+    background: #305932;
     color: #fff;
-    border-color: #000;
+    border-color: #305932;
 }
 
 
@@ -84,8 +140,10 @@
 .sort-tabs {
     display: flex;
     justify-content: flex-end; /* 오른쪽 정렬 */
+    max-width: 1400px;
+    margin: 0 auto 10px;
     padding: 0 16px;
-    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 .sort-link {
@@ -94,8 +152,12 @@
     text-decoration: none;
 }
 
+.sort-link:hover {
+    text-decoration: none;
+}
+
 .sort-link.active {
-    color: #000;
+    color: #305932;
     font-weight: 700;
 }
 
@@ -108,8 +170,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px 24px;
-    padding: 24px 16px;
-    max-width: 1200px;   /* 전체 그리드 폭 제한 */
+    padding: 24px 16px 24px 32px;
+    max-width: 1400px;   /* 전체 그리드 폭 제한 */
     margin: 0 auto;      /* 가운데 정렬 */
 }
 
@@ -151,7 +213,7 @@
 .product-price {
     font-size: 15px;
     font-weight: 700;
-    color: #222;
+    color: #ff6a00;
     margin: 0;
 }
 
@@ -182,7 +244,7 @@
     margin-top: 6px;
     font-size: 12px;
     padding: 3px 8px;
-    background: #000;
+    background: #305932;
     color: #fff;
 }
 
@@ -205,16 +267,13 @@
     padding: 5px 8px;
 }
 
-.page-btn.active {
-    color: #000;
-    font-weight: 700;
+.page-btn:hover {
+    text-decoration: none;
 }
 
-/* 상품 카드 3열 그리드 */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px 24px;
+.page-btn.active {
+    color: #305932;
+    font-weight: 700;
 }
 
 .product-card {

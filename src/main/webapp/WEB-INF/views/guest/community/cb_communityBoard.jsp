@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>커뮤니티 게시판</title>
 <link rel="stylesheet" href="/css/communityBoard.css">
+<link rel="stylesheet" href="/css/cb.css">
+<link rel="stylesheet" href="/css/review.css">
+<link rel="stylesheet" href="/css/qna.css">
 </head>
 <body>
 <%@ include file="../../header.jsp" %>
@@ -13,10 +16,10 @@
     <h3 class="board-title">커뮤니티 게시판</h3>
 
     <div class="board-menu">
-        <button class="board-menu-item" onclick="loadTab('/guest/community/cb_brandnoticeList')">브랜드 소식</button>
-        <button class="board-menu-item" onclick="loadTab('/guest/community/cb_editorialList')">에디토리얼</button>
-        <button class="board-menu-item" onclick="loadTab('/guest/community/cb_reviewList')">리뷰</button>
-        <button class="board-menu-item" onclick="loadTab('/guest/community/cb_qnaList')">Q&A</button>
+        <button class="board-menu-item" data-url="/guest/community/cb_brandnoticeList" onclick="loadTab(this)">브랜드 소식</button>
+        <button class="board-menu-item" data-url="/guest/community/cb_editorialList" onclick="loadTab(this)">에디토리얼</button>
+        <button class="board-menu-item" data-url="/guest/community/cb_reviewList" onclick="loadTab(this)">리뷰</button>
+        <button class="board-menu-item" data-url="/guest/community/cb_qnaList" onclick="loadTab(this)">Q&A</button>
     </div>
 
     <!-- 비동기로 로드된 리스트가 삽입될 위치 -->
@@ -24,7 +27,13 @@
 </div>
 
 <script>
-function loadTab(url) {
+function loadTab(btn) {
+    const url = btn.dataset.url;
+
+    // 클릭한 버튼만 active, 나머지는 해제
+    document.querySelectorAll('.board-menu-item').forEach(el => el.classList.remove('active'));
+    btn.classList.add('active');
+
     // 1. 현재 로드하는 URL을 sessionStorage에 저장
     sessionStorage.setItem('lastCommunityTab', url);
 
@@ -40,10 +49,16 @@ function loadTab(url) {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. 세션에 저장된 마지막 탭 URL을 가져옴
     const savedUrl = sessionStorage.getItem('lastCommunityTab');
-    
-    // 2. 저장된 URL이 있으면 그 탭을, 없으면 기본값(브랜드소식)을 로드
     const defaultUrl = '/guest/community/cb_brandnoticeList';
-    loadTab(savedUrl ? savedUrl : defaultUrl);
+    const targetUrl = savedUrl ? savedUrl : defaultUrl;
+
+    // 2. URL에 해당하는 버튼을 찾아서 active 처리 + 로드
+    const targetBtn = Array.from(document.querySelectorAll('.board-menu-item'))
+        .find(el => el.dataset.url === targetUrl);
+
+    if (targetBtn) {
+        loadTab(targetBtn);
+    }
 });
 </script>
 <%@ include file="../../footer.jsp" %>
