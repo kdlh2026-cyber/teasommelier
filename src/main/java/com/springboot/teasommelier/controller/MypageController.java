@@ -25,31 +25,6 @@ public class MypageController {
 	@Autowired
 	IMemberDao m_dao;
 	
-	//마이페이지 주문조회는 여기서
-	@RequestMapping("/member/mypage/OrderSelect")
-	public String OrderSelect(){
-		return "member/mypage/OrderSelect";
-	}
-		
-	// 마이페이지 관심상품은 여기서
-	@RequestMapping("/member/mypage/FavoriteProduct")
-	public String FavoriteProduct(){	
-		return "member/mypage/FavoriteProduct";
-	}
-			
-	//마이페이지 적립금은 여기서
-	@RequestMapping("/member/mypage/MemberCash")
-	public String MemberCash(){
-		
-		return "member/mypage/MemberCash";
-	}
-		
-	//마이페이지 커뮤니티 관리는 여기서
-	@RequestMapping("/member/mypage/CommunityManagement")
-	public String CommunityManagement(){		
-		return "member/mypage/CommunityManagement";
-	}
-	
 	//마이페이지 배송주소 관리는 여기서
 	@RequestMapping("/member/mypage/ShipaddrManagement")
 	public String ShipaddrManagement(Authentication authentication, Model model){
@@ -63,13 +38,6 @@ public class MypageController {
 		return "member/mypage/ShipaddrManagement";
 	}
 		
-	//마이페이지 대량문의 관리는 여기서
-	@RequestMapping("/member/mypage/InqiryManagement")
-	public String InqiryManagement(){
-		return "member/mypage/InqiryManagement";
-	}
-	
-	
 	@RequestMapping("/member/mypage/ShipaddrWriteForm")
 	public String ShipaddrWriteForm(@RequestParam(value="m_no", required=false) Integer m_no,
 			Model model){

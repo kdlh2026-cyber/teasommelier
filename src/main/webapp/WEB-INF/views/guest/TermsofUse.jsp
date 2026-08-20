@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-.box {
-        border: 1px solid #ccc; /* 테두리 */
-        padding: 15px;
-        height: 150px; /* 박스 높이 (이 높이를 넘어가면 스크롤 생성) */
-        overflow-y: auto; /* 세로 스크롤 생성 */
-        font-size: 13px;
-        color: #666; /* 텍스트 색상 (약간 흐리게) */
-        line-height: 1.6; /* 줄 간격 */
-        white-space: pre-wrap; /* HTML 코드 내의 줄바꿈을 화면에 그대로 반영 */
-        background-color: #fff;
-}
-</style>
 <div class="box">
 제1조(목적)
 이 약관은 OO 회사(전자상거래 사업자)가 운영하는 OO 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리.의무 및 책임사항을 규정함을 목적으로 합니다.

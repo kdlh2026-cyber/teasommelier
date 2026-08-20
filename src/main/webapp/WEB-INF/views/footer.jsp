@@ -34,9 +34,8 @@
     </div>
     <div class="footer-bottom">
         <div class="menu">
-            <a href="#">이용안내</a>
-            <a href="#">이용약관</a>
-            <a href="#">개인정보처리방침</a>
+            <a href="/Termsfooter">이용약관</a>
+            <a href="/Personalfooter">개인정보처리방침</a>
         </div>
         상호 : 나드에프앤비 (주) | 대표 이재준 | 서울특별시 성동구 아차산로17길 49 (성수동2가) 데시앙플렉스 917호<br>   
         사업자번호 107-87-59496 | 통신판매업번호 2018-서울성동-1289 | twgteakr@nardfnb.com<br>

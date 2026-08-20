@@ -14,6 +14,7 @@
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp" %>
 	<div>
 		<h3>배송주소록 관리</h3>
 		<p>자주 쓰는 배송지를 등록 관리하실 수 있습니다.</p>
@@ -100,4 +101,5 @@
 	<input type="button" value="취소" onclick="history.back();">
 	</form>
 </body>
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </html>

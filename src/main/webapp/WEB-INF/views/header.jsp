@@ -29,9 +29,6 @@
 		<a href="/cartList">
 			<img src="/images/main_img/cartlist.png" alt="장바구니">
 		</a>
-		<a href="#">
-			<img src="/images/main_img/search.png" alt="검색">
-		</a>
 		</div>
 	</sec:authorize>
 	<!--일반회원-->
@@ -46,14 +43,11 @@
 		<a href="/cartList">
 			<img src="/images/main_img/cartlist.png" alt="장바구니">
 		</a>
-		<a href="#">
-			<img src="/images/main_img/search.png" alt="검색">
-		</a>
 		</div>
 	</sec:authorize>
 	<!--관리자-->
 	<sec:authorize access="hasRole('ADMIN')">
-		<span class="member-welcome"><sec:authentication property="principal.username"/>님 환영합니다.</span>
+		<span class="member-welcome">관리자님 환영합니다.</span>
 		<div class="header-menu">
 		<a href="/logout">로그아웃</a>
 		<a href="/admin/MemberList">회원목록</a>
@@ -61,6 +55,7 @@
 		<a href="/admin/orderList">주문목록</a>
 		<a href ="/admin/inquiryListA">기업주문목록</a>
 		<a href ="/admin/ShopList">매장안내목록</a>
+		<a href="/guest/cs/cs_customerServiceList">고객센터</a>
 		</div>
 	</sec:authorize>
 	</div>

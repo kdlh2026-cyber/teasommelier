@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-.box {
-        border: 1px solid #ccc; /* 테두리 */
-        padding: 15px;
-        height: 150px; /* 박스 높이 (이 높이를 넘어가면 스크롤 생성) */
-        overflow-y: auto; /* 세로 스크롤 생성 */
-        font-size: 13px;
-        color: #666; /* 텍스트 색상 (약간 흐리게) */
-        line-height: 1.6; /* 줄 간격 */
-        white-space: pre-wrap; /* HTML 코드 내의 줄바꿈을 화면에 그대로 반영 */
-        background-color: #fff;
-}
-</style>
 <div class="box">
  ** 본 양식은 쇼핑몰 운영에 도움을 드리고자 샘플로 제공되는 서식으로 쇼핑몰 운영형태에 따른 수정이 필요합니다. 쇼핑몰에 적용하시기 전, 쇼핑몰 운영 사항 등을 확인하시고 적절한 내용을 반영하여 사용하시기 바랍니다. **
 

@@ -21,7 +21,7 @@
 			
 			<c:if test="${not empty product}">
 				<div class="product-info-box">
-					<img src="${product.p_img}" alt="${product.p_name}" class="product-img">
+					<img src="/images/product/${product.p_img}" alt="${product.p_name}" class="product-img">
 					<div class="product-details">
 						<p class="product-name">${product.p_name}</p>
 						<p class="product-price"><fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</p>

@@ -9,7 +9,17 @@
 body {
     font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 }
-
+.box {
+        border: 1px solid #ccc; /* 테두리 */
+        padding: 15px;
+        height: 150px; /* 박스 높이 (이 높이를 넘어가면 스크롤 생성) */
+        overflow-y: auto; /* 세로 스크롤 생성 */
+        font-size: 13px;
+        color: #666; /* 텍스트 색상 (약간 흐리게) */
+        line-height: 1.6; /* 줄 간격 */
+        white-space: pre-wrap; /* HTML 코드 내의 줄바꿈을 화면에 그대로 반영 */
+        background-color: #fff;
+}
 /* 회원가입 폼 전체 감싸는 영역 */
 .join-wrapper {
     max-width: 640px;      /* 폼 전체 너비 */
