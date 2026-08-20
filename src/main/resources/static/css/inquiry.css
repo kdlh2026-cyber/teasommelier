@@ -8,27 +8,20 @@
 
 * {
     box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    padding: 0;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: #333;
-    font-family: 'Noto Sans KR', Arial, sans-serif;
 }
 
-.inquiry-container,
 .inquiry-edit-container {
     max-width: 1400px;
     margin: 40px auto;
     padding: 0 20px;
-    background: #fff;
+    box-sizing: border-box;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #333;
 }
 
-/* =========================
-   제목 영역 (addr-header와 동일 값)
-   ========================= */
-
+/* 상단 타이틀 영역 */
 .inquiry-header {
     display: flex;
     align-items: center;
@@ -37,26 +30,22 @@ body {
 }
 
 .inquiry-header h2 {
-    margin: 0;
-    color: #111;
     font-size: 24px;
     font-weight: 700;
-    white-space: nowrap;
+    margin: 0;
+    color: #111;
 }
 
 .inquiry-header p {
+    font-size: 14px;
+    color: #888;
     margin: 0;
     padding-left: 15px;
     border-left: 1px solid #ddd;
-    color: #888;
-    font-size: 14px;
     line-height: 1.2;
 }
 
-/* =========================
-   문의 목록 (addr-table과 동일 값)
-   ========================= */
-
+/* 테이블 스타일 */
 .inquiry-table {
     width: 100%;
     border-collapse: collapse;
@@ -67,7 +56,7 @@ body {
 }
 
 .inquiry-table th {
-    background-color: #F2F2F2;
+    background-color: #fafafa;
     color: #555;
     font-weight: 600;
     padding: 16px 10px;
@@ -86,7 +75,6 @@ body {
 }
 
 /* 열 너비 */
-
 .inquiry-table .no {
     width: 80px;
 }
@@ -111,11 +99,10 @@ body {
     width: 150px;
 }
 
-/* 제목 */
-
+/* 제목 열 좌측 정렬 */
 .title-cell {
-    text-align: left !important;
-    padding-left: 20px !important;
+    text-align: left;
+    padding-left: 20px;
 }
 
 .title-cell a {
@@ -127,10 +114,7 @@ body {
     text-decoration: underline;
 }
 
-/* =========================
-   답변 상태
-   ========================= */
-
+/* 답변 상태 */
 .reply-complete,
 .reply-wait {
     display: inline-block;
@@ -141,51 +125,57 @@ body {
 }
 
 .reply-complete {
-    background: #F2F2F2;
-    color: #222;
+    background: #fafafa;
+    color: #111;
 }
 
 .reply-wait {
-    background: #F2F2F2;
+    background: #fafafa;
     color: #888;
 }
 
-/* =========================
-   관리 버튼 (배송주소록 등록버튼처럼 평소에도 검정으로 채워짐)
-   ========================= */
-
+/* 관리 버튼(action-cell) 영역 */
 .action-cell {
     white-space: nowrap;
 }
 
-.btn-edit,
-.btn-delete,
-.btn-list,
-.btn-submit,
-.btn-cancel {
-    display: inline-block;
+/* 수정 버튼 */
+.btn-edit {
     padding: 4px 10px;
-    background-color: #111;
-    border: 1px solid #111;
-    border-radius: 0;
-    color: #fff;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #555;
     font-size: 12px;
-    text-decoration: none;
     cursor: pointer;
-    transition: background-color .2s ease;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
 }
 
-.btn-edit:hover,
-.btn-delete:hover,
-.btn-list:hover,
-.btn-submit:hover,
-.btn-cancel:hover {
-    background-color: #333;
-    border-color: #333;
+.btn-edit:hover {
+    background-color: #222;
+    border-color: #222;
+    color: #fff;
 }
 
+/* 삭제 버튼 (표 안, 수정 버튼과 동일 크기) */
 .btn-delete {
+    padding: 4px 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #555;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
     margin-left: 6px;
+}
+
+.btn-delete:hover {
+    background-color: #222;
+    border-color: #222;
+    color: #fff;
 }
 
 .empty {
@@ -211,7 +201,7 @@ body {
 .inquiry-detail-table th {
     width: 130px;
     padding: 16px 10px;
-    background: #F2F2F2;
+    background: #fafafa;
     border-bottom: 1px solid #eee;
     color: #555;
     font-size: 13px;
@@ -233,15 +223,11 @@ body {
     vertical-align: top;
 }
 
-/* =========================
-   상세 하단 버튼
-   ========================= */
-
 .detail-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 35px;
+    margin-top: 25px;
 }
 
 .detail-buttons a {
@@ -252,10 +238,6 @@ body {
 /* =========================
    수정 페이지
    ========================= */
-
-.inquiry-edit-container {
-    max-width: 1400px;
-}
 
 .page-title {
     margin-bottom: 25px;
@@ -275,7 +257,7 @@ body {
 .edit-table th {
     width: 150px;
     padding: 16px 10px;
-    background: #F2F2F2;
+    background: #fafafa;
     border-bottom: 1px solid #eee;
     color: #555;
     font-size: 13px;
@@ -313,10 +295,7 @@ body {
     line-height: 1.7;
 }
 
-/* =========================
-   수정 버튼 영역 (배송지등록 버튼과 동일하게 검정)
-   ========================= */
-
+/* 수정 버튼 영역 - 배송지등록 버튼과 동일한 검정 강조 버튼(btn-submit) 사용 */
 .button-area {
     display: flex;
     justify-content: center;
@@ -324,17 +303,42 @@ body {
     margin-top: 25px;
 }
 
-.button-area .btn {
-    min-width: 100px;
+.button-area .btn-submit {
     padding: 10px 24px;
-    text-align: center;
+    background-color: #111;
+    border: 1px solid #111;
+    color: #fff;
+    font-size: 13px;
     font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 100px;
+    text-align: center;
 }
 
-/* =========================
-   첨부파일
-   ========================= */
+.button-area .btn-submit:hover {
+    background-color: #333;
+    border-color: #333;
+}
 
+.button-area .btn-cancel {
+    padding: 10px 24px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    text-align: center;
+}
+
+.button-area .btn-cancel:hover {
+    background-color: #f8f8f8;
+    border-color: #999;
+}
+
+/* 첨부파일 */
 .inquiry-detail-table a {
     color: #444;
     text-decoration: none;
@@ -345,10 +349,7 @@ body {
     text-decoration: underline;
 }
 
-/* =========================
-   화면이 작을 때
-   ========================= */
-
+/* 화면이 작을 때 */
 @media (max-width: 1350px) {
     .inquiry-container,
     .inquiry-edit-container {
@@ -384,10 +385,7 @@ body {
     }
 }
 
-/* =========================
-   목록 상단 검색 영역
-   ========================= */
-
+/* 목록 상단 검색 영역 */
 .search-area {
     display: flex;
     justify-content: center;

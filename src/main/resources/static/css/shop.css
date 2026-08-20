@@ -3,6 +3,7 @@
 .shop-page {
     max-width: 1200px;
     margin: 30px auto;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* 매장 탭 - 동그란 pill 형태 */
@@ -22,9 +23,9 @@
 }
 
 .tab-btn.active {
-    background:#111;
+    background: #305932;
     color: #fff;
-    border-color: #111;
+    border-color: #305932;
 }
 
 /* 카테고리 라인 (TEA SALON | TEA BOUTIQUE 등) */
