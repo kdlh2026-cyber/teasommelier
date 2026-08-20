@@ -1,5 +1,6 @@
-/* /css/admin-shop.css - 관리자 매장 등록/수정/목록 공통 스타일
-   (inquiry.css 값 그대로, 클래스명만 admin-shop 쪽으로 매칭) */
+@charset "UTF-8";
+/* /css/admin-shop.css - 관리자 매장 등록/수정/목록 공통 스타일 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 .admin-shop-wrap {
     max-width: 1400px;
