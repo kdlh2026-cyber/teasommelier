@@ -15,7 +15,7 @@
 		<h2>브랜드 소식</h2>
 		<p class="form-description">브랜드 소식입니다.</p>
 		
-		<form id="brandnoticeUpdateForm" method="post" action="/cb_communityUpdate" enctype="multipart/form-data" onsubmit="saveTabState()">
+		<form id="brandnoticeUpdateForm" method="post" action="/cb_communityUpdate" enctype="multipart/form-data" onsubmit="return (insertCheck() && (saveTabState(), true));">
 			<input name="m_no" type="hidden" value="${viewCBdao.m_no}">
 			<input type="hidden" name="cb_no" value="${viewCBdao.cb_no}">
 			<input type="hidden" name="cb_category" value="브랜드소식">

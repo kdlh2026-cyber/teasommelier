@@ -13,7 +13,7 @@
 	<div class="cs-form-title">
 		<h2>문의 작성</h2>
 	</div>
-	<form name="customerServiceUpdate" class="cs-form" method="post" action="/customerServiceUpdate">
+	<form name="customerServiceUpdate" class="cs-form" method="post" action="/customerServiceUpdate" onsubmit="return csCheck();">
 		<table class="cs-table">
 			<input type="hidden" name="cs_no" value="${csUpdate.cs_no}">
 				<tr>

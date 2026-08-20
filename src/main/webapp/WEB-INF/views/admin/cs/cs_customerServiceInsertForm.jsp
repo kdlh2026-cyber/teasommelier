@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>고객센터 작성 폼</title>
 <link rel="stylesheet" href="/css/customerService.css">
+<script src="/js/cs-form.js"></script>
 </head>
 <body>
 <%@ include file="../../header.jsp" %>
@@ -13,7 +14,7 @@
 		<div class="cs-form-title">
 			<h2>문의 작성</h2>
 		</div>
-		<form name="customerServiceInsert" class="cs-form" method="post" action="/customerServiceInsert">
+		<form name="customerServiceInsert" class="cs-form" method="post" action="/customerServiceInsert" onsubmit="return csCheck();">
 			<table class="cs-table">
 				<tr>
 					<th>제목</th>

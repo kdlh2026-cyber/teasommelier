@@ -53,7 +53,7 @@
 		</c:forEach>
 		</table>
 
-		<sec:authorize access="hasRole('ADMIN')">
+		<sec:authorize access="hasRole('USER')">
 			<a class="review-write-btn" href="/member/community/cb_reviewInsertForm">리뷰 게시글 작성</a>
 		</sec:authorize>
 	</div>

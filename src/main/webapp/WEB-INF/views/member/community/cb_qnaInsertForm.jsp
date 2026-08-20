@@ -15,8 +15,7 @@
 		<h2>Q&A</h2>
 		<p class="form-description">상품문의입니다.</p>
 		
-		<form id="qnaInsertForm" method="post" action="/cb_communityInsert" enctype="multipart/form-data" onsubmit="saveTabState()">
-			<input name="m_no" type="hidden" value="${m_no}">
+		<form id="qnaInsertForm" method="post" action="/cb_communityInsert" enctype="multipart/form-data" onsubmit="return (insertCheck() && (saveTabState(), true));">
 			<input name="p_no" type="hidden" value="${p_no}">
 			<input type="hidden" name="cb_category" value="Q&A">
 			

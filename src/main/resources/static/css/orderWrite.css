@@ -1,0 +1,195 @@
+@charset "UTF-8";
+
+/* 구글 폰트 Noto Sans KR 불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+/* 모든 요소에 Noto Sans KR 폰트 및 박스 Sizing 적용 */
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    color: #333;
+    font-size: 13px;
+    background-color: #FEFDFE;
+    margin: 0;
+    padding: 0;
+}
+
+/* 전체 컨테이너 */
+.order-wrapper {
+    width: 1100px;
+    margin: 40px auto;
+}
+
+/* 페이지 타이틀 영역 정돈 */
+.order-title-area {
+    margin-bottom: 30px;
+}
+
+.order-title-area .main-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+    letter-spacing: -1px;
+}
+
+.order-title-area .sub-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: #999;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid #d7d7d7;
+}
+
+/* 섹션 박스 디자인 */
+.order-section {
+    background: #FEFDFE;
+    border: 1px solid #d7d7d7;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+/* 영역별 타이틀 (배송지 등) - 왼쪽 포인트 두꺼운 선 적용 */
+.order-section h4 {
+    margin: -25px -25px 20px -25px; 
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    background: #F9F9F8; 
+    border-bottom: 1px solid #e9e9e9;
+    border-left: 4px solid #454931; /* 왼쪽 포인트 굵은 선 */
+}
+
+/* 입력 필드 및 폼 요소 */
+.form-row {
+    margin-bottom: 12px;
+}
+
+.form-row label {
+    display: inline-block;
+    width: 90px;
+    font-weight: 500;
+}
+
+input[type="text"], select {
+    padding: 6px 10px;
+    border: 1px solid #d7d7d7;
+    font-size: 13px;
+    color: #333;
+    background: #FEFDFE;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #454931;
+    outline: none;
+}
+
+/* 개별 입력창 크기 조절 */
+input[name="o_name"] { width: 200px; }
+input[name="o_zip"] { width: 90px; }
+input[name="o_addr1"], input[name="o_addr2"], input[name="o_email"] { width: 350px; }
+
+/* 버튼 디자인 */
+input[type="button"], button {
+    background: #FEFDFE;
+    border: 1px solid #d7d7d7;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+input[type="button"]:hover, button:hover {
+    background: #454931;
+    color: #FEFDFE;
+    border-color: #454931;
+}
+
+/* 주문상품 리스트 */
+.orderItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.orderItem img {
+    border: 1px solid #eaeaea;
+    margin-right: 15px;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-name {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.shipping-fee-text {
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* 안내 및 계산 텍스트 */
+.notice-row {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+.notice-text {
+    color: #e74c3c;
+}
+
+.apply-result-row {
+    margin-top: 12px;
+}
+
+.pay-calc-row {
+    margin-bottom: 8px;
+}
+
+.final-row {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #d7d7d7;
+    font-size: 15px;
+}
+
+.finalTotal, .totalDiscount, .earnPoint {
+    font-weight: bold;
+    color: #454931;
+}
+
+.finalTotal {
+    font-size: 18px;
+}
+
+/* 최종 결제하기 버튼 */
+.submit-btn-wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-payment {
+    width: 250px;
+    height: 50px;
+    background: #454931 !important;
+    color: #FEFDFE !important;
+    border: 1px solid #454931 !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    cursor: pointer;
+}
+
+.btn-payment:hover {
+    background: #343725 !important;
+    border-color: #343725 !important;
+}

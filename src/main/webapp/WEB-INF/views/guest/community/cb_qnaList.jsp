@@ -46,7 +46,7 @@
 		</c:forEach>
 		</table>
 
-		<sec:authorize access="hasRole('ADMIN')">
+		<sec:authorize access="hasRole('USER')">
 			<a class="qna-write-btn" href="/member/community/cb_qnaInsertForm">새 문의 작성</a>
 		</sec:authorize>
 	</div>
