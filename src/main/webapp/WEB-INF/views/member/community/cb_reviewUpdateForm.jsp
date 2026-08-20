@@ -14,7 +14,7 @@
 		<h2>리뷰</h2>
 		<p class="form-description">상품 사용후기입니다.</p>
 		
-		<form id="reviewUpdateForm" method="post" action="/cb_communityUpdate" enctype="multipart/form-data" onsubmit="saveTabState()">
+		<form id="reviewUpdateForm" method="post" action="/cb_communityUpdate" enctype="multipart/form-data" onsubmit="return (insertCheck() && (saveTabState(), true));">
 			<input name="m_no" type="hidden" value="${viewCBdao.m_no}">
 			<input name="p_no" type="hidden" value="${viewCBdao.p_no}">
 			<input name="cb_no" type="hidden" value="${viewCBdao.cb_no}">

@@ -15,7 +15,7 @@
 	<div class="cb-detail-page">
 		<c:if test="${not empty product}">
 			<div class="product-info-box">
-				<a href="/guest/productDetail?p_no=${product.p_no}"><img class="product-info-thumb" src="${product.p_img}" alt="${product.p_name}"></a>
+				<a href="/guest/productDetail?p_no=${product.p_no}"><img class="product-info-thumb" src="/images/product/${product.p_img}" alt="${product.p_name}" /></a>
 				<div class="product-info-body">
 					<a href="/guest/productDetail?p_no=${product.p_no}"><p class="product-info-name">${product.p_name}</p></a>
 					<p class="product-info-price">${product.p_price}원</p>
@@ -46,8 +46,22 @@
 				<td>${viewCBdao.cb_view_count}</td>
 			</tr>
 			<tr>
-				<td colspan="2" class="content-cell">${viewCBdao.cb_content}</td>
-			</tr>
+				<td colspan="2" class="content-cell">
+							<!-- 본문 내용 -->
+							${viewCBdao.cb_content}
+					
+							<!-- 첨부 이미지 출력 영역 -->
+							<c:if test="${not empty viewCBdao.cb_file}">
+								<div class="community-attached-images" style="margin-top: 15px;">
+									<c:forEach var="fileName" items="${fn:split(viewCBdao.cb_file, ',')}">
+										<c:if test="${not empty fn:trim(fileName)}">
+											<img src="/images/community/${fn:trim(fileName)}" alt="첨부 이미지" style="max-width: 100%; height: auto; display: block; margin-bottom: 10px;" />
+										</c:if>
+									</c:forEach>
+								</div>
+							</c:if>
+						</td>
+					</tr>
 		</table>
 
 		<c:if test="${not empty responseQnaDto}">

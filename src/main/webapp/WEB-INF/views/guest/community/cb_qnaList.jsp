@@ -29,7 +29,7 @@
 					<c:set var="pd" value="${productMap[pNoKey]}" />
 					<c:if test="${not empty pd}">
 						<a href="/guest/productDetail?p_no=${QAL.p_no}">
-							<img class="qna-thumb" src="${pd.p_img}" width="60" height="60" alt="${pd.p_name}">
+							<img class="qna-thumb" src="/images/product/${pd.p_img}" width="60" height="60" alt="${pd.p_name}">
 						</a>
 					</c:if>
 				</td>
@@ -46,7 +46,7 @@
 		</c:forEach>
 		</table>
 
-		<sec:authorize access="hasRole('ADMIN')">
+		<sec:authorize access="hasRole('USER')">
 			<a class="qna-write-btn" href="/member/community/cb_qnaInsertForm">새 문의 작성</a>
 		</sec:authorize>
 	</div>

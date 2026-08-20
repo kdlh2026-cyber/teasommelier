@@ -29,7 +29,7 @@
 				    <c:set var="pd" value="${productMap[pNoKey]}" />
 				    <c:if test="${not empty pd}">
 				        <a href="/guest/productDetail?p_no=${RVL.p_no}">
-				            <img class="review-thumb" src="${pd.p_img}" width="60" height="60" alt="${pd.p_name}">
+				            <img class="review-thumb" src="/images/product/${pd.p_img}" width="60" height="60" alt="${pd.p_name}">
 				        </a>
 				    </c:if>
 				</td>
@@ -53,7 +53,7 @@
 		</c:forEach>
 		</table>
 
-		<sec:authorize access="hasRole('ADMIN')">
+		<sec:authorize access="hasRole('USER')">
 			<a class="review-write-btn" href="/member/community/cb_reviewInsertForm">리뷰 게시글 작성</a>
 		</sec:authorize>
 	</div>

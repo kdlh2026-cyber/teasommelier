@@ -36,4 +36,6 @@ public interface ICommunityDao {
 	public void ResponseQnaUpdate(QnaResponseDto res_dto);
 	
 	public int ResponseQnaDelete(int res_no);
+	
+	MemberDto select_member_by_id(String m_id);
 }

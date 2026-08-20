@@ -101,5 +101,9 @@ and cb.cb_category = #{cb_category}
 	<delete id="ResponseQnaDelete">
 		delete from tea_response_qna where res_no=#{res_no}
 	</delete>
+	
+	<select id="select_member_by_id" parameterType="String" resultType="com.springboot.teasommelier.dto.MemberDto">
+    	SELECT * FROM tea_member WHERE m_id = #{m_id}
+	</select>
 
 </mapper>
