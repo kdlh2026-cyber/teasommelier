@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiry.css">
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <div class="inquiry-container">
     <div class="inquiry-header">
         <h2>대량주문문의 관리</h2>
@@ -49,5 +50,6 @@
         </tbody>
     </table>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

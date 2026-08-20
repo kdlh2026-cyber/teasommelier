@@ -53,6 +53,16 @@
 <script>
 
     // 매장별 카테고리 / 타이틀 (DB 컬럼 없어서 하드코딩)
+    function getParameterByName(name) {
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
     var shopDetailMap = {
         '에비뉴엘 월드타워점': {
             category: 'TEA SALON | TEA BOUTIQUE',
@@ -102,10 +112,21 @@
         }, 300);
 
         // 페이지 최초 로드 시 첫 번째 매장 자동 선택
-        var firstTab = document.querySelector('.tab-btn');
-        if (firstTab != null) {
-            selectShop(firstTab);
+		var shopName = getParameterByName('name');
+        
+        if (shopName) {
+            var targetBtn = document.querySelector('.tab-btn[data-name="' + shopName + '"]');
+            if (targetBtn) {
+                selectShop(targetBtn);
+            }
+        } else {
+            // 파라미터가 없으면 기존처럼 첫 번째 매장 선택
+            var firstTab = document.querySelector('.tab-btn');
+            if (firstTab != null) {
+                selectShop(firstTab);
+            }
         }
+              
     }
 
 

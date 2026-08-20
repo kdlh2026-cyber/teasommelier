@@ -10,5 +10,6 @@ public class ShipaddrlistDto {
 	private String sphone;
 	private String saddr;
 	private String mid;
+	private String sdefaddr;
 	private int sno;
 }

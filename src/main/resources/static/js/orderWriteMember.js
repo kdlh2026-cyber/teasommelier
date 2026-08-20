@@ -11,28 +11,42 @@ function jusoCallBack(o_addr1, o_addr2, o_zip){
 const shipping = 0;
 
 function allCash(){
-    let userCash = parseInt(document.querySelector(".maxCash").innerText) || 0;
+    // 보유 잔액 가져오기 (콤마 제거)
+    let maxCashText = document.querySelector(".maxCash").innerText.replace(/,/g, '').trim();
+    let userCash = parseInt(maxCashText, 10) || 0;
+    // 최대 한도(3000원)와 보유 잔액 중 작은 값 선택
     let useAmount = userCash > maxLimit ? maxLimit : userCash;
     
-    document.querySelector(".useCash").value = useAmount;
+    const cashInput = document.querySelector(".useCash");
+    cashInput.value = useAmount;
+    
+    // 통합 계산 함수 호출
     totalDiscount();
 }
 
 function totalDiscount(){
     const cashInput = document.querySelector(".useCash");
-    let val = parseInt(cashInput.value) || 0;
+    let val = parseInt(cashInput.value.replace(/,/g, ''), 10) || 0;
 
-    if(val < 0) val = 0;
+    if(isNaN(val) || val < 0) val = 0;
+    
     if(val > maxLimit){
         alert("적립금은 1회 최대 3,000원까지만 사용 가능합니다.");
         val = maxLimit;
     }
     
-    const userCash = parseInt(document.querySelector(".maxCash").innerText) || 0;
-    if(val > userCash) val = userCash;
+    let maxCashText = document.querySelector(".maxCash").innerText.replace(/,/g, '').trim();
+    const userCash = parseInt(maxCashText, 10) || 0;
+    
+    if(val > userCash){
+        alert("보유하신 적립금보다 많을 수 없습니다.");
+        val = userCash;
+    }
     
     cashInput.value = val;
-    document.querySelector(".totalDiscount").innerText = val.toLocaleString();
+    
+    // 적용금액 텍스트 업데이트
+    document.querySelector(".applyDiscount").innerText = val.toLocaleString();
     
     updateTotal(val);
 }
@@ -46,7 +60,7 @@ function updateTotal(discount){
     document.querySelector(".earnPoint").innerText = earnPoint.toLocaleString();
 }
 
-// 페이지가 로드될 때 초기화 실행 (DOMContentLoaded 이벤트 활용)
+// 페이지가 로드될 때 초기화 실행
 document.addEventListener("DOMContentLoaded", function() {
     updateTotal(0);
 });
@@ -54,20 +68,17 @@ document.addEventListener("DOMContentLoaded", function() {
 async function requestPayment(){
     const form = document.writeForm;
 
-    // 1. 받는 사람 유효성 검사
     if (!form.o_name.value.trim()) {
         alert("받는 사람 이름을 입력해주세요.");
         form.o_name.focus();
         return;
     }
 
-    // 2. 주소 유효성 검사
     if (!form.o_zip.value.trim() || !form.o_addr1.value.trim()) {
         alert("배송지 주소를 검색해주세요.");
         return;
     }
 
-    // 3. 휴대전화 형식 검사 (각 4자리 숫자)
     const expPhone = /^[0-9]{4}$/;
     if (!expPhone.test(form.o_phone2.value.trim()) || !expPhone.test(form.o_phone3.value.trim())) {
         alert("휴대전화 번호는 각 4자리 숫자만 입력 가능합니다.");
@@ -76,7 +87,6 @@ async function requestPayment(){
         return;
     }
 
-    // 4. 이메일 형식 검사
     const expEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!form.o_email.value.trim()) {
         alert("이메일을 입력해주세요.");
@@ -90,12 +100,9 @@ async function requestPayment(){
         return;
     }
 
-    // 결제 프로세스 진행
     const finalTotalStr = document.querySelector(".finalTotal").innerText.replace(/,/g, '');
     const finalTotalAmount = parseInt(finalTotalStr, 10);
     const paymentId = "order-" + new Date().getTime();
-    
-    console.log("생성된 paymentId:", paymentId);
     
     try{
         const response = await PortOne.requestPayment({

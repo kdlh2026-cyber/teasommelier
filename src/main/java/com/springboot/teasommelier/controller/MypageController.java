@@ -1,5 +1,6 @@
 package com.springboot.teasommelier.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springboot.teasommelier.dao.IMemberDao;
 import com.springboot.teasommelier.dao.IShippingaddrDao;
+import com.springboot.teasommelier.dao.IorderDAO;
 import com.springboot.teasommelier.dto.MemberDto;
+import com.springboot.teasommelier.dto.OrderDTO;
 import com.springboot.teasommelier.dto.ShippingaddrDto;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +27,9 @@ public class MypageController {
 	
 	@Autowired
 	IMemberDao m_dao;
+	
+	@Autowired
+	IorderDAO ordao;
 	
 	//마이페이지 주문조회는 여기서
 	@RequestMapping("/member/mypage/OrderSelect")
@@ -39,9 +45,30 @@ public class MypageController {
 			
 	//마이페이지 적립금은 여기서
 	@RequestMapping("/member/mypage/MemberCash")
-	public String MemberCash(){
-		
-		return "member/mypage/MemberCash";
+	public String memberCash(Principal principal, Model model) {
+	    if (principal == null) {
+	        return "redirect:/login";
+	    }
+	    
+	    String m_id = principal.getName();
+	    MemberDto member = m_dao.MemberFindId(m_id); 
+	    
+	    // 디버그용 출력
+	    System.out.println("로그인 아이디: " + m_id);
+	    System.out.println("조회된 회원 객체: " + member);
+	    
+	    if (member != null) {
+	        System.out.println("회원 번호(m_no): " + member.getM_no());
+	        System.out.println("회원 적립금(m_cash): " + member.getM_cash());
+	        
+	        List<OrderDTO> memberCashList = ordao.memberCashList(member.getM_no());
+	        System.out.println("조회된 적립금 내역 개수: " + (memberCashList != null ? memberCashList.size() : 0));
+	        
+	        model.addAttribute("member", member);
+	        model.addAttribute("memberCashList", memberCashList);
+	    }
+	    
+	    return "member/mypage/MemberCash";
 	}
 		
 	//마이페이지 커뮤니티 관리는 여기서

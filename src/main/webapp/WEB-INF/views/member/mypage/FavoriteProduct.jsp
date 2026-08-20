@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TeaSommelier</title>
+<link rel="stylesheet" href="/css/favoriteProduct.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header.jsp" %>

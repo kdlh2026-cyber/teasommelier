@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+/* 컨테이너 및 기본 설정 */
+.order-container {
+    max-width: 1400px; 
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+}
+
+/* 상단 타이틀 영역 */
+.order-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.order-header h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: #111;
+}
+
+.order-header p {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+    padding-left: 15px;
+    border-left: 1px solid #ddd;
+    line-height: 1.2;
+}
+
+/* 테이블 스타일 */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+    font-size: 13px;
+}
+
+.order-table th {
+    background-color: #fafafa;
+    color: #555;
+    font-weight: 600;
+    padding: 16px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-table td {
+    padding: 18px 10px;
+    color: #444;
+    border-bottom: 1px solid #f2f2f2;
+    vertical-align: middle;
+}
+
+.order-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 이미지 스타일 */
+.order-table img {
+    border-radius: 4px;
+    border: 1px solid #eee;
+    object-fit: cover;
+}
+
+/* 상품명 좌측 정렬 */
+.td-product {
+    text-align: left;
+    padding-left: 15px;
+}
+
+/* 주문번호 및 총결제금액 강조 */
+.order-no {
+    font-weight: 500;
+    color: #111;
+}
+
+.order-total-price {
+    font-weight: 600;
+    color: #111;
+}

@@ -56,11 +56,7 @@
                 </tr>
                 <tr>
                     <th>휴대폰</th>
-                    <td><input type="tel" name="i_phone" maxlength="20" placeholder="예) 010-0000-0000" required></td>
-                </tr>
-                <tr>
-                    <th>정보수정 동의</th>
-                    <td><label><input type="checkbox" name="info_update" value="Y"> 입력하신 이메일 및 연락처 정보로 회원정보를 수정합니다.</label></td>
+                    <td><input type="tel" name="i_phone" maxlength="20" placeholder="예) 010-0000-0000"></td>
                 </tr>
                 <tr>
                     <th>작성자 <span class="required-dot">•</span></th>
