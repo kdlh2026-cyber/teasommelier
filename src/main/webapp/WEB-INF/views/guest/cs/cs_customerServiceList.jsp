@@ -63,6 +63,24 @@
 		</sec:authorize>
 	</div>
 
+<!-- 카테고리 탭 클릭 시 active 표시 + 해당 카테고리만 보이기 -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.csCategoryBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.csCategoryBtn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const category = btn.dataset.category;
+            document.querySelectorAll('.csItem').forEach(item => {
+                const match = (category === '전체' || item.dataset.category === category);
+                item.style.display = match ? '' : 'none';
+            });
+        });
+    });
+});
+</script>
+
 <%@ include file="../../footer.jsp" %>
 </body>
 </html>

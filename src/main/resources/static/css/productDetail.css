@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 /* ===== 상품 상세 페이지 전체 스타일 (productDetail.css) - TWG 실제 페이지 참고 ===== */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
@@ -145,14 +146,14 @@ body {
     width: 36px;
     height: 36px;
     border: none;
-    background: #222;
+    background: #305932;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
 }
 
 .qty-btn:hover {
-    background: #444;
+    background: #244326;
 }
 
 .qty-stepper input[type="number"] {
@@ -226,9 +227,9 @@ body {
 
 /* 선택된 탭 강조 */
 .tab-btn.active {
-    color: #222;
+    color: #305932;
     font-weight: 700;
-    border-bottom: 2px solid #222;
+    border-bottom: 2px solid #305932;
 }
 
 /* 탭 내용 패널 - 선택된 것만 보임 */
@@ -295,11 +296,16 @@ body {
     transition: background .15s;
 }
 
-/* 바로구매(맨 왼쪽, 강조) - TWG 구매하기 버튼 스타일 참고 */
+/* 바로구매(맨 왼쪽, 강조)만 초록 */
 .btn-buy {
-    background: #222;
+    background: #305932;
     color: #fff;
-    border-color: #222;
+    border-color: #305932;
+}
+
+.btn-buy:hover {
+    background: #244326;
+    border-color: #244326;
 }
 
 /* 맨 왼쪽 버튼은 좌측 테두리도 필요 */
@@ -461,7 +467,6 @@ body {
     font-size: 13px;
     font-weight: 400;
     border: 1px solid #ccc;
-    border-radius: 2px;
     background: #fff;
     color: #333;
     cursor: pointer;
@@ -469,9 +474,12 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    transition: background .15s, color .15s, border-color .15s;
 }
 
 .tab-btn-area .btn-write:hover,
 .tab-btn-area .btn-list:hover {
-    background: #f7f7f7;
+    background: #305932;
+    color: #fff;
+    border-color: #305932;
 }

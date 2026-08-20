@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 /* 기본 스타일 초기화 */
 * {
@@ -99,11 +100,15 @@ body {
 /* 하단 회원가입 / 비회원주문조회 버튼 그룹 (2분할 박스) */
 .sub-buttons {
     display: flex;
-    border: 1px solid #333;
+    width: 100%; /* 부모 너비에 딱 맞게 설정 */
+    border: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
-.sub-buttons input[type="button"] {
-    flex: 1;
+.sub-buttons input[type="button"],
+.sub-buttons button {
+    flex: 1; /* 두 버튼이 정확히 1:1 비율로 공간을 똑같이 나눠 가짐 */
+    width: 50%; /* 너비를 50%씩 균등 배분 */
     height: 48px;
     background-color: #fff;
     color: #333;
@@ -111,14 +116,43 @@ body {
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
+    text-align: center;
     transition: background-color 0.2s ease;
+    box-sizing: border-box;
 }
 
-/* 두 버튼 사이 경계선 */
+/* 두 버튼 사이의 세로 경계선 */
 .sub-buttons input[type="button"]:first-child {
-    border-right: 1px solid #333;
+    border-right: 1px solid #ddd;
 }
 
-.sub-buttons input[type="button"]:hover {
+.sub-buttons input[type="button"]:hover,
+.sub-buttons button:hover {
+    background-init: #f8f8f8;
     background-color: #f8f8f8;
+}
+
+/* 비회원 주문조회 전체 영역 컨테이너 */
+.guestOrderSearch {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #eaeaea;
+}
+
+/* ORDER 타이틀 */
+.guestOrderSearch .order-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #111;
+}
+
+/* 안내 문구 스타일 */
+.guestOrderSearch .order-desc {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.4;
 }

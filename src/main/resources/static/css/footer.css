@@ -1,4 +1,8 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+/* 구글 폰트 Noto Sans KR 불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 /* 공통 초기화 */
 * {
@@ -8,23 +12,32 @@
 }
 
 body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
-/* 푸터 전체 컨테이너 */
+/* 푸터 전체 영역 (처음의 희미한 회색 배경) */
+footer {
+    width: 100%;
+    background-color: #f7f7f7; /* 처음 요청하셨던 연한 회색 */
+    border-top: 1px solid #eaeaea;
+}
+
+/* 푸터 내부 컨테이너 */
 .footer-wrap {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 20px;
-    color: #555555;
-    font-size: 13px;
-    line-height: 1.7;
+    padding: 40px 20px;
+    color: #666666;
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
 }
 
 .footer-wrap a {
     color: inherit;
     text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* 상단 영역 (고객센터/계좌 vs 매장안내 2열 배치) */
@@ -32,7 +45,8 @@ body {
     display: flex;
     justify-content: space-between;
     list-style: none;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eaeaea; /* 구분선도 부드럽게 조절 */
 }
 
 .footer-top > ul > li:first-child {
@@ -43,21 +57,22 @@ body {
     width: 250px;
 }
 
-/* 소제목 (고객센터, 무통장 입금, 매장안내) */
+/* 소제목 (고객센터, 무통장 입금, 매장안내) 폰트 크기 축소 및 폰트 지정 */
 .footer-wrap h2 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
-    color: #111111;
-    margin-bottom: 12px;
+    color: #222222;
+    margin-bottom: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* 무통장 입금 섹션 */
 .bank-info {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .bank-info span {
-    margin-right: 12px;
+    margin-right: 10px;
 }
 
 .bank-info b {
@@ -68,37 +83,38 @@ body {
 /* 매장안내 목록 세로 나열 */
 .store-list a {
     display: block;
-    margin-bottom: 6px;
-    color: #555555;
+    margin-bottom: 5px;
+    color: #666666;
 }
 
 .store-list a:hover {
     color: #111111;
 }
 
-/* 하단 영역 (구분선 및 회사정보) */
+/* 하단 영역 (회사정보) */
 .footer-bottom {
-    padding-top: 25px;
+    padding-top: 20px;
     color: #777777;
-    font-size: 13px;
-    line-height: 1.8;
+    font-size: 11.5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.7;
 }
 
 /* 하단 메뉴 (이용안내, 이용약관, 개인정보처리방침) */
 .footer-bottom .menu {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .footer-bottom .menu a {
-    font-size: 13px;
-    color: #333333;
-    margin-right: 20px;
+    font-size: 12px;
+    color: #444444;
+    margin-right: 15px;
     font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .footer-bottom .copyright {
-	border-top: 1px solid #eaeaea;
     display: block;
     margin-top: 8px;
-    color: #888888;
+    color: #999999;
 }
