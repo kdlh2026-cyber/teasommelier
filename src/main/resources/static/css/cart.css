@@ -98,15 +98,15 @@ body {
 }
 
 .updateQtyBtn:hover {
-    background: #454931; /* 포인트 색상 */
+    background: #305932; /* 초록색 포인트 */
     color: #FEFDFE;
-    border-color: #454931;
+    border-color: #305932;
 }
 
 /* 하단 총가격 바 영역 */
 .subtext {
     font-weight: bold;
-    background: #FAFAFA; /* 테이블 헤더와 동일한 연한 배경 적용 */
+    background: #FAFAFA;
     text-align: center !important;
 }
 
@@ -123,7 +123,7 @@ body {
 .finalPrice {
     font-weight: bold;
     font-size: 18px;
-    color: #454931; /* 총가격 금액 포인트 색상 적용 */
+    color: #ff6a00; /* 쨍한 주황색 (가격 강조) */
 }
 
 /* 하단 버튼 영역 정렬 (삭제: 왼쪽 / 주문: 오른쪽) */
@@ -141,6 +141,7 @@ body {
     float: right;
 }
 
+/* 하단 버튼 영역 공통 스타일 (선택상품주문 포함 일반 버튼) */
 .orderBtn button, 
 .orderBtn .buy, 
 .orderBtn .delete {
@@ -150,15 +151,30 @@ body {
     cursor: pointer;
     font-size: 12px;
     margin-right: 3px;
+    color: #333;
 }
 
-/* 버튼 마우스 호버 시 포인트 색상으로 변경 */
+/* 일반 버튼 및 선택상품주문, 삭제 버튼 마우스 호버 시 */
 .orderBtn button:hover, 
 .orderBtn .buy:hover, 
 .orderBtn .delete:hover {
-    background: #454931;
-    color: #FEFDFE;
-    border-color: #454931;
+    background: #f5f5f5;
+    border-color: #bbb;
+    color: #333;
+}
+
+/* [전체상품주문] 버튼만 초록색 강조 */
+.orderBtn .all-buy {
+    background-color: #305932;
+    color: #fff;
+    border-color: #305932;
+}
+
+/* [전체상품주문] 버튼 마우스 호버 시 진한 초록색 */
+.orderBtn .all-buy:hover {
+    background-color: #244326;
+    border-color: #244326;
+    color: #fff;
 }
 
 .cartForm {

@@ -6,7 +6,7 @@
 /* 전체 레이아웃 및 폰트 설정 */
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: #FEFDFE; /* 요청하신 배경 색상 */
+    background-color: #FEFDFE;
     color: #333;
     margin: 0;
     padding: 40px 20px;
@@ -25,7 +25,7 @@ body > a img {
 h2 {
     font-size: 24px;
     font-weight: 700;
-    color: #454931; /* 주요 색상 포인트 */
+    color: #305932; /* 초록색 강조 */
     margin-bottom: 8px;
 }
 
@@ -54,7 +54,7 @@ h2 {
 .order-card h4 {
     font-size: 16px;
     font-weight: 600;
-    color: #454931; /* 주요 색상 포인트 */
+    color: #305932; /* 초록색 강조 */
     margin-top: 0;
     margin-bottom: 12px;
     border-bottom: 1px solid #eee;
@@ -68,7 +68,7 @@ h2 {
 
 .order-card .highlight {
     font-weight: 500;
-    color: #111;
+    color: #ff6a00; /* 쨍한 주황색 (가격/주문번호 강조) */
 }
 
 .info-text {
@@ -120,7 +120,13 @@ h2 {
 .order-card b {
     font-size: 16px;
     font-weight: 600;
-    color: #454931;
+    color: #305932;
+}
+
+/* 최종 결제금액 숫자 쨍한 주황색 적용 */
+.total-row span {
+    color: #ff6a00;
+    font-weight: bold;
 }
 
 /* 하단 버튼 영역 */
@@ -144,11 +150,13 @@ h2 {
     transition: background-color 0.2s;
 }
 
-.btn-group a:last-child {
-    background-color: #454931; /* 주요 색상 적용 */
+/* 첫 번째 버튼: 쇼핑 계속하기 (초록색 테두리형) */
+.btn-group a:first-child {
+    background-color: #305932;
     color: #ffffff;
+    border: 1px solid #305932;
 }
 
-.btn-group a:last-child:hover {
-    background-color: #353826; /* 주요 색상의 어두운 버전 (hover용) */
+.btn-group a:first-child:hover {
+    background-color: #244326; /* 연한 초록빛 배경 호버 */
 }

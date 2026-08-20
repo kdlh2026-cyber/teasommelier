@@ -92,10 +92,12 @@
 				<button type="button" class="delete" onclick="allDeleteChoice()">전체상품삭제</button>
 			</div>
 			<div class="right-btn-group">
-				<form class="cartForm" action="" method="post">
-					<button type="button" class="buy" onclick="choice('order')">선택상품주문</button>
-					<button type="button" class="buy" onclick="allOrderChoice(this)">전체상품주문</button>
-				</form>
+			    <form class="cartForm" action="" method="post">
+			        <!-- 기존 클래스에 .buy가 있어 기본 스타일이 적용됨 -->
+			        <button type="button" class="buy" onclick="choice('order')">선택상품주문</button>
+			        <!-- 아래와 같이 .all-buy 클래스를 추가해야 초록색이 적용됩니다 -->
+			        <button type="button" class="buy all-buy" onclick="allOrderChoice()">전체상품주문</button>
+			    </form>
 			</div>
 		</div>
 		

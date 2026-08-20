@@ -135,17 +135,17 @@
 
 
    <!-- 관리자 답변 저장 -->
-	<update id="update_tea_inquiry"
-	    parameterType="com.springboot.teasommelier.dto.InquiryDto">
-	
-	UPDATE tea_inquiry
-	
-	SET i_reply = #{i_reply},
-	    i_answer = #{i_answer, jdbcType=VARCHAR}
-	
-	WHERE i_no = #{i_no}
-	
-	</update>
+   <update id="update_tea_inquiry"
+       parameterType="com.springboot.teasommelier.dto.InquiryDto">
+   
+   UPDATE tea_inquiry
+   
+   SET i_reply = #{i_reply},
+       i_answer = #{i_answer, jdbcType=VARCHAR}
+   
+   WHERE i_no = #{i_no}
+   
+   </update>
 
 
     <!-- 관리자 문의 삭제 -->
