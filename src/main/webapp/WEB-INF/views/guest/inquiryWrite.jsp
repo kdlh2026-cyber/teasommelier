@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <th>휴대폰</th>
-                    <td><input type="tel" name="i_phone" maxlength="20" placeholder="예) 010-0000-0000" required></td>
+                    <td><input type="tel" name="i_phone" maxlength="20" placeholder="예) 010-0000-0000"></td>
                 </tr>
                 <tr>
                     <th>정보수정 동의</th>
