@@ -21,9 +21,9 @@
 }
 
 .tab-btn.active {
-    background: #b8860b;
+    background:#111;
     color: #fff;
-    border-color: #b8860b;
+    border-color: #111;
 }
 
 /* 카테고리 라인 (TEA SALON | TEA BOUTIQUE 등) */
