@@ -43,6 +43,13 @@ function productCheck() {
         form.p_stock.focus();
         return false;
     }
+	
+	// 상품 이미지 1 필수 체크 추가
+	    if (!form.p_image.value) {
+	        alert("상품 이미지 1은 필수 등록 항목입니다.");
+	        form.p_image.focus();
+	        return false;
+	    }
 
     // 유효성 검사 통과 시 폼 제출
     form.submit();

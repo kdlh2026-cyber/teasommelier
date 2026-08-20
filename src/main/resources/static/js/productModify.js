@@ -1,4 +1,4 @@
-function productModifyCheck() {
+function productCheck() {
     const form = document.product;
     
     if (!form.p_name.value.trim()) {
@@ -43,7 +43,13 @@ function productModifyCheck() {
         form.p_stock.focus();
         return false;
     }
+	
+	// productModify.js 내부의 productCheck 함수에 추가
+	if (!form.p_image.value) {
+	    alert("상품 이미지를 선택해주세요.");
+	    return false;
+	}
 
-    // 유효성 검사 통과 시 폼 제출
-    form.submit();
+    // 유효성 검사 통과 시 true를 반환하여 폼 제출 수행
+    return true;
 }

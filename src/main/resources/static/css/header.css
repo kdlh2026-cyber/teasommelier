@@ -1,39 +1,52 @@
+@charset "UTF-8";
+
+/* 구글 폰트 Noto Sans KR 불러오기 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
- /* 상단 전체 헤더 컨테이너 */
-    .header-container {
-        display: flex;
-        justify-content: space-between; /* 양 끝으로 정렬 */
-        align-items: center;            /* 세로 중앙 정렬 */
-        padding: 20px 40px;
-        width: 100%;
-        box-sizing: border-box;
-    }
 
-    /* 1. 로고 영역 */
-    .header-logo img {
-    	width: 160px;
-        height: 80px; /* 로고 높이 조절 */
-        object-fit: contain;
-    }
+/* 상단 전체 헤더 컨테이너 */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* 양 끝으로 정렬 */
+    align-items: center;            /* 세로 중앙 정렬 */
+    padding: 20px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
-    /* 2. 중앙 네비게이션 메뉴 */
-    .header-nav {
-        display: flex;
-        gap: 30px; /* 메뉴 간격 */
-    }
-    .header-nav a {
-        text-decoration: none;
-        color: #333;
-        font-size: 16px;
-        font-weight: 600;
-        transition: color 0.2s;
-    }
-/* 우측 메뉴(로그인/회원가입/아이콘) 영역 가로 정렬 및 간격 */
+/* 1. 로고 영역 (크기 확대) */
+.header-logo img {
+    width: 200px;
+    height: 95px;
+    object-fit: contain;
+}
+
+/* 2. 중앙 네비게이션 메뉴 */
+.header-nav {
+    display: flex;
+    gap: 30px; /* 메뉴 간격 */
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: color 0.2s;
+}
+
+.header-nav a:hover {
+    color: #000;
+}
+
+/* 3. 우측 메뉴(로그인/회원가입/아이콘) 영역 (폰트 크기 축소) */
 .header-menu {
     display: flex;
     align-items: center;
     gap: 15px;
-    font-size: 16px;
+    font-size: 13px; /* 폰트 크기 축소 */
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .header-menu a {
@@ -41,6 +54,8 @@
     align-items: center;
     text-decoration: none;
     color: #555;
+    font-size: 13px; /* 메뉴 텍스트 폰트 크기 축소 */
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .header-menu a:hover {
@@ -49,8 +64,25 @@
 
 /* 마이페이지, 장바구니, 검색 아이콘 크기 조절 */
 .header-menu img {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     display: block;
+}
+
+/* 관리자 환영 문구 및 메뉴 전체 박스 정렬 */
+.login .admin-welcome-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 오른쪽 정렬 */
+}
+
+/* 'admin님 환영합니다.' 텍스트 스타일 */
+.header-container .member-welcome {
+    display: block;
+    text-align: right; /* 텍스트 우측 정렬 */
+    font-weight: 600;  /* 굵기 조절 (bold 또는 600~700) */
+    font-size: 13px;   /* 필요에 따라 크기 조절 */
+    color: #222;       /* 가독성을 위한 진한 색상 */
+    margin-bottom: 6px;/* 메뉴와의 간격 */
 }
