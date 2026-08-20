@@ -339,7 +339,7 @@ public class ProductController {
 								  @RequestParam("p_image2") MultipartFile p_image2) throws Exception {
 		
 		// 업로드할 경로 변수 선언
-		String uploadPath = "C:\\easommelier\\src\\main\\resources\\static\\images\\product\\";
+		String uploadPath = "C:\\Teasommelier\\src\\main\\resources\\static\\images\\product\\";
 		
 		if(!p_image.isEmpty()) {
 			String pimage = p_image.getOriginalFilename();
