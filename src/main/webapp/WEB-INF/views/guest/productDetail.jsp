@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -7,11 +7,11 @@
 <head>    
 <meta charset="UTF-8">    
 <title>${product.p_name} - 상품상세</title>    
-<link rel="stylesheet" href="/css/productDetail.css"></head>
+<link rel="stylesheet" href="/css/productDetail.css">
+</head>
 <body>
-	<div>
-		<jsp:include page="/WEB-INF/views/header.jsp" />
-	</div>
+<%@ include file="../header.jsp" %>
+
 <div class="detail-wrap">
 	<form id="productForm" action="/insertCart" method="get">
 		<input type="hidden" name="p_no" value="${product.p_no}">
@@ -313,9 +313,7 @@
 		alert('이미 관심상품에 들어있습니다.');
 	</c:if>
 	
-	</script>
-	<div>
-        <%@ include file="/WEB-INF/views/footer.jsp" %>
-    </div>
+	</script>       
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>

@@ -205,7 +205,11 @@ function deleteSelected() {
                     <tr>
                         <td><input type="checkbox" name="addr_chk" value="${addrlist.sno}"></td>
                         <td>${addrlist.sdeliveryname}</td>
-                        <td>${addrlist.sname}</td>
+                        <td><c:if test="${addrlist.sdefaddr == 'T'}">
+        					<img src="/images/main_img/ico_addr_default.png" alt="기본배송지" style="vertical-align: middle; margin-right: 4px;">
+    					</c:if>
+        					${addrlist.sname}
+                        </td>
                         <td>${addrlist.stel}</td>
                         <td>${addrlist.sphone}</td>
                         <td class="td-addr">${fn:replace(addrlist.saddr, ',',' ')}</td>

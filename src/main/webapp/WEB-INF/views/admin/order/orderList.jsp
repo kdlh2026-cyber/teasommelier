@@ -8,6 +8,7 @@
 <title>관리자 주문 목록</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp" %>
     <h2>관리자 - 회원 주문 목록</h2>
     <table border="1">
             <tr>
@@ -30,5 +31,6 @@
      </c:forEach>
     </table>
     <a href="#" onclick="history.back()">관리자 메인</a>
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
