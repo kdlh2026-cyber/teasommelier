@@ -23,11 +23,11 @@
                 <div>
                     <h2>매장안내</h2>
                     <div class="store-list">
-                        <a href="#">광화문점</a>
-                        <a href="#">성수낙낙점</a>
-                        <a href="#">안다즈점</a>
-                        <a href="#">에비뉴엘 월드타워점</a>
-                    </div>
+    					<a href="/guest/ShopList?name=광화문점">광화문점</a>
+    					<a href="/guest/ShopList?name=성수낙낙점">성수낙낙점</a>
+    					<a href="/guest/ShopList?name=안다즈점">안다즈점</a>
+    					<a href="/guest/ShopList?name=에비뉴엘 월드타워점">에비뉴엘 월드타워점</a>
+					</div>
                 </div>
             </li>
         </ul>
