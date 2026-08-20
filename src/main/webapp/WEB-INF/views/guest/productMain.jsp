@@ -24,7 +24,6 @@
                 </div>
                 <c:if test="${not empty product.p_category}"><div class="info-line">${product.p_category}</div></c:if>
                 <c:if test="${not empty product.p_type}"><div class="info-line">${product.p_type}</div></c:if>
-                <c:if test="${not empty product.p_desc}"><div class="info-line">${product.p_desc}</div></c:if>
                 <div class="product-capacity">${product.p_capacity}</div>
                 <c:if test="${not empty product.p_sale and product.p_sale ne '판매중'}">
                     <span class="badge-status">${product.p_sale}</span>

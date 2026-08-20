@@ -9,6 +9,7 @@
 <title>회원 주문 상세정보 열람</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp" %>
 	<h2>주문 상세 정보</h2>
     <hr>
     <h3>주문 기본 및 결제 정보</h3>
@@ -84,5 +85,6 @@
     <div>
         <a href="#" onclick="history.back()">목록으로 돌아가기</a>
     </div>
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>

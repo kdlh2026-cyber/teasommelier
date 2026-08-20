@@ -116,11 +116,7 @@
                 </c:if>
 
                 <!-- 상품 설명 -->
-                <c:if test="${not empty product.p_desc}">
-                    <div class="info-line">
-                        ${product.p_desc}
-                    </div>
-                </c:if>
+               <!--<c:if test="${not empty product.p_desc}"><div class="info-line">${product.p_desc} </div></c:if>  --> 
 
                 <!-- 용량 -->
                 <div class="product-capacity">
