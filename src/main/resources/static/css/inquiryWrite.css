@@ -69,6 +69,16 @@
     margin-right: 4px;
 }
 
+/* 체크박스 (개인정보 동의 등) - 체크했을 때 빨간색 */
+.inquiry-table input[type="checkbox"] {
+    accent-color: #c0392b;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
 /* 라벨 */
 .inquiry-table label {
     margin-right: 16px;
@@ -84,14 +94,17 @@
 /* 검색 버튼 */
 .btn-search {
     padding: 8px 16px;
-    border: 1px solid #999;
-    background: #f5f5f5;
+    border: 1px solid #305932;
+    background: #fff;
+    color: #305932;
     cursor: pointer;
     margin-left: 6px;
+    transition: background .2s ease, color .2s ease;
 }
 
 .btn-search:hover {
-    background: #eee;
+    background: #305932;
+    color: #fff;
 }
 
 /* 개인정보 안내 */
@@ -109,7 +122,7 @@
 
 /* 등록 버튼 */
 .btn-submit {
-    background: #1a1a2e;
+    background: #305932;
     color: #fff;
     border: none;
     padding: 14px 60px;
@@ -119,7 +132,7 @@
 }
 
 .btn-submit:hover {
-    background: #33334d;
+    background: #244326;
 }
 
 
@@ -154,7 +167,7 @@
 
 /* 모달 헤더 */
 .search-modal-header {
-    background: #4a6b70;
+    background: #305932;
     color: #fff;
     padding: 10px 16px;
 
@@ -192,9 +205,9 @@
 }
 
 .search-modal-tabs .modal-tab.active {
-    color: #222;
+    color: #305932;
     font-weight: bold;
-    border-bottom: 2px solid #222;
+    border-bottom: 2px solid #305932;
 }
 
 /* 모달 내용 */
@@ -226,9 +239,16 @@
 
 .search-modal-row button {
     padding: 6px 14px;
-    border: 1px solid #999;
-    background: #f5f5f5;
+    border: 1px solid #305932;
+    background: #fff;
+    color: #305932;
     cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.search-modal-row button:hover {
+    background: #305932;
+    color: #fff;
 }
 
 /* 검색 결과 */
@@ -264,7 +284,14 @@
 
 .search-modal-footer button {
     padding: 6px 24px;
-    border: 1px solid #999;
-    background: #f5f5f5;
+    border: 1px solid #305932;
+    background: #fff;
+    color: #305932;
     cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.search-modal-footer button:hover {
+    background: #305932;
+    color: #fff;
 }

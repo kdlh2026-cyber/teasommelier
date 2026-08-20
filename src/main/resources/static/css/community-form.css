@@ -27,9 +27,8 @@
     align-items: center;
     gap: 16px;
     padding: 12px 16px;
-    background-color: #f9f9f9;
+    background-color: #fafafa;
     border: 1px solid #eee;
-    border-radius: 6px;
     margin-bottom: 20px;
 }
 
@@ -37,7 +36,6 @@
     width: 75px;
     height: 75px;
     object-fit: cover;
-    border-radius: 4px;
     border: 1px solid #ddd;
 }
 
@@ -62,7 +60,7 @@
 .form-table {
     width: 100%;
     border-collapse: collapse;
-    border-top: 2px solid #222;
+    border-top: 1px solid #e5e5e5;
     margin-bottom: 30px;
 }
 
@@ -76,8 +74,8 @@
     width: 120px;
     background-color: #fafafa;
     font-size: 14px;
-    color: #333;
-    font-weight: 500;
+    color: #555;
+    font-weight: 600;
     text-align: left;
 }
 
@@ -86,7 +84,6 @@
     height: 40px;
     padding: 0 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
     font-size: 14px;
 }
@@ -106,7 +103,6 @@
     height: 250px;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
     resize: vertical;
     font-size: 14px;
@@ -122,10 +118,10 @@
     gap: 12px;
     align-items: center;
     font-size: 14px;
-    color: #f39c12;
+    color: #e04c4c;
 }
 
-/* 버튼 스타일 */
+/* 버튼 스타일 (평소 흰색/검정, hover 시 검정 채움) */
 .btn-group {
     display: flex;
     justify-content: center;
@@ -142,19 +138,19 @@
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
-    border-radius: 4px;
     cursor: pointer;
     box-sizing: border-box;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
 .btn-submit {
-    background-color: #111;
+    background-color: #305932;
     color: #fff;
     border: none;
 }
 
 .btn-submit:hover {
-    background-color: #333;
+    background-color: #244326;
 }
 
 .btn-cancel {
@@ -164,5 +160,7 @@
 }
 
 .btn-cancel:hover {
-    background-color: #f5f5f5;
+    background-color: #305932;
+    color: #fff;
+    border-color: #305932;
 }

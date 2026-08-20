@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
 /* =========================
    페이지 컨테이너
 ========================= */
@@ -8,6 +10,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 24px 16px 40px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .board-title {
@@ -24,29 +27,30 @@
 
 .board-menu {
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    padding: 10px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    width: 100%;
+    padding: 0;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
 }
 
 .board-menu-item {
-    flex: 1 1 140px;
+    flex: 1;
     text-align: center;
-    padding: 14px 10px;
-    font-size: 13px;
-    color: #666;
+    padding: 16px 0;
+    font-size: 16px;
+    color: #555;
     text-decoration: none;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.board-menu-item:hover {
-    background: #000;
+/* 현재 선택된 탭 (JS에서 클릭 시 active 클래스 토글) */
+.board-menu-item.active {
+    background: #305932;
     color: #fff;
-    border-color: #000;
+    font-weight: 700;
 }
 
 
@@ -58,4 +62,88 @@
     margin-top: 20px;
     font-size: 13px;
     color: #999;
+}
+
+
+/* =========================
+   게시판 제목 영역 (예: "브랜드 소식 | 브랜드 소식입니다.")
+   - inquiry.css .inquiry-header와 동일 톤
+========================= */
+
+.board-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.board-header h2 {
+    margin: 0;
+    color: #111;
+    font-size: 24px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.board-header p {
+    margin: 0;
+    padding-left: 15px;
+    border-left: 1px solid #ddd;
+    color: #888;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+
+/* =========================
+   게시글 목록 표 (번호/제목/작성자/작성일/조회)
+   - inquiry.css .inquiry-table과 동일 톤
+========================= */
+
+.board-list {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+    font-size: 13px;
+}
+
+.board-list th {
+    background-color: #fafafa;
+    color: #555;
+    font-weight: 600;
+    padding: 16px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.board-list td {
+    padding: 18px 10px;
+    color: #444;
+    border-bottom: 1px solid #f2f2f2;
+    vertical-align: middle;
+}
+
+.board-list tr:last-child td {
+    border-bottom: none;
+}
+
+/* 제목 열 좌측 정렬 */
+.board-list .title-cell {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.board-list .title-cell a {
+    color: #333;
+    text-decoration: none;
+}
+
+.board-list .title-cell a:hover {
+    text-decoration: underline;
+}
+
+.board-list .empty {
+    height: 120px !important;
+    color: #888 !important;
 }

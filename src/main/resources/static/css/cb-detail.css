@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
 /* =========================
    페이지 컨테이너 / 타이틀
 ========================= */
@@ -8,27 +10,31 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 16px 60px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
 }
 
 .cb-detail-title-row {
     display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin: 24px 0 16px;
+    align-items: center;
+    gap: 15px;
+    margin: 24px 0 25px;
 }
 
 .cb-detail-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #222;
     margin: 0;
-    padding-right: 12px;
+    padding-right: 15px;
     border-right: 1px solid #ddd;
+    color: #111;
+    font-size: 24px;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 .cb-detail-subtitle {
+    margin: 0;
+    color: #888;
     font-size: 14px;
-    color: #999;
 }
 
 
@@ -42,14 +48,12 @@
     gap: 16px;
     background: #fafafa;
     padding: 20px;
-    border-radius: 4px;
 }
 
 .product-info-thumb {
     width: 75px;
     height: 75px;
     object-fit: cover;
-    border-radius: 4px;
     background: #eee;
 }
 
@@ -79,7 +83,7 @@ a {
 .cb-detail-table {
     width: 100%;
     border-collapse: collapse;
-    border-top: 2px solid #222;
+    border-top: 1px solid #e5e5e5;
     margin-bottom: 12px;
 }
 
@@ -88,31 +92,33 @@ a {
 }
 
 .cb-detail-table td {
-    padding: 14px 12px;
+    padding: 16px 12px;
     font-size: 14px;
-    color: #333;
+    color: #444;
     vertical-align: middle;
 }
 
 .label-cell {
     width: 120px;
-    color: #999;
-    font-weight: 700;
+    color: #555;
+    font-weight: 600;
     background: #fafafa;
 }
 
 .content-cell {
     min-height: 120px;
     line-height: 1.7;
-    color: #555;
+    color: #444;
 }
 
 
 /* 별점 (리뷰 상세) */
 .review-stars {
+    display: inline-block;
     color: #e04c4c;
     font-size: 14px;
     letter-spacing: 1px;
+    white-space: nowrap;
 }
 
 
@@ -126,7 +132,6 @@ a {
     max-width: 600px;
     width: 100%;
     margin-bottom: 8px;
-    border-radius: 4px;
 }
 
 
@@ -147,14 +152,14 @@ a {
 
 
 /* =========================
-   하단 액션 버튼
+   하단 액션 버튼 (평소 흰색, hover 시 검정 / 삭제만 빨강 유지)
 ========================= */
 
 .cb-detail-actions {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 24px;
+    margin-top: 25px;
 }
 
 .cb-list-btn,
@@ -162,35 +167,22 @@ a {
 .cb-delete-btn,
 .cb-answer-btn {
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 13px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
     text-decoration: none;
     cursor: pointer;
-}
-
-.cb-list-btn {
-    color: #666;
-    border: 1px solid #ddd;
     background: #fff;
+    border: 1px solid #ccc;
+    color: #555;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
 
-.cb-list-btn:hover {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-}
-
-.cb-edit-btn,
-.cb-answer-btn {
-    color: #333;
-    border: 1px solid #999;
-    background: #fff;
-}
-
+.cb-list-btn:hover,
 .cb-edit-btn:hover,
 .cb-answer-btn:hover {
-    background: #f5f5f5;
+    background: #222;
+    color: #fff;
+    border-color: #222;
 }
 
 .cb-delete-btn {
