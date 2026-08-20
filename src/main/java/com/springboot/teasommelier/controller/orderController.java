@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,9 @@ public class orderController {
 	
 	@Autowired
 	private IFavoriteDao favDAO;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	private int getMno(Principal principal) {
 		String m_id = principal.getName();
@@ -169,6 +173,14 @@ public class orderController {
 		
 		boolean loggedIn = (principal != null);
 		orderDto.setM_no(loggedIn ? getMno(principal) : null);
+		
+		// 비회원 주문서 처리 컨트롤러 내부
+		if (!loggedIn) {
+			if (orderDto.getO_passwd() != null && !orderDto.getO_passwd().trim().isEmpty()) {
+				String encodedPasswd = passwordEncoder.encode(orderDto.getO_passwd());
+				orderDto.setO_passwd(encodedPasswd);
+			}
+		}
 		
 		List<cartDTO> orderItems = new ArrayList<>();
 		
@@ -310,23 +322,31 @@ public class orderController {
 	// 비회원주문 확인 기능
 	@RequestMapping("/guestOrderConfirm")
 	@ResponseBody
-	public String guestOrderConfirm(@RequestParam("o_name") String o_name,
-	                                @RequestParam("o_no") int o_no,
-	                                @RequestParam("o_passwd") String o_passwd,
+	public String guestOrderConfirm(@RequestParam(value = "o_name", required = false) String o_name,
+	                                @RequestParam(value = "o_no", required = false) String o_noStr,
+	                                @RequestParam(value = "o_passwd", required = false) String o_passwd,
 	                                Principal principal,
 	                                Model model) {
 			
 		if (principal != null) {
 			return "redirect:/member/orderList";
 		}
+		
+		// 비어있는 값이 들어왔을 때의 방어 코드
+		if (o_name == null || o_name.trim().isEmpty() ||
+		    o_noStr == null || o_noStr.trim().isEmpty() ||
+		    o_passwd == null || o_passwd.trim().isEmpty()) {
+		    return "<script>alert('모든 정보를 입력해주세요.'); history.back();</script>";
+		}
 			
+		int o_no = Integer.parseInt(o_noStr); // 안전하게 변환
 		OrderDTO orderInfo = ordao.orderHeader(o_no);
 		
 		if (orderInfo == null || !orderInfo.getO_name().equals(o_name)) {
 		    return "<script>alert('주문자 정보가 일치하지 않습니다.'); location.href='/login';</script>";
 		}
 
-		if (!orderInfo.getO_passwd().equals(o_passwd)) {
+		if (!passwordEncoder.matches(o_passwd, orderInfo.getO_passwd())) {
 		    return "<script>alert('비밀번호가 일치하지 않습니다.'); location.href='/login';</script>";
 		}
 			

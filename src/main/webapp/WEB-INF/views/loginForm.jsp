@@ -38,10 +38,10 @@
    <div class="guestOrderSearch" style="display: none;">
 		<h3>ORDER</h3>
 		<p>비회원의 경우, 주문시의 주문번호로 주문조회가 가능합니다.</p>
-		<form method="post" action="/orderConfirm">
-			 주문자명 <input type="text" name="o_name" placeholder="주문자명"> <br>
-			 주문번호 <input type="text" name="o_no" placeholder="주문번호"> <br>
-			 비밀번호 <input type="password" name="o_passwd" placeholder="비회원주문 비밀번호"><br>
+		<form method="post" action="/guestOrderConfirm" onsubmit="return checkGuestOrder()">
+			 주문자명 <input type="text" name="o_name" id="searchName" placeholder="주문자명"> <br>
+			 주문번호 <input type="text" name="o_no" id="searchNo" placeholder="주문번호"> <br>
+			 비밀번호 <input type="password" name="o_passwd" id="searchPasswd" placeholder="비회원주문 비밀번호"><br>
 			 <button type="submit">비회원 주문조회</button>
 		</form>	
 	</div>
@@ -58,6 +58,30 @@ function guestForm(){
 	}else{
 		formDisplay.style.display = "none";
 	}
+}
+
+function checkGuestOrder() {
+    const name = document.getElementById("searchName").value.trim();
+    const no = document.getElementById("searchNo").value.trim();
+    const passwd = document.getElementById("searchPasswd").value.trim();
+
+    if (!name) {
+        alert("주문자명을 입력해주세요.");
+        document.getElementById("searchName").focus();
+        return false; // 서버로 전송 중단
+    }
+    if (!no) {
+        alert("주문번호를 입력해주세요.");
+        document.getElementById("searchNo").focus();
+        return false; // 서버로 전송 중단
+    }
+    if (!passwd) {
+        alert("비밀번호를 입력해주세요.");
+        document.getElementById("searchPasswd").focus();
+        return false; // 서버로 전송 중단
+    }
+    
+    return true; // 모두 입력되었을 때만 정상 전송
 }
 </script>
 </html>
