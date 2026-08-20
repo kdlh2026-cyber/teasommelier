@@ -13,7 +13,7 @@
 		<h2>에디토리얼</h2>
 		<p class="form-description">에디토리얼입니다.</p>
 		
-		<form id="editorialInsertForm" method="post" action="/cb_communityInsert" enctype="multipart/form-data" onsubmit="saveTabState()">
+		<form id="editorialInsertForm" method="post" action="/cb_communityInsert" enctype="multipart/form-data" onsubmit="return (insertCheck() && (saveTabState(), true));">
 			<input name="m_no" type="hidden" value="1">
 			<input type="hidden" name="cb_category" value="에디토리얼">
 			

@@ -16,7 +16,7 @@
 		<h2>리뷰</h2>
 		<p class="form-description">상품 사용후기입니다.</p>
 		
-		<form id="reviewInsertForm" method="post" action="/cb_communityInsert" enctype="multipart/form-data" onsubmit="saveTabState()">
+		<form id="reviewInsertForm" method="post" action="/cb_communityInsert" enctype="multipart/form-data" onsubmit="return (insertCheck() && (saveTabState(), true));">
 			<input name="m_no" type="hidden" value="${m_no}">
 			<input name="p_no" type="hidden" value="${p_no}">
 			<input type="hidden" name="cb_category" value="리뷰">
@@ -49,7 +49,7 @@
 			        </td>
 			    </tr>
 			    <tr>
-			        <td colspan="2"><textarea name="cb_content" class="input-textarea" placeholder="후기를 작성해주세요."></textarea></td>
+			        <td colspan="2"><textarea name="cb_content" class="input-textarea" placeholder="후기를 작성해주세요." required></textarea></td>
 			    </tr>
 			    <tr>
 			        <th>UCC URL</th>
