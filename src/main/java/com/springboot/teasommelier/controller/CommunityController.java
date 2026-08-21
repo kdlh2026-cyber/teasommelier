@@ -333,6 +333,19 @@ public class CommunityController {
 	    return getCategoryListUrl(category);
 	}
 	
+	@RequestMapping(value = "/member/mypage/CommunityManagement", method = RequestMethod.GET)
+	   public String CommunityManagement(Model model, Authentication authentication) {
+	   
+	       String m_id = authentication.getName();
+	   
+	       MemberDto memberDto = cb_dao.select_member_by_id(m_id);
+	       int m_no = memberDto.getM_no();
+	   
+	       List<CommunityDto> myList = cb_dao.selectMyList(m_no);
+	       model.addAttribute("myList", myList);
+	   
+	       return "member/mypage/CommunityManagement";
+	 }
 }
   
 

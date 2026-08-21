@@ -106,4 +106,12 @@ and cb.cb_category = #{cb_category}
     	SELECT * FROM tea_member WHERE m_id = #{m_id}
 	</select>
 
+	<!-- 마이페이지: 내가 쓴 게시물 목록 -->
+   <select id="selectMyList" parameterType="int" resultType="com.springboot.teasommelier.dto.CommunityDto">
+       select cb.cb_no, cb.cb_category, cb.cb_subject, m.m_id, cb.cb_date, cb.cb_view_count
+       from tea_community cb
+       join tea_member m on cb.m_no = m.m_no
+       where cb.m_no = #{m_no}
+       order by cb.cb_no desc
+   </select>
 </mapper>

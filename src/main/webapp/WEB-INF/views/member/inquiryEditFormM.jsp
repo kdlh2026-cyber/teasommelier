@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>대량주문문의 수정</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiry.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/inquiryEditFormM.css">
 </head>
 <body>
 <%@ include file="../header.jsp" %>
