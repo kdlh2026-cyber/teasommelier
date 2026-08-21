@@ -87,6 +87,8 @@ public class MemberController {
 	        m_dto.setM_birth(null);
 	    }
 		
+		m_dto.setM_cash(3000);
+		
 		m_dto.setM_passwd(passwordEncoder.encode(m_dto.getM_passwd()));
 		
 		m_dao.MemberWrite(m_dto);

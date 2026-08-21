@@ -2,6 +2,7 @@ package com.springboot.teasommelier.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -241,10 +242,17 @@ public class CommunityController {
 	                               @RequestParam(value = "files", required = false) List<MultipartFile> files,
 	                               Authentication authentication) {
 
-	    // 로그인한 회원의 m_id로 m_no 조회 후 DTO에 주입
 	    String m_id = authentication.getName();
-	    MemberDto m_dto = cb_dao.select_member_by_id(m_id); // 기존 회원 DAO 메서드 활용 (없으면 아래 매퍼 추가)
+	    MemberDto m_dto = cb_dao.select_member_by_id(m_id);
 	    cb_dto.setM_no(m_dto.getM_no());
+
+	    // ▼ 한글 자모 분리(NFD) -> 조합형(NFC)으로 정규화
+	    if (cb_dto.getCb_subject() != null) {
+	        cb_dto.setCb_subject(Normalizer.normalize(cb_dto.getCb_subject(), Normalizer.Form.NFC));
+	    }
+	    if (cb_dto.getCb_content() != null) {
+	        cb_dto.setCb_content(Normalizer.normalize(cb_dto.getCb_content(), Normalizer.Form.NFC));
+	    }
 
 	    String uploadDir = "C:\\teasommelier\\src\\main\\resources\\static\\images\\community\\";
 	    File dirCheck = new File(uploadDir);

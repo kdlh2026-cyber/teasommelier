@@ -108,9 +108,9 @@
                     </div>
                 </c:if>
 
-                <!-- 상품 종류 -->
+                <!-- 상품 종류 (이벤트 페이지 전용: UP TO 50%OFF 등을 다홍색으로 강조) -->
                 <c:if test="${not empty product.p_type}">
-                    <div class="info-line">
+                    <div class="info-line info-line-event">
                         ${product.p_type}
                     </div>
                 </c:if>

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">    
 <title>${product.p_name} - 상품상세</title>    
 <link rel="stylesheet" href="/css/productDetail.css">
+<link rel="stylesheet" href="/css/guide.css">
 </head>
 <body>
 <%@ include file="../header.jsp" %>

@@ -175,7 +175,9 @@ table.detail-table td {
             </tr>
             <tr>
                 <th>상세설명</th>
-                <td colspan="3" class="desc-content">${product.p_desc}</td>
+                <td colspan="3" class="desc-content">
+                   <img src="/images/product/${product.p_img2}" alt="상품이미지">}
+                </td>
             </tr>
         </table>
 

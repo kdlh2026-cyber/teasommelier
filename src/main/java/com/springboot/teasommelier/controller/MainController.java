@@ -77,4 +77,15 @@ public class MainController {
 	public String loginError() {
 		return"loginError";
 	}
+	
+	@RequestMapping("/Personalfooter")
+	public String Personalfooter() {
+		return "Personalfooter";
+	}
+	
+	@RequestMapping("/Termsfooter")
+	public String Termsfooter() {
+		return "Termsfooter";
+	}
+
 }

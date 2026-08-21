@@ -18,13 +18,14 @@ public class WebSecurityConfig {
 			.cors((cors) -> cors.disable()) // CORS 비활성화
 			.authorizeHttpRequests(request -> request
 					.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() // 내부 포워드 요청 허용
-					.requestMatchers("/","/main","/loginForm","/ShipaddrWrite","/MemberWrite","/passwordCheck").permitAll() // 루트(/)는 모두 허용
+					.requestMatchers("/","/main","/loginForm","/passwordCheck").permitAll() // 루트(/)는 모두 허용
 					.requestMatchers("/css/**","/js/**","/images/**","/error").permitAll() // 정적(static)리소스 모두 허용
 					.requestMatchers("/guest/**").permitAll() // guest 폴더는 모두 허용(게스트 페이지)
 					.requestMatchers("/member/**", "/member/mypage/**").hasAnyRole("USER","ADMIN") // member 폴더는 USER, ADMIN만 허용(회원페이지)
 					.requestMatchers("/admin/**","/AdminMDelete").hasAnyRole("ADMIN") // admin 폴더는 ADMIN만 허용(관리자 페이지)
 					.requestMatchers("/cart", "/cartList", "/insertCart", "/deleteCarts", "/clearCart").permitAll()
 					.requestMatchers("/orderWrite", "/updateCartQty", "/orderSubmit", "/orderConfirm", "/orderWriteDirect", "/guestOrderConfirm").permitAll()
+					.requestMatchers("/ShipaddrWrite","/MemberWrite","/Personalfooter","/Termsfooter").permitAll()
 					.anyRequest().authenticated() //나머지 모두 인증이 필요	
 			);
 		

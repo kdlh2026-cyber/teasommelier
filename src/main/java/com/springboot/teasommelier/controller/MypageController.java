@@ -90,13 +90,6 @@ public class MypageController {
 		return "member/mypage/ShipaddrManagement";
 	}
 		
-	//마이페이지 대량문의 관리는 여기서
-	@RequestMapping("/member/mypage/InqiryManagement")
-	public String InqiryManagement(){
-		return "member/mypage/InqiryManagement";
-	}
-	
-	
 	@RequestMapping("/member/mypage/ShipaddrWriteForm")
 	public String ShipaddrWriteForm(@RequestParam(value="m_no", required=false) Integer m_no,
 			Model model){

@@ -67,6 +67,7 @@
 
 /* 라디오 버튼 */
 .inquiry-table input[type="radio"] {
+	accent-color: #c0392b;
     margin-right: 4px;
 }
 

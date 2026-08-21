@@ -6,6 +6,43 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" href="css/checkForm.css">
+<script>
+// 기존 비회원 주문조회 함수
+function guestForm(){
+	var formDisplay = document.querySelector(".guestOrderSearch");
+	
+	if(formDisplay.style.display === "none"){
+		formDisplay.style.display = "block";
+	}else{
+		formDisplay.style.display = "none";
+	}
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // 요소 선택
+    var idInput = document.querySelector('input[name="m_id"]');
+    var rememberChk = document.querySelector('input[name="rememberId"]');
+    var loginForm = document.loginForm;
+
+    // 1. 페이지 로딩 시, 저장된 아이디가 있으면 불러오기
+    var savedId = localStorage.getItem("savedId");
+    if (savedId) {
+        idInput.value = savedId;        // 입력창에 아이디 채우기
+        rememberChk.checked = true;     // 체크박스 체크 상태로 유지
+    }
+    
+    // 2. 로그인 폼이 제출될 때(submit), 체크박스 상태에 따라 저장/삭제 처리
+    loginForm.addEventListener("submit", function() {
+        if (rememberChk.checked) {
+            // 체크되어 있으면 로컬 스토리지에 아이디 저장
+            localStorage.setItem("savedId", idInput.value);
+        } else {
+            // 체크 해제되어 있으면 로컬 스토리지에서 아이디 삭제
+            localStorage.removeItem("savedId");
+        }
+    });
+});
+</script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -20,11 +57,6 @@
             <label class="remember-id">
                 <input type="checkbox" name="rememberId"> 아이디 저장
             </label>
-            <div class="find-links">
-                <a href="#">아이디찾기</a>
-                <span class="divider">|</span>
-                <a href="#">비밀번호찾기</a>
-            </div>
     </div>
    <div class="button-group">
       <input type="submit" value="로그인">
@@ -49,7 +81,6 @@
 			</div>
 		</form>	
 	</div>
-	</form>
 </div>
 <%@ include file="footer.jsp" %>
 </body>

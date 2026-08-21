@@ -110,6 +110,11 @@ a {
     min-height: 120px;
     line-height: 1.7;
     color: #444;
+    white-space: pre-line;
+}
+
+.content-area {
+    white-space: pre-line;
 }
 
 

@@ -14,19 +14,23 @@
 	<div class="form-container">
 		<h2>브랜드 소식</h2>
 		<p class="form-description">브랜드 소식입니다.</p>
-		
+
 		<form id="brandnoticeUpdateForm" method="post" action="/cb_communityUpdate" enctype="multipart/form-data" onsubmit="return (insertCheck() && (saveTabState(), true));">
 			<input name="m_no" type="hidden" value="${viewCBdao.m_no}">
 			<input type="hidden" name="cb_no" value="${viewCBdao.cb_no}">
 			<input type="hidden" name="cb_category" value="브랜드소식">
-			
+
 			<table class="form-table">
 				<tr>
 					<th>제목</th>
 					<td><input type="text" name="cb_subject" value="${viewCBdao.cb_subject}" class="input-text" required></td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea name="cb_content" class="input-textarea">${viewCBdao.cb_content}</textarea></td>
+					<td colspan="2">
+						<c:set var="cleanContent" value="${fn:replace(viewCBdao.cb_content, '<br>', '&#10;')}" />
+						<c:set var="cleanContent" value="${fn:replace(cleanContent, '<br/>', '&#10;')}" />
+						<textarea name="cb_content" class="input-textarea" wrap="hard">${cleanContent}</textarea>
+					</td>
 				</tr>
 				<tr>
 					<th>첨부파일1</th>
@@ -49,7 +53,7 @@
 					<td><input type="file" name="files" class="input-file"></td>
 				</tr>
 			</table>
-			
+
 			<div class="btn-group">
 				<input type="submit" value="수정" class="btn btn-submit">
 				<a href="/guest/community/cb_communityBoard" class="btn btn-cancel">취소</a>
