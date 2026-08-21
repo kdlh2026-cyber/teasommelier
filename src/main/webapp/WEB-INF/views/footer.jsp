@@ -24,6 +24,13 @@
                 </li>
                 <li>
                     <div>
+                        <h2>매장안내</h2>
+                        <div class="store-list">
+                            <a href="/guest/ShopList?name=부산본점">부산본점</a>
+                            <a href="/guest/ShopList?name=센텀시티점">센텀시티점</a>
+                            <a href="/guest/ShopList?name=광복점">광복점</a>
+                            <a href="/guest/ShopList?name=동래점">동래점</a>
+                        </div>
                     </div>
                 </li>
             </ul>
