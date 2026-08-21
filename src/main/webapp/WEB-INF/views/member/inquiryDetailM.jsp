@@ -78,7 +78,7 @@
     </table>
 
     <div class="detail-buttons">
-        <a href="${pageContext.request.contextPath}inquiryEditFormM?i_no=${inquiry.i_no}" class="btn-edit">수정</a>
+        <a href="${pageContext.request.contextPath}/member/inquiryEditFormM?i_no=${inquiry.i_no}" class="btn-edit">수정</a>
         <a href="${pageContext.request.contextPath}/member/inquiryListM" class="btn-list">목록</a>
     </div>
 </div>

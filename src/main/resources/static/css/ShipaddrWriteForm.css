@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+/* =========================
+   페이지 컨테이너 / 타이틀
+========================= */
+
+.addr-form-wrap {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+}
+
+.addr-form-wrap h3 {
+    margin: 0 0 8px;
+    color: #111;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.addr-form-wrap > div > p {
+    margin: 0 0 30px;
+    color: #888;
+    font-size: 14px;
+}
+
+/* 필수 표시 - 빨간 별표 */
+.required {
+    color: #c0392b;
+    margin-right: 2px;
+}
+
+/* =========================
+   입력 폼 테이블
+========================= */
+
+.addr-form-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+
+.addr-form-wrap table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.addr-form-wrap table th {
+    width: 140px;
+    padding: 16px 10px;
+    background: #fafafa;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.addr-form-wrap table td {
+    padding: 12px 14px;
+    color: #333;
+}
+
+.addr-form-wrap input[type="text"] {
+    padding: 9px 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.addr-form-wrap input[type="text"]:focus,
+.addr-form-wrap select:focus {
+    outline: none;
+    border-color: #305932;
+}
+
+.addr-form-wrap select {
+    padding: 9px 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: #fff;
+}
+
+/* 주소 입력 영역 (우편번호/기본주소/상세주소) */
+.addr-form-wrap td ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.addr-form-wrap td ul li {
+    margin-bottom: 8px;
+}
+
+.addr-form-wrap td ul li:last-child {
+    margin-bottom: 0;
+}
+
+.addr-form-wrap #s_zipno {
+    width: 100px;
+}
+
+.addr-form-wrap #s_addr1,
+.addr-form-wrap #s_addr2 {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* 전화번호 입력칸 */
+.addr-form-wrap input[id^="s_tel"],
+.addr-form-wrap input[id^="s_phone"] {
+    width: 70px;
+    text-align: center;
+}
+
+/* 체크박스 (기본배송지 등록) */
+.addr-form-wrap input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.addr-form-wrap table tr:last-child {
+    border-bottom: none;
+}
+
+.addr-form-wrap table tr:last-child td {
+    padding: 16px 10px 0;
+    color: #555;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* =========================
+   버튼 (평소 흰색, hover 시 초록)
+========================= */
+
+.addr-form-wrap .btn_search,
+.addr-form-wrap input[type="submit"],
+.addr-form-wrap input[type="button"],
+.addr-form-wrap button {
+    padding: 9px 16px;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #555;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.addr-form-wrap .btn_search:hover,
+.addr-form-wrap input[type="submit"]:hover,
+.addr-form-wrap input[type="button"]:hover,
+.addr-form-wrap button:hover {
+    background: #305932;
+    border-color: #305932;
+    color: #fff;
+}
+
+/* 등록 버튼만 강조 - 항상 초록 */
+.addr-form-wrap input[type="submit"] {
+    background: #305932;
+    border-color: #305932;
+    color: #fff;
+    padding: 11px 28px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-right: 8px;
+}
+
+.addr-form-wrap input[type="submit"]:hover {
+    background: #244326;
+    border-color: #244326;
+}

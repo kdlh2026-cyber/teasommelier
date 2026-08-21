@@ -30,18 +30,6 @@ public class MypageController {
 	
 	@Autowired
 	IorderDAO ordao;
-	
-	//마이페이지 주문조회는 여기서
-	@RequestMapping("/member/mypage/OrderSelect")
-	public String OrderSelect(){
-		return "member/mypage/OrderSelect";
-	}
-		
-	// 마이페이지 관심상품은 여기서
-	@RequestMapping("/member/mypage/FavoriteProduct")
-	public String FavoriteProduct(){	
-		return "member/mypage/FavoriteProduct";
-	}
 			
 	//마이페이지 적립금은 여기서
 	@RequestMapping("/member/mypage/MemberCash")
@@ -69,12 +57,6 @@ public class MypageController {
 	    }
 	    
 	    return "member/mypage/MemberCash";
-	}
-		
-	//마이페이지 커뮤니티 관리는 여기서
-	@RequestMapping("/member/mypage/CommunityManagement")
-	public String CommunityManagement(){		
-		return "member/mypage/CommunityManagement";
 	}
 	
 	//마이페이지 배송주소 관리는 여기서

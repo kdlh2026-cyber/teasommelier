@@ -6,15 +6,11 @@
 <meta charset="UTF-8">
 <title>TeaSommelier</title>
 <script src="/js/addrcheck.js"></script>
-<style>
-.required {
-  color: #007bff;        /* 파란색 별표 */
-  margin-right: 2px;
-}
-</style>
+<link rel="stylesheet" href="/css/ShipaddrWriteForm.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header.jsp" %>
+	<div class="addr-form-wrap">
 	<div>
 		<h3>배송주소록 관리</h3>
 		<p>자주 쓰는 배송지를 등록 관리하실 수 있습니다.</p>
@@ -45,10 +41,10 @@
 			<td>
 				<ul>
 				<li>
-					<input type="text" name="s_zipno" id="s_zipno" size="5" maxlength="5" readonly placeholder="우편번호">	
+					<input type="text" name="s_zipno" id="s_zipno" size="5" maxlength="5" readonly placeholder="우편번호">
 					<button type="button" class="btn_search" onclick="goPopup();">주소검색</button>
 				</li>
-				<li>	
+				<li>
 					<input type="text" id="s_addr1" name="s_addr1" readonly>
 				</li>
 				<li>
@@ -94,12 +90,13 @@
 			</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="s_defaddr" value="T">기본배송지로 저장</td>
+			<td colspan="2"><input type="checkbox" name="s_defaddr" value="T">기본배송지로 저장</td>
 		</tr>
 	</table>
 	<input type="submit" value="등록" onclick="return addrcheck();">
 	<input type="button" value="취소" onclick="history.back();">
 	</form>
-</body>
+	</div>
 <%@ include file="/WEB-INF/views/footer.jsp" %>
+</body>
 </html>

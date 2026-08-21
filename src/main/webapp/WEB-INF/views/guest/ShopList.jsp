@@ -64,22 +64,23 @@
     }
 
     var shopDetailMap = {
+    	'센텀시티점': {
+             category: 'TEA SALON | TEA BOUTIQUE | TAKEAWAY TEA',
+             title: 'TEA SOMMELIER 센텀시티점'
+        },
+        '광복점': {
+             category: 'TEA BOUTIQUE | TAKEAWAY TEA',
+             title: 'TEA SOMMELIER 광복점'
+        },
+        '동래점': {
+          	 category: 'TEA SALON | TEA BOUTIQUE',
+             title: 'TEA SOMMELIER 동래점'
+        },
         '부산본점': {
             category: 'TEA SALON | TEA BOUTIQUE',
             title: 'TEA SOMMELIER 부산본점'
-        },
-        '센텀시티점': {
-            category: 'TEA SALON | TEA BOUTIQUE | TAKEAWAY TEA',
-            title: 'TEA SOMMELIER 센텀시티점'
-        },
-        '광복점': {
-            category: 'TEA BOUTIQUE | TAKEAWAY TEA',
-            title: 'TEA SOMMELIER 광복점'
-        },
-        '동래점': {
-            category: 'TEA SALON | TEA BOUTIQUE',
-            title: 'TEA SOMMELIER 동래점'
         }
+        
     };
 
     // SDK 로드 후 지도 초기화 (autoload=false 이므로 수동 호출)

@@ -38,4 +38,6 @@ public interface ICommunityDao {
 	public int ResponseQnaDelete(int res_no);
 	
 	MemberDto select_member_by_id(String m_id);
+	
+	List<CommunityDto> selectMyList(int m_no);
 }
