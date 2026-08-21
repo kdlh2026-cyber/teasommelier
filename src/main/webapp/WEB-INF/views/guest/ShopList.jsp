@@ -64,21 +64,21 @@
     }
 
     var shopDetailMap = {
-        '에비뉴엘 월드타워점': {
+        '부산본점': {
             category: 'TEA SALON | TEA BOUTIQUE',
-            title: 'TWG Tea 에비뉴엘 월드타워점'
+            title: 'TEA SOMMELIER 부산본점'
         },
-        '광화문점': {
+        '센텀시티점': {
             category: 'TEA SALON | TEA BOUTIQUE | TAKEAWAY TEA',
-            title: 'TWG Tea 광화문점'
+            title: 'TEA SOMMELIER 센텀시티점'
         },
-        '성수낙낙점': {
+        '광복점': {
             category: 'TEA BOUTIQUE | TAKEAWAY TEA',
-            title: 'TWG Tea 성수낙낙점'
+            title: 'TEA SOMMELIER 광복점'
         },
-        '안다즈점': {
+        '동래점': {
             category: 'TEA SALON | TEA BOUTIQUE',
-            title: 'TWG Tea 안다즈점'
+            title: 'TEA SOMMELIER 동래점'
         }
     };
 
@@ -112,7 +112,7 @@
         }, 300);
 
         // 페이지 최초 로드 시 첫 번째 매장 자동 선택
-		var shopName = getParameterByName('name');
+      var shopName = getParameterByName('name');
         
         if (shopName) {
             var targetBtn = document.querySelector('.tab-btn[data-name="' + shopName + '"]');

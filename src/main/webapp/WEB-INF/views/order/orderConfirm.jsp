@@ -49,8 +49,9 @@
         <h4>결제정보</h4>
         <div class="price-row"><span>주문상품</span> <span><fmt:formatNumber value="${orderInfo.o_price}" pattern="#,###"/>원</span></div>
         <div class="price-row"><span>배송비</span> <span>+0원</span></div>
+        <div class="price-row"><sapn>적립금</sapn> <span>-${orderInfo.o_earn}원</span></div>
         <div class="price-row total-row">
-            <b>결제금액</b> <span><fmt:formatNumber value="${orderInfo.o_price}" pattern="#,###"/>원</span>
+            <b>결제금액</b> <span><fmt:formatNumber value="${orderInfo.o_price - orderInfo.o_earn}" pattern="#,###"/>원</span>
         </div>
     </div>
     

@@ -216,6 +216,12 @@
     margin-top: 5px;
 }
 
+/* 이벤트 페이지 전용: UP TO 50%OFF 등을 다홍색으로 강조 (info-line과 함께 사용) */
+.info-line-event {
+    color: #d84315;
+    font-weight: 700;
+}
+
 
 /* 용량 */
 

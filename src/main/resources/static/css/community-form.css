@@ -108,6 +108,7 @@
     resize: vertical;
     font-size: 14px;
     line-height: 1.5;
+    white-space: pre-line;
 }
 
 .input-file {
@@ -164,4 +165,8 @@
     background-color: #305932;
     color: #fff;
     border-color: #305932;
+}
+
+.content-area {
+    white-space: pre-line; /* 또는 pre-wrap (연속 공백까지 유지하고 싶으면) */
 }

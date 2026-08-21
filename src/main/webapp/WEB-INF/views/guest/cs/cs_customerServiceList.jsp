@@ -40,19 +40,23 @@
 		<c:forEach var="cs" items="${csList}">
 		  <div class="csItem" data-category="${cs.cs_category}">
 		    <h5><button type="button" class="csToggleBtn"><span class="csQMark">Q.</span> ${cs.cs_subject}</button></h5>
-		    <div class="csContent" style="display:none;">
-		      <div>
-		        ${cs.cs_content}<br>
-		        <br>
-		        <sec:authorize access="hasRole('ADMIN')">
-		        <form class="csAdminForm" action="/customerServiceDelete" method="post">
-		          <input type="hidden" name="cs_no" value="${cs.cs_no}">
-		          <a href="/admin/cs/cs_customerServiceUpdateForm?cs_no=${cs.cs_no}">수정</a>
-		          <button type="submit" onclick="return confirm('정말로 삭제하겠습니까?');">삭제</button>
-		        </form>
-		        </sec:authorize>
-		      </div>
-		    </div>
+		    <%-- csContent 내부 출력 부분 --%>
+				<div class="csContent" style="display:none;">
+				  <div>
+				    <%-- \n을 <br>로 치환하기 위한 pageContext 변수 세팅 --%>
+				    <% pageContext.setAttribute("newline", "\n"); %>
+				    ${fn:replace(cs.cs_content, newline, "<br>")}
+				    <br><br>
+				    
+				    <sec:authorize access="hasRole('ADMIN')">
+				    <form class="csAdminForm" action="/customerServiceDelete" method="post">
+				      <input type="hidden" name="cs_no" value="${cs.cs_no}">
+				      <a href="/admin/cs/cs_customerServiceUpdateForm?cs_no=${cs.cs_no}">수정</a>
+				      <button type="submit" onclick="return confirm('정말로 삭제하겠습니까?');">삭제</button>
+				    </form>
+				    </sec:authorize>
+				  </div>
+				</div>
 		  </div>
 		</c:forEach>
 		</div>

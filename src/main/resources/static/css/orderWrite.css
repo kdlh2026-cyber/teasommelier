@@ -181,15 +181,15 @@ input[type="button"]:hover, button:hover {
 .btn-payment {
     width: 250px;
     height: 50px;
-    background: #454931 !important;
+    background: #305932 !important; /* 요청하신 색상 적용 */
     color: #FEFDFE !important;
-    border: 1px solid #454931 !important;
+    border: 1px solid #305932 !important;
     font-size: 16px !important;
     font-weight: bold !important;
     cursor: pointer;
 }
 
 .btn-payment:hover {
-    background: #343725 !important;
-    border-color: #343725 !important;
+    background: #244426 !important; /* 호버 시 살짝 더 어두운 톤 */
+    border-color: #244426 !important;
 }

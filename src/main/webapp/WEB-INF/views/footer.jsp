@@ -9,63 +9,40 @@
             <ul>
                 <li>
                     <div>
-                        <h2>고객센터 02-536-7300</h2>
+                        <h2>고객센터 051-123-4567</h2>
                         <div>평일 09:30 ~ 18:00 (점심시간 12:30 ~ 13:30)</div>
                         <div>(주말 및 공휴일은 휴무입니다)</div>
                         <div class="bank-info">
                             <h2>무통장 입금 계좌번호</h2>
-                            <span>우리 1005-001-924325</span>
-                            <span>국민 079801-04-076897</span><br>
-                            <span>하나 229-910013-87104</span>
-                            <span>농협 317-0005-2439-41</span>
-                            <b>예금주 나드에프앤비(주)</b>
+                            <span>우리 1234-001-11111</span>
+                            <span>국민 097890-04-222222</span><br>
+                            <span>하나 333-910013-33333</span>
+                            <span>농협 111-0005-4444-22</span>
+                            <b>예금주 티 소믈리에(주)</b>
                         </div>
                     </div>
-<<<<<<< HEAD
-                </div>
-            </li>
-            <li>
-                <div>
-                    <h2>매장안내</h2>
-                    <div class="store-list">
-    					<a href="/guest/ShopList?name=광화문점">광화문점</a>
-    					<a href="/guest/ShopList?name=성수낙낙점">성수낙낙점</a>
-    					<a href="/guest/ShopList?name=안다즈점">안다즈점</a>
-    					<a href="/guest/ShopList?name=에비뉴엘 월드타워점">에비뉴엘 월드타워점</a>
-					</div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="footer-bottom">
-        <div class="menu">
-            <a href="/Termsfooter">이용약관</a>
-            <a href="/Personalfooter">개인정보처리방침</a>
-=======
                 </li>
                 <li>
                     <div>
                         <h2>매장안내</h2>
                         <div class="store-list">
-                            <a href="/guest/ShopList?name=광화문점">광화문점</a>
-                            <a href="/guest/ShopList?name=성수낙낙점">성수낙낙점</a>
-                            <a href="/guest/ShopList?name=안다즈점">안다즈점</a>
-                            <a href="/guest/ShopList?name=에비뉴엘 월드타워점">에비뉴엘 월드타워점</a>
+                            <a href="/guest/ShopList?name=센텀시티점">센텀시티점</a>
+                            <a href="/guest/ShopList?name=광복점">광복점</a>
+                            <a href="/guest/ShopList?name=동래점">동래점</a>
+                            <a href="/guest/ShopList?name=부산본점">부산본점</a>
                         </div>
                     </div>
                 </li>
             </ul>
->>>>>>> refs/remotes/origin/master
         </div>
         <div class="footer-bottom">
             <div class="menu">
-                <a href="#">이용안내</a>
-                <a href="#">이용약관</a>
-                <a href="#">개인정보처리방침</a>
+                <a href="/Termsfooter">이용약관</a>
+                <a href="/Personalfooter">개인정보처리방침</a>
             </div>
-            상호 : 나드에프앤비 (주) | 대표 이재준 | 서울특별시 성동구 아차산로17길 49 (성수동2가) 데시앙플렉스 917호<br>   
-            사업자번호 107-87-59496 | 통신판매업번호 2018-서울성동-1289 | twgteakr@nardfnb.com<br>
-            <span class="copyright">Copyright (c) TWG TEA 한국 공식몰 All Rights Reserved.</span>
+            상호 : 티 소믈리에 (주) | 대표 김성진 | 부산광역시 부산진구 중앙대로 627 삼비빌딩 805호(범천1동 869-28)<br>   
+            사업자번호 110-90-42242 | 통신판매업번호 2026-부산-1289 | admin@teasommelier.com<br>
+            <span class="copyright">Copyright (c) TEA TeaSommelier All Rights Reserved.</span>
         </div>
     </div>
 </footer>

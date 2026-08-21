@@ -152,6 +152,11 @@
     font-size: 13px;
     color: #555;
     line-height: 1.7;
+    white-space: pre-line;
+}
+
+.csContent div {
+    white-space: pre-line;
 }
 
 
@@ -257,6 +262,7 @@
     min-height: 160px;
     resize: vertical;
     box-sizing: border-box;
+    white-space: pre-line;
 }
 
 .cs-btn-area {
